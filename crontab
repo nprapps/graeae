@@ -1,0 +1,1 @@
+* * * * * ubuntu /bin/bash /home/ubuntu/apps/graeae/repository/run_on_server.sh fab $DEPLOYMENT_TARGET cron_jobs.test >/var/log/graeae/crontab.log 2>&1
