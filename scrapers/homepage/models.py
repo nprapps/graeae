@@ -1,10 +1,10 @@
 from pyquery import PyQuery
 
 class Article:
-    def __init__(self, element, slot, runtime):
+    def __init__(self, element, slot, run_time):
         self.element = element
         self.slot = slot
-        self.runtime = runtime
+        self.run_time = run_time
 
     def serialize(self):
         return {

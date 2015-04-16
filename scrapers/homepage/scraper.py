@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import dataset
+import app_config
 
 from datetime import datetime
 from models import Article
@@ -13,8 +13,7 @@ class HomepageScraper:
     def __init__(self):
         self.run_time = datetime.utcnow()
         self.page = PyQuery(url=self.url)
-        self.db = dataset.connect(app_config.POSTGRES_URL)
-        self.table = self.db['homepage']
+        self.table = app_config.db['homepage']
 
     def scrape(self):
         """
@@ -27,10 +26,4 @@ class HomepageScraper:
             if not element.hasClass('attachment'):
                 slot += 1
             article = Article(element, slot, self.run_time)
-            table.insert(article.serialize())
-
-if __name__ == '__main__':
-    if __package__ is None:
-        __package__ = 'scrapers.homepage'
-    scraper = HomepageScraper()
-    scraper.scrape()
+            self.table.insert(article.serialize())

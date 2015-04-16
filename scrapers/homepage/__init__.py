@@ -1,1 +1,1 @@
-from .. import app_config
+from scraper import HomepageScraper

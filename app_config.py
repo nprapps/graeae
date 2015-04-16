@@ -8,6 +8,7 @@ They will be exposed to users. Use environment variables instead.
 See get_secrets() below for a fast way to access them.
 """
 
+import dataset
 import os
 
 from authomatic.providers import oauth2
@@ -56,7 +57,7 @@ PRODUCTION_POSTGRES_URL = 'TKTK'
 
 STAGING_POSTGRES_URL = 'TKTK'
 
-LOCAL_POSTGRES_CONFIG = 'postgresql:///%s' % PROJECT_SLUG
+LOCAL_POSTGRES_URL = 'postgresql:///%s' % PROJECT_SLUG
 
 DEFAULT_MAX_AGE = 20
 
@@ -175,6 +176,7 @@ def configure_targets(deployment_target):
     Configure deployment targets. Abstracted so this can be
     overriden for rendering before deployment.
     """
+    global POSTGRES_URL
     global S3_BUCKET
     global S3_BASE_URL
     global S3_DEPLOY_URL
@@ -229,3 +231,4 @@ DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
 configure_targets(DEPLOYMENT_TARGET)
 
+db = dataset.connect(POSTGRES_URL)
