@@ -52,6 +52,12 @@ ASSETS_S3_BUCKET = {
     'region': 'us-east-1'
 }
 
+PRODUCTION_POSTGRES_URL = 'TKTK'
+
+STAGING_POSTGRES_URL = 'TKTK'
+
+LOCAL_POSTGRES_CONFIG = 'postgresql:///%s' % PROJECT_SLUG
+
 DEFAULT_MAX_AGE = 20
 
 PRODUCTION_SERVERS = ['cron.nprapps.org']
@@ -86,6 +92,7 @@ SERVER_SERVICES = [
 ]
 
 # These variables will be set at runtime. See configure_targets() below
+POSTGRES_URL = None
 S3_BUCKET = None
 S3_BASE_URL = None
 S3_DEPLOY_URL = None
@@ -180,6 +187,7 @@ def configure_targets(deployment_target):
     global ASSETS_MAX_AGE
 
     if deployment_target == 'production':
+        POSTGRES_URL = PRODUCTION_POSTGRES_URL
         S3_BUCKET = PRODUCTION_S3_BUCKET
         S3_BASE_URL = 'http://%s/%s' % (S3_BUCKET['bucket_name'], PROJECT_SLUG)
         S3_DEPLOY_URL = 's3://%s/%s' % (S3_BUCKET['bucket_name'], PROJECT_SLUG)
@@ -190,6 +198,7 @@ def configure_targets(deployment_target):
         DEBUG = False
         ASSETS_MAX_AGE = 86400
     elif deployment_target == 'staging':
+        POSTGRES_URL = STAGING_POSTGRES_URL
         S3_BUCKET = STAGING_S3_BUCKET
         S3_BASE_URL = 'http://%s/%s' % (S3_BUCKET['bucket_name'], PROJECT_SLUG)
         S3_DEPLOY_URL = 's3://%s/%s' % (S3_BUCKET['bucket_name'], PROJECT_SLUG)
@@ -200,6 +209,7 @@ def configure_targets(deployment_target):
         DEBUG = True
         ASSETS_MAX_AGE = 20
     else:
+        POSTGRES_URL = LOCAL_POSTGRES_URL
         S3_BUCKET = None
         S3_BASE_URL = 'http://127.0.0.1:8000'
         S3_DEPLOY_URL = None

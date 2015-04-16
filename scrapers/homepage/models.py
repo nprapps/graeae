@@ -1,18 +1,20 @@
 from pyquery import PyQuery
 
 class Article:
-    def __init__(self, element, slot):
+    def __init__(self, element, slot, runtime):
         self.element = element
         self.slot = slot
+        self.runtime = runtime
 
     def serialize(self):
         return {
-            'story_id': self.story_id,
-            'slot': self.slot,
-            'headline': self.headline,
-            'url': self.url,
-            'is_bullet': self.is_bullet,
             'has_image': self.has_image,
+            'headline': self.headline,
+            'is_bullet': self.is_bullet,
+            'run_time': self.run_time,
+            'slot': self.slot,
+            'story_id': self.story_id,
+            'url': self.url,
         }
 
     @property
