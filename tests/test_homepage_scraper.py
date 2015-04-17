@@ -40,13 +40,34 @@ class TestScraper(unittest.TestCase):
     def setUp(self):
         self.scraper = HomepageScraper()
         self.articles = self.scraper.scrape(filename='tests/snapshots/index-04-17-2015-1000.html')
+        self.first = self.articles[0]
+        self.first_bullet = self.articles[2]
 
     def test_headline(self):
-        first = self.articles[0]
-        self.assertEqual(first.headline, 'When The World Bank Does More Harm Than Good')
+        self.assertEqual(self.first.headline, 'When The World Bank Does More Harm Than Good')
+        self.assertEqual(self.first_bullet.headline, 'For Marathon Bombing Survivors, World Still Feels Out Of Control')
+
+    def test_url(self):
+        self.assertEqual(self.first.url, 'http://www.npr.org/blogs/goatsandsoda/2015/04/17/399816448/when-the-world-bank-does-more-harm-than-good')
+        self.assertEqual(self.first_bullet.url, 'http://www.npr.org/blogs/health/2015/04/15/399616139/bombing-survivors-face-a-world-that-still-feels-out-of-control')
+
+    def test_is_bullet(self):
+        self.assertFalse(self.first.is_bullet)
+        self.assertTrue(self.first_bullet.is_bullet)
+
+    def test_story_id(self):
+        self.assertEqual(self.first.story_id, '399816448')
+        self.assertEqual(self.first_bullet.story_id, '399616139')
+
+    def test_has_image(self):
+        self.assertTrue(self.first.has_image)
+        self.assertFalse(self.first_bullet.has_image)
+        self.assertFalse(self.articles[8].has_image)
 
     def test_num_articles(self):
         self.assertEqual(len(self.articles), 22)
+
+
 
 
 
