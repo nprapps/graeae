@@ -31,7 +31,8 @@ class TestScraperDB(unittest.TestCase):
 
     def test_db_write(self):
         articles = self.scraper.scrape_homepage()
-        self.scraper.write(articles, self.db)
+        api_entries = self.scraper.scrape_api_entries(articles, filename='tests/snapshots/query-399816448-04-17-2015.xml')
+        self.scraper.write(self.db, articles, api_entries)
         rows = list(self.db['homepage'].all())
         self.assertGreater(len(rows), 0)
 
@@ -71,7 +72,8 @@ class TestScrapeHomepage(unittest.TestCase):
         self.assertFalse(self.articles[3].has_audio)
 
     def test_num_articles(self):
-        self.assertEqual(len(self.articles), 22)
+        self.assertEqual(len(self.articles), 20)
+
 
 class TestScrapeApi(unittest.TestCase):
     def setUp(self):

@@ -38,20 +38,21 @@ class HomepageScraper:
         for el in article_elements:
             element = PyQuery(el)
 
-            if not element.attr('id'):
+            article = Article(element, self.run_time)
+
+            if not article.is_story_link:
                 continue
 
             if not element.hasClass('attachment'):
                 slot += 1
 
-            article = Article(element, slot, self.run_time)
-            print article.headline
+            article.slot = slot
 
             articles.append(article)
 
         return articles
 
-    def scrape_api_entries(self, articles):
+    def scrape_api_entries(self, articles, **kwargs):
         """
         Scrape NPR API for all articles.
         """
@@ -62,7 +63,7 @@ class HomepageScraper:
 
         for article in articles:
             print article.story_id
-            api_entries.append(self.scrape_api_entry(article))
+            api_entries.append(self.scrape_api_entry(article, **kwargs))
 
         return api_entries
 

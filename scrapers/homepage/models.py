@@ -4,9 +4,9 @@ import os
 from pyquery import PyQuery
 
 class Article:
-    def __init__(self, element, slot, run_time):
+    def __init__(self, element, run_time):
         self.element = element
-        self.slot = slot
+        self.slot = None
         self.run_time = run_time
 
     def serialize(self):
@@ -17,7 +17,8 @@ class Article:
             ('run_time', self.run_time),
             ('slot', self.slot),
             ('story_id', self.story_id),
-            ('url', self.url)
+            ('url', self.url),
+            ('homepage_image', self.homepage_image),
         ])
 
     @property
@@ -36,6 +37,10 @@ class Article:
     def story_id(self):
         url_parts = self.url.split('/')
         return url_parts[-2]
+
+    @property
+    def is_story_link(self):
+        return self.story_id.isdigit()
 
     @property
     def layout(self):
