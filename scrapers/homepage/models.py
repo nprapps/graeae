@@ -8,7 +8,7 @@ class Article:
 
     def serialize(self):
         return {
-            'has_image': self.has_image,
+            'layout': self.layout,
             'headline': self.headline,
             'is_bullet': self.is_bullet,
             'run_time': self.run_time,
@@ -35,5 +35,26 @@ class Article:
         return url_parts[-2]
 
     @property
-    def has_image(self):
-        return bool(self.element('figure').length)
+    def layout(self):
+        """
+        Possible layouts: ['bullet', 'video', 'big-image', 'small-image']
+        """
+        if self.is_bullet:
+            return 'bullet'
+
+        bucketwrap = self.element.find('.bucketwrap')
+
+        if bucketwrap.hasClass('video'):
+            return 'video'
+
+        if bucketwrap.hasClass('homeLarge'):
+            return 'big-image'
+
+        if bucketwrap.hasClass('homeThumb'):
+            return 'small-image'
+
+        return None
+
+    @property
+    def has_audio(self):
+        return bool(self.element.hasClass('post-type-audio'))

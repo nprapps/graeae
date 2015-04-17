@@ -59,15 +59,16 @@ class TestScraper(unittest.TestCase):
         self.assertEqual(self.first.story_id, '399816448')
         self.assertEqual(self.first_bullet.story_id, '399616139')
 
-    def test_has_image(self):
-        self.assertTrue(self.first.has_image)
-        self.assertFalse(self.first_bullet.has_image)
-        self.assertFalse(self.articles[8].has_image)
+    def test_layout(self):
+        self.assertEqual(self.articles[2].layout, 'bullet')
+        self.assertEqual(self.articles[12].layout, 'video')
+        self.assertEqual(self.articles[0].layout, 'big-image')
+        self.assertEqual(self.articles[1].layout, 'small-image')
+        self.assertEqual(self.articles[8].layout, None)
+
+    def test_has_audio(self):
+        self.assertTrue(self.articles[0].has_audio)
+        self.assertFalse(self.articles[3].has_audio)
 
     def test_num_articles(self):
         self.assertEqual(len(self.articles), 22)
-
-
-
-
-
