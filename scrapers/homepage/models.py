@@ -86,10 +86,6 @@ class ApiEntry:
             ('lead_art_url', self.lead_art_url)
         ])
 
-    @property
-    def has_story_image(self):
-        return self.element.find('layout').find('image').length > 0
-
     def _lead_art_element(self):
         el = PyQuery(self.element.find('layout').find('storytext').children()[0])
 
@@ -99,6 +95,10 @@ class ApiEntry:
         image_id = el.attr('refId')
 
         return PyQuery(self.element.find('image[id="%s"]' % image_id))
+
+    @property
+    def has_story_image(self):
+        return self.element.find('layout').find('image').length > 0
 
     @property
     def has_lead_art(self):
