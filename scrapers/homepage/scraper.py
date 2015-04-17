@@ -7,9 +7,8 @@ from pyquery import PyQuery
 class HomepageScraper:
     url = 'http://npr.org'
 
-    def __init__(self, db):
+    def __init__(self):
         self.run_time = datetime.utcnow()
-        self.table = db['homepage']
 
     def scrape(self, **kwargs):
         """
@@ -31,9 +30,10 @@ class HomepageScraper:
 
         return articles
 
-    def write(self, articles):
+    def write(self, articles, db):
         """
         Write to database
         """
+        table = db['homepage']
         for article in articles:
-            self.table.insert(article.serialize())
+            table.insert(article.serialize())

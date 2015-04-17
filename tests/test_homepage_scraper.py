@@ -10,7 +10,7 @@ from scrapers.homepage import HomepageScraper
 from time import time
 
 
-class TestScraper(unittest.TestCase):
+class TestScraperDB(unittest.TestCase):
     """
     Test the scraper
     """
@@ -27,13 +27,26 @@ class TestScraper(unittest.TestCase):
 
     def setUp(self):
         self.db = dataset.connect('postgres:///%s' % self.temp_db_name)
-        self.scraper = HomepageScraper(self.db)
+        self.scraper = HomepageScraper()
 
     def test_db_write(self):
-        self.scraper.scrape()
-        rows = list(self.scraper.table.all())
+        articles = self.scraper.scrape()
+        self.scraper.write(articles, self.db)
+        rows = list(self.db['homepage'].all())
         self.assertGreater(len(rows), 0)
 
+
+class TestScraper(unittest.TestCase):
+    def setUp(self):
+        self.scraper = HomepageScraper()
+        self.articles = self.scraper.scrape(filename='tests/snapshots/index-04-17-2015-1000.html')
+
+    def test_headline(self):
+        first = self.articles[0]
+        self.assertEqual(first.headline, 'When The World Bank Does More Harm Than Good')
+
+    def test_num_articles(self):
+        self.assertEqual(len(self.articles), 22)
 
 
 
