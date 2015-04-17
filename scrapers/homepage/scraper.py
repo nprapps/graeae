@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
 from datetime import datetime
-from models import Article
+import os
+
 from pyquery import PyQuery
+
+from models import ApiEntry, Article
 
 class HomepageScraper:
     url = 'http://npr.org'
@@ -10,7 +13,7 @@ class HomepageScraper:
     def __init__(self):
         self.run_time = datetime.utcnow()
 
-    def scrape(self, **kwargs):
+    def scrape_homepage(self, **kwargs):
         """
         Scrape!
         """
@@ -29,6 +32,28 @@ class HomepageScraper:
             articles.append(Article(element, slot, self.run_time))
 
         return articles
+
+    def scrape_api_entries(self, articles):
+        """
+        Scrape NPR API for all articles.
+        """
+        api_entries = []
+
+        for article in articles:
+            api_entries.append(scrape_api_entry(article))
+
+        return api_entries
+
+    def scrape_api_entry(self, article, **kwargs):
+        """
+        Scrape NPR API for a single article.
+        """
+        if not kwargs:
+            element = PyQuery(url='http://api.npr.org/query?id=%s&apiKey=%s' % (article.story_id, os.environ['NPR_API_KEY']))
+        else:
+            element = PyQuery(**kwargs)
+
+        return ApiEntry(element)
 
     def write(self, articles, db):
         """

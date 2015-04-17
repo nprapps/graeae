@@ -1,3 +1,5 @@
+import os
+
 from pyquery import PyQuery
 
 class Article:
@@ -58,3 +60,11 @@ class Article:
     @property
     def has_audio(self):
         return bool(self.element.hasClass('post-type-audio'))
+
+class ApiEntry:
+    def __init__(self, element):
+        self.element = element
+
+    @property
+    def has_story_image(self):
+        return self.element.find('layout').find('image').length > 0

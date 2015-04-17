@@ -30,16 +30,16 @@ class TestScraperDB(unittest.TestCase):
         self.scraper = HomepageScraper()
 
     def test_db_write(self):
-        articles = self.scraper.scrape()
+        articles = self.scraper.scrape_homepage()
         self.scraper.write(articles, self.db)
         rows = list(self.db['homepage'].all())
         self.assertGreater(len(rows), 0)
 
 
-class TestScraper(unittest.TestCase):
+class TestScrapeHomepage(unittest.TestCase):
     def setUp(self):
         self.scraper = HomepageScraper()
-        self.articles = self.scraper.scrape(filename='tests/snapshots/index-04-17-2015-1000.html')
+        self.articles = self.scraper.scrape_homepage(filename='tests/snapshots/index-04-17-2015-1000.html')
         self.first = self.articles[0]
         self.first_bullet = self.articles[2]
 
@@ -72,3 +72,12 @@ class TestScraper(unittest.TestCase):
 
     def test_num_articles(self):
         self.assertEqual(len(self.articles), 22)
+
+class TestScrapeApi(unittest.TestCase):
+    def setUp(self):
+        self.scraper = HomepageScraper()
+        self.articles = self.scraper.scrape_homepage(filename='tests/snapshots/index-04-17-2015-1000.html')
+        self.api_entry = self.scraper.scrape_api_entry(self.articles[0], filename='tests/snapshots/query-399816448-04-17-2015.xml')
+
+    def test_has_story_image(self):
+        self.assertTrue(self.api_entry.has_story_image)

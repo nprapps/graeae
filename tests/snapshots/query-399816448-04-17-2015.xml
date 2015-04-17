@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nprml version="0.94">
+  <list>
+    <title><![CDATA[Stories from NPR]]></title>
+    <teaser><![CDATA[Assorted stories from NPR]]></teaser>
+    <miniTeaser><![CDATA[Custom NPR News Feed API.  Visit http://www.npr.org/templates/apidoc/index.php for more information.]]></miniTeaser>
+    <link type="api">http://api.npr.org/query?id=399816448&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+    <link type="html">http://www.npr.org/blogs/goatsandsoda/2015/04/17/399816448/when-the-world-bank-does-more-harm-than-good?ft=nprml&amp;f=399816448</link>
+    <story id="399816448">
+      <link type="html">http://www.npr.org/blogs/goatsandsoda/2015/04/17/399816448/when-the-world-bank-does-more-harm-than-good?ft=nprml&amp;f=399816448</link>
+      <link type="api">http://api.npr.org/query?id=399816448&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      <link type="short">http://n.pr/1JKwR1s</link>
+      <title><![CDATA[When The World Bank Does More Harm Than Good]]></title>
+      <partnerId>399816448</partnerId>
+      <subtitle/>
+      <shortTitle/>
+      <teaser><![CDATA[Large projects funded by the bank have left millions of poor people worse off, an investigation found. The bank says the vast majority of its projects don't fall into this category.]]></teaser>
+      <miniTeaser/>
+      <slug>Goats and Soda</slug>
+      <thumbnail>
+        <medium>http://media.npr.org/assets/img/2015/04/15/463942430_sq-150e856e3cee1c724dc8df2c1980c9a5d5a496b4.jpg?s=13</medium>
+        <large>http://media.npr.org/assets/img/2015/04/15/463942430_sq-150e856e3cee1c724dc8df2c1980c9a5d5a496b4.jpg?s=11</large>
+        <provider>AFP/Getty Images</provider>
+      </thumbnail>
+      <storyDate>Fri, 17 Apr 2015 03:43:00 -0400</storyDate>
+      <pubDate>Fri, 17 Apr 2015 08:17:00 -0400</pubDate>
+      <lastModifiedDate>Fri, 17 Apr 2015 08:43:23 -0400</lastModifiedDate>
+      <audioRunByDate>Sat, 25 Apr 2015 14:00:00 -0400</audioRunByDate>
+      <show>
+        <program id="3" code="ME">Morning Edition</program>
+        <showDate>Fri, 17 Apr 2015 05:00:00 -0400</showDate>
+        <segNum>17</segNum>
+      </show>
+      <keywords/>
+      <priorityKeywords/>
+      <organization orgId="1" orgAbbr="NPR">
+        <name>NPR</name>
+        <website>http://www.npr.org/</website>
+      </organization>
+      <parent id="1031" type="primaryTopic">
+        <title>Global Health</title>
+        <link type="html">http://www.npr.org/sections/global-health/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1031&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="312150170" type="collection">
+        <title>Editor's Picks</title>
+        <link type="html">http://www.npr.org/series/312150170/editors-picks?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=312150170&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="1095" type="topic">
+        <title>Business Story of the Day</title>
+        <link type="html">http://www.npr.org/sections/business-story-of-the-day/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1095&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="155111283" type="collection">
+        <title>NPR Selects</title>
+        <link type="html">http://www.npr.org/series/155111283/npr-selects?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=155111283&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="1002" type="topic">
+        <title>Home Page Top Stories</title>
+        <link type="html">http://www.npr.org/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1002&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="1001" type="topic">
+        <title>News</title>
+        <link type="html">http://www.npr.org/sections/news/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1001&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="400285178" type="programEpisode">
+        <title>Morning Edition for April 17, 2015</title>
+        <link type="html">http://www.npr.org/programs/morning-edition/2015/04/17/400285178/morning-edition-for-april-17-2015?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=400285178&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="191676894" type="collection">
+        <title>Most Popular</title>
+        <link type="html">http://www.npr.org/series/191676894/most-popular?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=191676894&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="368010752" type="tag">
+        <title>global development</title>
+        <link type="html">http://www.npr.org/tags/368010752/global-development?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=368010752&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="329599399" type="category">
+        <title>Money</title>
+        <link type="html">http://www.npr.org/blogs/goatsandsoda/329599399/money?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=329599399&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="327351768" type="blog" slug="true">
+        <title>Goats and Soda</title>
+        <link type="html">http://www.npr.org/blogs/goatsandsoda/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=327351768&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="143149832" type="tag">
+        <title>World Bank</title>
+        <link type="html">http://www.npr.org/tags/143149832/world-bank?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=143149832&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="126947040" type="tag">
+        <title>Kenya</title>
+        <link type="html">http://www.npr.org/tags/126947040/kenya?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=126947040&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="1128" type="topic">
+        <title>Health</title>
+        <link type="html">http://www.npr.org/sections/health/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1128&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="1031" type="topic">
+        <title>Global Health</title>
+        <link type="html">http://www.npr.org/sections/global-health/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1031&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="1022" type="topic">
+        <title>Interviews</title>
+        <link type="html">http://www.npr.org/sections/interviews/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1022&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="1017" type="topic">
+        <title>Economy</title>
+        <link type="html">http://www.npr.org/sections/economy/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1017&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="1006" type="topic">
+        <title>Business</title>
+        <link type="html">http://www.npr.org/sections/business/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1006&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="1004" type="topic">
+        <title>World</title>
+        <link type="html">http://www.npr.org/sections/world/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=1004&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <parent id="3" type="program">
+        <title>Morning Edition</title>
+        <link type="html">http://www.npr.org/programs/morning-edition/?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=3&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </parent>
+      <audio id="400285313" type="primary">
+        <title/>
+        <duration>249</duration>
+        <description/>
+        <format>
+          <mp3 type="mp3" method="fms">http://pd.npr.org/anon.npr-mp3/npr/me/2015/04/20150417_me_when_the_world_bank_does_more_harm_than_good.mp3?orgId=1&amp;topicId=1031&amp;e=399816448&amp;d=249&amp;ft=nprml&amp;f=399816448</mp3>
+          <mp3 type="m3u" method="fms">http://api.npr.org/m3u/1400285313-0690a2.m3u?orgId=1&amp;topicId=1031&amp;e=399816448&amp;d=249&amp;ft=nprml&amp;f=399816448</mp3>
+          <wm>http://www.npr.org/templates/dmg/dmg_wmref_em.php?id=400285313&amp;type=1&amp;mtype=WM&amp;orgId=1&amp;topicId=1031&amp;e=399816448&amp;d=249&amp;ft=nprml&amp;f=399816448</wm>
+          <threegp>http://pd.npr.org/npr-3gp/npr/me/2015/04/20150417_me_when_the_world_bank_does_more_harm_than_good.3gp?orgId=1&amp;topicId=1031&amp;e=399816448&amp;d=249&amp;ft=nprml&amp;f=399816448</threegp>
+          <mp4>http://pd.npr.org/npr-mp4/npr/me/2015/04/20150417_me_when_the_world_bank_does_more_harm_than_good.mp4?orgId=1&amp;topicId=1031&amp;e=399816448&amp;d=249&amp;ft=nprml&amp;f=399816448</mp4>
+          <hls>http://ivideo-i.akamaihd.net/i/npr-mp4/npr/me/2015/04/20150417_me_when_the_world_bank_does_more_harm_than_good,,.mp4.csmil/master.m3u8?orgId=1&amp;topicId=1031&amp;e=399816448&amp;d=249&amp;ft=nprml&amp;f=399816448</hls>
+          <mediastream>rtmp://flash.npr.org/ondemand/mp3:anon.npr-mp3/npr/me/2015/04/20150417_me_when_the_world_bank_does_more_harm_than_good.mp3</mediastream>
+        </format>
+        <region>all</region>
+        <rightsHolder/>
+        <permissions>
+          <download allow="true"/>
+          <stream allow="true"/>
+          <embed allow="true"/>
+        </permissions>
+        <stream active="false"/>
+      </audio>
+      <byline id="399838254">
+        <name personId="125167196">NPR Staff</name>
+        <link type="api">http://api.npr.org/query?id=125167196&amp;meta=inherit&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </byline>
+      <image id="399843929" type="primary" width="200" src="http://media.npr.org/assets/img/2015/04/15/463942430-a6ceb5d9f82976adf38dfa46c6eb125b7af2ce62.jpg?s=12" hasBorder="false">
+        <title>In the 1950s, the World Bank funded the creation of the world's largest man-made dam, the Kariba Dam, which sits on the border of Zimbabwe and Zambia. The construction of such dams can have dire consequences for poor people living near a river, an investigation found.</title>
+        <caption>In the 1950s, the World Bank funded the creation of the world's largest man-made dam, the Kariba Dam, which sits on the border of Zimbabwe and Zambia. The construction of such dams can have dire consequences for poor people living near a river, an investigation found.</caption>
+        <link url=""/>
+        <producer>Jekesai Njikizana</producer>
+        <provider url="">AFP/Getty Images</provider>
+        <copyright/>
+        <enlargement src="http://media.npr.org/assets/img/2015/04/15/463942430-a6ceb5d9f82976adf38dfa46c6eb125b7af2ce62.jpg">
+          <caption/>
+        </enlargement>
+        <crop type="standard" src="http://media.npr.org/assets/img/2015/04/15/463942430-a6ceb5d9f82976adf38dfa46c6eb125b7af2ce62.jpg" height="2189" width="2921" primary="true"/>
+        <crop type="square" src="http://media.npr.org/assets/img/2015/04/15/463942430_sq-150e856e3cee1c724dc8df2c1980c9a5d5a496b4.jpg" height="2195" width="2197"/>
+        <crop type="wide" src="http://media.npr.org/assets/img/2015/04/15/463942430_wide-d7202aafc983e9d09794299786231f0f284b2b7d.jpg" height="1968" width="3494"/>
+        <crop type="enlargement" src="http://media.npr.org/assets/img/2015/04/15/463942430-a6ceb5d9f82976adf38dfa46c6eb125b7af2ce62.jpg" height="2189" width="2921"/>
+      </image>
+      <image id="399843730" type="standard" width="200" src="http://media.npr.org/assets/img/2015/04/15/463942450-90cf0b4ac0ebb5252abfa538eeccc86d92a8991f.jpg?s=12" hasBorder="false">
+        <title>The World Bank is helping to fund a $300-million project to fix the Kariba Dam between Zimbabwe and Zambia. If the dam collapses, it could have devastating humanitarian consequences.</title>
+        <caption>The World Bank is helping to fund a $300-million project to fix the Kariba Dam between Zimbabwe and Zambia. If the dam collapses, it could have devastating humanitarian consequences.</caption>
+        <link url=""/>
+        <producer>Jekesai Njikizana</producer>
+        <provider url="">AFP/Getty Images</provider>
+        <copyright/>
+        <enlargement src="http://media.npr.org/assets/img/2015/04/15/463942450-90cf0b4ac0ebb5252abfa538eeccc86d92a8991f.jpg">
+          <caption/>
+        </enlargement>
+        <crop type="standard" src="http://media.npr.org/assets/img/2015/04/15/463942450-90cf0b4ac0ebb5252abfa538eeccc86d92a8991f.jpg" height="2258" width="3011" primary="true"/>
+        <crop type="square" src="http://media.npr.org/assets/img/2015/04/15/463942450_sq-cbbcf61be8c6643974539832e80e9df36000398b.jpg" height="2270" width="2270"/>
+        <crop type="wide" src="http://media.npr.org/assets/img/2015/04/15/463942450_wide-1dccd70cd7e0361801bc5ad95d68d04201af2d2e.jpg" height="1966" width="3494"/>
+        <crop type="enlargement" src="http://media.npr.org/assets/img/2015/04/15/463942450-90cf0b4ac0ebb5252abfa538eeccc86d92a8991f.jpg" height="2258" width="3011"/>
+      </image>
+      <image id="399844013" type="standard" width="200" src="http://media.npr.org/assets/img/2015/04/15/469595126-68da9329644c78c8545d33c32fb9d9773d2049f8.jpg?s=12" hasBorder="false">
+        <title>Dr. Jim Yong Kim became president of the World Bank in 2012. He is the first bank president to come from the global health sector.</title>
+        <caption>Dr. Jim Yong Kim became president of the World Bank in 2012. He is the first bank president to come from the global health sector.</caption>
+        <link url=""/>
+        <producer>Saul Loeb</producer>
+        <provider url="">AFP/Getty Images</provider>
+        <copyright/>
+        <enlargement src="http://media.npr.org/assets/img/2015/04/15/469595126-68da9329644c78c8545d33c32fb9d9773d2049f8.jpg">
+          <caption/>
+        </enlargement>
+        <crop type="standard" src="http://media.npr.org/assets/img/2015/04/15/469595126-68da9329644c78c8545d33c32fb9d9773d2049f8.jpg" height="2516" width="3357" primary="true"/>
+        <crop type="square" src="http://media.npr.org/assets/img/2015/04/15/469595126_sq-7a0cccf66f3ec8bef3c5d4b32e5e2b31ab7b37f2.jpg" height="2516" width="2517"/>
+        <crop type="wide" src="http://media.npr.org/assets/img/2015/04/15/469595126_wide-b702ce942b978b000c551ea67d2ea9f52f20ac06.jpg" height="2158" width="3830"/>
+        <crop type="enlargement" src="http://media.npr.org/assets/img/2015/04/15/469595126-68da9329644c78c8545d33c32fb9d9773d2049f8.jpg" height="2516" width="3357"/>
+      </image>
+      <relatedLink id="400195320" type="internal">
+        <caption><![CDATA[ The World Bank Gets An Overhaul — And Not Everyone's Happy]]></caption>
+        <link type="html">http://www.npr.org/blogs/parallels/2014/03/13/289819931/the-world-bank-gets-an-overhaul-and-not-everyones-happy?ft=nprml&amp;f=399816448</link>
+        <link type="api">http://api.npr.org/query?id=289819931&amp;apiKey=MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001</link>
+      </relatedLink>
+      <text>
+        <paragraph num="1"><![CDATA[The World Bank's goal is to end extreme poverty and to grow income for the poorest people on the planet.]]></paragraph>
+        <paragraph num="2"><![CDATA[The bank does this by lending money and giving grants to governments and private corporations in some of the least developed places on the planet. For example, money goes to preserving land, building dams and creating health care systems.]]></paragraph>
+        <paragraph num="3"><![CDATA[But a lot of poor people actually end up worse off because of those projects, a report from The International Consortium of Investigative Journalists found.]]></paragraph>
+        <paragraph num="4"><![CDATA[People are often displaced, or their livelihoods are ruined. Over the past decade an estimated 3.4 million people have been displaced by bank-funded projects, says Michael Hudson, a senior editor at ICIJ, who worked on the report. In one instance, hundreds of families had their homes burned down.]]></paragraph>
+        <paragraph num="5"><![CDATA["The World Bank has promised 'do no harm,' but our reporting has found that the World Bank has broken this promise," Hudson says.]]></paragraph>
+        <paragraph num="6"><![CDATA[In response, the World Bank says the vast majority of its projects don't involve the resettlement of people. But the bank says it has identified shortcomings in its resettlement policies. And it plans to improve those policies to protect people and businesses affected by bank-funded projects.]]></paragraph>
+        <paragraph num="7"><![CDATA[ICIJ's Hudson spoke to NPR's Steve Inskeep on Morning Edition about the new report, which he and his team worked on with The Huffington Post and other outlets.]]></paragraph>
+        <paragraph num="8"><![CDATA[A lot of these projects seem beneficial. But you found that something is going wrong. What is it? ]]></paragraph>
+        <paragraph num="9"><![CDATA[What is often going wrong is what happens to people on the ground when you do these big projects. When you build a big dam, that can have huge consequences for the people living along the banks of the river and people who make their living via subsistence fishing or farming along the river bank. A mega-dam can affect 50,000, even a 100,000 people.]]></paragraph>
+        <paragraph num="10"><![CDATA[What happens to the people displaced?]]></paragraph>
+        <paragraph num="11"><![CDATA[In some cases they may have to move. Or they may lose part of their land. In other cases, they may not be physically displaced but rather economically displaced because their livelihoods have been destroyed, or at least partly impacted.]]></paragraph>
+        <paragraph num="12"><![CDATA[If you make your living fishing from the river or along the coast, and a power plant or dam affects the ecosystem, there's fewer fish, and you're not catching as many. Then your livelihood and your ability to feed your family has been impacted.]]></paragraph>
+        <paragraph num="13"><![CDATA[The problem is that even resettlements that are done well and fairly often leave poor people even poorer. There's a lot of research that shows that people who are forced to move suffer higher rates of hunger, illness and early death. It causes really serious consequences for people.]]></paragraph>
+        <paragraph num="14"><![CDATA[You write about a land conservation project in Kenya. What went wrong there?]]></paragraph>
+        <paragraph num="15"><![CDATA[The land conservation project funneled money to the Kenyan forest service with the idea of preserving a forest in western Kenya. The problem is with the thousands of indigenous people — the Sengwer — living in the forest. Our reporting on the ground shows that hundreds, and perhaps as many as a thousand, homes have been burned by the Kenyan forest service as they try to evict people from the forest.]]></paragraph>
+        <paragraph num="16"><![CDATA[When you brought these cases to the World Bank's attention, how did they react?]]></paragraph>
+        <paragraph num="17"><![CDATA[Around the first of March, we told the bank that our reporting had found systemic gaps in its protection for displaced families. Days later, the bank announced that it had found major problems with how it handles resettlement and released an action plan to fix the problem.]]></paragraph>
+        <paragraph num="18"><![CDATA[The bank has also released internal reports going back several years, which show the bank often had violated its own rules, has failed to protect people, has failed to monitor what happens to them and hasn't held its part as accountable for their actions.]]></paragraph>
+        <paragraph num="19"><![CDATA[Is it inevitable, on some level, that people may be harmed when you replace a low-level economy with a corner of the global economy via these projects?]]></paragraph>
+        <paragraph num="20"><![CDATA[There's always a price tag for development. But the question is: Who should pay the price? Should poor people be the ones who sacrifice when the government tries to do a big project? Even the World Bank says the budget for a project should include money to cover people's losses, that you can't just show up at someone's house and tell them to leave — that there has to be a process and that people have to be made whole. [Copyright 2015 NPR]]]></paragraph>
+      </text>
+      <textWithHtml>
+        <paragraph num="1"><![CDATA[The World Bank's goal is to end extreme poverty and to grow income for the poorest people on the planet.]]></paragraph>
+        <paragraph num="2"><![CDATA[The bank does this by lending money and giving grants to governments and private corporations in some of the least developed places on the planet. For example, money goes to preserving land, building dams and creating health care systems.]]></paragraph>
+        <paragraph num="3"><![CDATA[But a lot of poor people actually end up worse off because of those projects, a <a href="http://www.huffingtonpost.com/2015/04/16/world-banks-broken-promise_n_7054842.html">report</a> from The International Consortium of Investigative Journalists found.]]></paragraph>
+        <paragraph num="4"><![CDATA[People are often displaced, or their livelihoods are ruined. Over the past decade an estimated 3.4 million people have been displaced by bank-funded projects, says <a href="http://www.icij.org/journalists/michael-hudson">Michael Hudson</a>, a senior editor at ICIJ, who worked on the report. In one instance, hundreds of families had their homes burned down.]]></paragraph>
+        <paragraph num="5"><![CDATA["The World Bank has promised 'do no harm,' but our reporting has found that the World Bank has broken this promise," Hudson says.]]></paragraph>
+        <paragraph num="6"><![CDATA[In response, the <a href="http://www.worldbank.org/">World Bank</a> says the vast majority of its projects don't involve the resettlement of people. But the bank says it has identified shortcomings in its resettlement policies. And it plans to improve those policies to protect people and businesses affected by bank-funded projects.]]></paragraph>
+        <paragraph num="7"><![CDATA[ICIJ's Hudson spoke to NPR's Steve Inskeep on <em>Morning Edition</em> about the new report, which he and his team worked on with <a href="http://projects.huffingtonpost.com/worldbank-evicted-abandoned"><em>The Huffington Post</em></a> and other outlets.]]></paragraph>
+        <paragraph num="8"><![CDATA[<strong>A lot of these projects seem beneficial. But you found that something is going wrong. What is it? </strong>]]></paragraph>
+        <paragraph num="9"><![CDATA[What is often going wrong is what happens to people on the ground when you do these big projects. When you build a big dam, that can have huge consequences for the people living along the banks of the river and people who make their living via subsistence fishing or farming along the river bank. A mega-dam can affect 50,000, even a 100,000 people.]]></paragraph>
+        <paragraph num="10"><![CDATA[<strong>What happens to the people displaced?</strong>]]></paragraph>
+        <paragraph num="11"><![CDATA[In some cases they may have to move. Or they may lose part of their land. In other cases, they may not be physically displaced but rather economically displaced because their livelihoods have been destroyed, or at least partly impacted.]]></paragraph>
+        <paragraph num="12"><![CDATA[If you make your living fishing from the river or along the coast, and a power plant or dam affects the ecosystem, there's fewer fish, and you're not catching as many. Then your livelihood and your ability to feed your family has been impacted.]]></paragraph>
+        <paragraph num="13"><![CDATA[The problem is that even resettlements that are done well and fairly often leave poor people even poorer. There's a lot of research that shows that people who are forced to move suffer higher rates of hunger, illness and early death. It causes really serious consequences for people.]]></paragraph>
+        <paragraph num="14"><![CDATA[<strong>You write about a land conservation project in Kenya. What went wrong there?</strong>]]></paragraph>
+        <paragraph num="15"><![CDATA[The <a href="http://projects.huffingtonpost.com/worldbank-evicted-abandoned/worldbank-projects-leave-trail-misery-around-globe-kenya">land conservation project</a> funneled money to the Kenyan forest service with the idea of preserving a forest in western Kenya. The problem is with the thousands of indigenous people — the Sengwer — living in the forest. Our reporting on the ground shows that hundreds, and perhaps as many as a thousand, homes have been burned by the Kenyan forest service as they try to evict people from the forest.]]></paragraph>
+        <paragraph num="16"><![CDATA[<strong>When you brought these cases to the World Bank's attention, how did they react?</strong>]]></paragraph>
+        <paragraph num="17"><![CDATA[Around the first of March, we told the bank that our reporting had found systemic gaps in its protection for displaced families. Days later, the bank announced that it had found major problems with how it handles resettlement and released an action plan to fix the problem.]]></paragraph>
+        <paragraph num="18"><![CDATA[The bank has also released internal reports going back several years, which show the bank often had violated its own rules, has failed to protect people, has failed to monitor what happens to them and hasn't held its part as accountable for their actions.]]></paragraph>
+        <paragraph num="19"><![CDATA[<strong>Is it inevitable, on some level, that people may be harmed when you replace a low-level economy with a corner of the global economy via these projects?</strong>]]></paragraph>
+        <paragraph num="20"><![CDATA[There's always a price tag for development. But the question is: Who should pay the price? Should poor people be the ones who sacrifice when the government tries to do a big project? Even the World Bank says the budget for a project should include money to cover people's losses, that you can't just show up at someone's house and tell them to leave — that there has to be a process and that people have to be made whole.  <div class="fullattribution">Copyright 2015 NPR. To see more, visit <a href="http://www.npr.org/">http://www.npr.org/</a>.<img src="http://www.google-analytics.com/__utm.gif?utmac=UA-5828686-4&utmdt=When+The+World+Bank+Does+More+Harm+Than+Good&utme=8(APIKey)9(MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001)"/></div>]]></paragraph>
+      </textWithHtml>
+      <layout>
+        <featuredMedia>
+      
+    <audio refId="400285313" num="0" fieldNum="0"/></featuredMedia>
+        <featuredStackLargeImage399816448>
+      
+    <image refId="399843929" num="0" fieldNum="0"/></featuredStackLargeImage399816448>
+        <featuredStackSquareImage399816448>
+      
+    <image refId="399843929" num="0" fieldNum="0"/></featuredStackSquareImage399816448>
+        <hpColumnHeaderImage399816448>
+      
+    <image refId="399843929" num="0" fieldNum="0"/></hpColumnHeaderImage399816448>
+        <none>
+      
+    <image refId="399843730" num="0" fieldNum="0"/></none>
+        <primaryaudio>
+      
+    <audio refId="400285313" num="0" fieldNum="0"/></primaryaudio>
+        <storybyline>
+      
+    <bylineContainer refId="399838255" num="0" fieldNum="0"/></storybyline>
+        <storytext>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    <image refId="399843929" num="0" fieldNum="0"/><text refId="400192188" num="1" paragraphNum="1" fieldNum="19"/><text refId="400192188" num="2" paragraphNum="2" fieldNum="19"/><text refId="400192188" num="3" paragraphNum="3" fieldNum="19"/><text refId="400192188" num="4" paragraphNum="4" fieldNum="19"/><image refId="399844013" num="5" fieldNum="0"/><text refId="400192188" num="6" paragraphNum="5" fieldNum="19"/><text refId="400192188" num="7" paragraphNum="6" fieldNum="19"/><text refId="400192188" num="8" paragraphNum="7" fieldNum="19"/><text refId="400192188" num="9" paragraphNum="8" fieldNum="19"/><text refId="400192188" num="10" paragraphNum="9" fieldNum="19"/><text refId="400192188" num="11" paragraphNum="10" fieldNum="19"/><text refId="400192188" num="12" paragraphNum="11" fieldNum="19"/><link refId="400195320" num="13" fieldNum="0"/><text refId="400192188" num="14" paragraphNum="12" fieldNum="19"/><text refId="400192188" num="15" paragraphNum="13" fieldNum="19"/><text refId="400192188" num="16" paragraphNum="14" fieldNum="19"/><text refId="400192188" num="17" paragraphNum="15" fieldNum="19"/><text refId="400192188" num="18" paragraphNum="16" fieldNum="19"/><text refId="400192188" num="19" paragraphNum="17" fieldNum="19"/><text refId="400192188" num="20" paragraphNum="18" fieldNum="19"/><text refId="400192188" num="21" paragraphNum="19" fieldNum="19"/><text refId="400192188" num="22" paragraphNum="20" fieldNum="19"/></storytext>
+      </layout>
+      <fullText><![CDATA[<div class="storytitle">
+      <h1>When The World Bank Does More Harm Than Good</h1>
+   <input type="hidden" id="title399816448" value="When The World Bank Does More Harm Than Good"></input>
+   <input type="hidden" id="modelShortUrl399816448" value="http://n.pr/1JKwT9F"></input>
+   <input type="hidden" id="modelFullUrl399816448" value="http://www.npr.org/blogs/goatsandsoda/2015/04/17/399816448/when-the-world-bank-does-more-harm-than-good"></input>
+</div>
+
+<!-- END CLASS="STORYTITLE" -->
+<div id="story-meta">
+      <div class="dateblock">
+            <time datetime="2015-04-17"><span class="date">April 17, 2015</span><span class="time"> 3:43 AM ET</span></time>
+   </div>
+   <div id="storybyline" class="  linkLocation">
+            <div class="bucketwrap byline" id="res399838255" previewTitle="bylines">
+                  <div class="blockBylines">
+                        <div class="blockByline  ">
+      <div class="rightContainer">
+            <div class="nameWrap">
+                  <div class="nameOuter">
+                        <div class="nameInner">
+               NPR Staff
+            </div>
+         </div>
+      </div>
+   </div>
+   
+<!-- END CLASS="RIGHTCONTAINER" -->
+</div>
+         </div>
+      </div>
+      
+<!-- END CLASS="BUCKETWRAP BYLINE" ID="RES399838255" PREVIEWTITLE="BYLINES" -->
+   </div>
+</div>
+
+<!-- END ID="STORY-META" -->
+<div id="primaryaudio" class="storylocation linkLocation">
+      <div id="res400285313" class="bucketwrap primary resaudio  clearfix medium">
+            <div class="player-core">
+                  <div class="listenicon">
+                        <a class="listen" href="http://www.npr.org/templates/player/mediaPlayer.html?action=1&t=1&islist=false&id=399816448&m=400285313&d=null" data-metrics='{"category":"Secondary Audio","action":"Play Audio","label":"20150417_me_when_the_world_bank_does_more_harm_than_good.mp3"}' ></a>
+         </div>
+         
+<!-- END CLASS="LISTENICON" -->
+         <div id="avcontent400285313" class="avcontent listen shorttitle">
+                        <span id="mediaTimeTotal400285313" class="media-time-total"><span id="mediaTimeCurrent400285313" class="media-time-current"></span></span>            <h3><a href="http://www.npr.org/templates/player/mediaPlayer.html?action=1&t=1&islist=false&id=399816448&m=400285313&d=null" data-metrics='{"category":"Secondary Audio","action":"Play Audio","label":"20150417_me_when_the_world_bank_does_more_harm_than_good.mp3"}' >Listen to the Story</a></h3>
+            <div class="inner">
+                              <p class="byline"><a class="program" href="http://www.npr.org/programs/morning-edition/">Morning Edition</a></p>               <div class="duration">
+                                    <span id="durationCurrent400285313" class="current"></span>                  <span class="total">4 min 9 sec</span>
+               </div>
+            </div>
+            
+<!-- END CLASS="INNER" -->
+         </div>
+         
+<!-- END ID="AVCONTENT400285313" CLASS="AVCONTENT LISTEN SHORTTITLE" -->
+      </div>
+      
+<!-- END CLASS="PLAYER-CORE" -->
+      <ul class="audiotools">
+                  <li><a class="add" href="http://www.npr.org/templates/player/mediaPlayer.html?action=2&t=1&islist=false&id=399816448&m=400285313&d=null" data-metrics='{"category":"Secondary Audio","action":"Playlist","label":"20150417_me_when_the_world_bank_does_more_harm_than_good.mp3"}' ><span>Playlist</span></a></li>
+         <li><a class="download" href="http://pd.npr.org/anon.npr-mp3/npr/me/2015/04/20150417_me_when_the_world_bank_does_more_harm_than_good.mp3" data-metrics='{"category":"Secondary Audio","action":"Download","label":"20150417_me_when_the_world_bank_does_more_harm_than_good.mp3"}' ><span>Download</span></a></li>
+         <li><a class="pending" title="Transcript Pending" href="#" data-metrics='{"category":"Segment Audio","action":"Click transcript","label":"399816448"}' ><span>Transcript</span></a></li>
+      </ul>
+      <div class="spacer">
+         &nbsp;
+      </div>
+   </div>
+   
+<!-- END ID="RES400285313" CLASS="BUCKETWRAP PRIMARY RESAUDIO  CLEARFIX MEDIUM" -->
+</div>
+<div id="storytext" class="storytext storylocation linkLocation">
+      <div id="res399843929" class="bucketwrap image large" previewTitle="In the 1950s, the World Bank funded the creation of the world's largest man-made dam, the Kariba Dam, which sits on the border of Zimbabwe and Zambia. The construction of such dams can have dire consequences for poor people living near a river, an investigation found.">
+            <div class="imagewrap" data-crop-type="">
+    <img src="http://media.npr.org/assets/img/2015/04/15/463942430-a6ceb5d9f82976adf38dfa46c6eb125b7af2ce62-s1000.jpg" title="In the 1950s, the World Bank funded the creation of the world's largest man-made dam, the Kariba Dam, which sits on the border of Zimbabwe and Zambia. The construction of such dams can have dire consequences for poor people living near a river, an investigation found." alt="In the 1950s, the World Bank funded the creation of the world's largest man-made dam, the Kariba Dam, which sits on the border of Zimbabwe and Zambia. The construction of such dams can have dire consequences for poor people living near a river, an investigation found." />
+</div>
+<div class="credit-caption">
+    <div class="caption">
+        <p><i>
+            In the 1950s, the World Bank funded the creation of the world's largest man-made dam, the Kariba Dam, which sits on the border of Zimbabwe and Zambia. The construction of such dams can have dire consequences for poor people living near a river, an investigation found.
+            </i>
+        </p>
+    </div>
+    
+    <span class="credit">
+        
+        Jekesai Njikizana/AFP/Getty Images
+        
+    </span>
+</div>
+   </div>
+   <p>The World Bank's goal is to end extreme poverty and to grow income for the poorest people on the planet.</p>   <p>The bank does this by lending money and giving grants to governments and private corporations in some of the least developed places on the planet. For example, money goes to preserving land, building dams and creating health care systems.</p>   <p>But a lot of poor people actually end up worse off because of those projects, a <a href="http://www.huffingtonpost.com/2015/04/16/world-banks-broken-promise_n_7054842.html">report</a> from The International Consortium of Investigative Journalists found.</p>   <p>People are often displaced, or their livelihoods are ruined. Over the past decade an estimated 3.4 million people have been displaced by bank-funded projects, says <a href="http://www.icij.org/journalists/michael-hudson">Michael Hudson</a>, a senior editor at ICIJ, who worked on the report. In one instance, hundreds of families had their homes burned down.</p>   <div id="res399844013" class="bucketwrap image medium" previewTitle="Dr. Jim Yong Kim became president of the World Bank in 2012. He is the first bank president to come from the global health sector.">
+            <div class="imagewrap" data-crop-type="">
+    <img src="http://media.npr.org/assets/img/2015/04/15/469595126-68da9329644c78c8545d33c32fb9d9773d2049f8-s300.jpg" title="Dr. Jim Yong Kim became president of the World Bank in 2012. He is the first bank president to come from the global health sector." alt="Dr. Jim Yong Kim became president of the World Bank in 2012. He is the first bank president to come from the global health sector." />
+</div>
+<div class="credit-caption">
+    <div class="caption">
+        <p><i>
+            Dr. Jim Yong Kim became president of the World Bank in 2012. He is the first bank president to come from the global health sector.
+            </i>
+        </p>
+    </div>
+    
+    <span class="credit">
+        
+        Saul Loeb/AFP/Getty Images
+        
+    </span>
+</div>
+   </div>
+   <p>"The World Bank has promised 'do no harm,' but our reporting has found that the World Bank has broken this promise," Hudson says.</p>   <p>In response, the <a href="http://www.worldbank.org/">World Bank</a> says the vast majority of its projects don't involve the resettlement of people. But the bank says it has identified shortcomings in its resettlement policies. And it plans to improve those policies to protect people and businesses affected by bank-funded projects.</p>   <p>ICIJ's Hudson spoke to NPR's Steve Inskeep on <em>Morning Edition</em> about the new report, which he and his team worked on with <a href="http://projects.huffingtonpost.com/worldbank-evicted-abandoned"><em>The Huffington Post</em></a> and other outlets.</p>   <p><strong>A lot of these projects seem beneficial. But you found that something is going wrong. What is it? </strong></p>   <p>What is often going wrong is what happens to people on the ground when you do these big projects. When you build a big dam, that can have huge consequences for the people living along the banks of the river and people who make their living via subsistence fishing or farming along the river bank. A mega-dam can affect 50,000, even a 100,000 people.</p>   <p><strong>What happens to the people displaced?</strong></p>   <p>In some cases they may have to move. Or they may lose part of their land. In other cases, they may not be physically displaced but rather economically displaced because their livelihoods have been destroyed, or at least partly impacted.</p>   <div id="res400195320" class="bucketwrap internallink insettwocolumn inset2col ">
+            <div class="bucket img">
+                  <a id="featuredStackSquareImage289819931" href="http://www.npr.org/blogs/parallels/2014/03/13/289819931/the-world-bank-gets-an-overhaul-and-not-everyones-happy"  data-metrics='{"category":"Story to Story","action":"Click Internal Link","label":"http:\/\/www.npr.org\/blogs\/parallels\/2014\/03\/13\/289819931\/the-world-bank-gets-an-overhaul-and-not-everyones-happy"}' ><img src="http://media.npr.org/assets/img/2014/03/13/yongkim_sq-08f638eea0c67c950f0c4a76ffe68769924ff7cf-s100.jpg" class="img100" title="Jim Yong Kim joined the World Bank as president in 2012." alt="Jim Yong Kim joined the World Bank as president in 2012." /></a>         <div class="bucketblock">
+                        <h3 class="slug"><a href="http://www.npr.org/blogs/parallels/">Parallels </a></h3>
+            <h3><a href="http://www.npr.org/blogs/parallels/2014/03/13/289819931/the-world-bank-gets-an-overhaul-and-not-everyones-happy"  data-metrics='{"category":"Story to Story","action":"Click Internal Link","label":"http:\/\/www.npr.org\/blogs\/parallels\/2014\/03\/13\/289819931\/the-world-bank-gets-an-overhaul-and-not-everyones-happy"}' > The World Bank Gets An Overhaul — And Not Everyone's Happy</a></h3>
+         </div>
+         
+<!-- END CLASS="BUCKETBLOCK" -->
+      </div>
+      
+<!-- END CLASS="BUCKET IMG" -->
+   </div>
+   
+<!-- END ID="RES400195320" CLASS="BUCKETWRAP INTERNALLINK INSETTWOCOLUMN INSET2COL " -->
+   <p>If you make your living fishing from the river or along the coast, and a power plant or dam affects the ecosystem, there's fewer fish, and you're not catching as many. Then your livelihood and your ability to feed your family has been impacted.</p>   <p>The problem is that even resettlements that are done well and fairly often leave poor people even poorer. There's a lot of research that shows that people who are forced to move suffer higher rates of hunger, illness and early death. It causes really serious consequences for people.</p>   <p><strong>You write about a land conservation project in Kenya. What went wrong there?</strong></p>   <p>The <a href="http://projects.huffingtonpost.com/worldbank-evicted-abandoned/worldbank-projects-leave-trail-misery-around-globe-kenya">land conservation project</a> funneled money to the Kenyan forest service with the idea of preserving a forest in western Kenya. The problem is with the thousands of indigenous people — the Sengwer — living in the forest. Our reporting on the ground shows that hundreds, and perhaps as many as a thousand, homes have been burned by the Kenyan forest service as they try to evict people from the forest.</p>   <p><strong>When you brought these cases to the World Bank's attention, how did they react?</strong></p>   <p>Around the first of March, we told the bank that our reporting had found systemic gaps in its protection for displaced families. Days later, the bank announced that it had found major problems with how it handles resettlement and released an action plan to fix the problem.</p>   <p>The bank has also released internal reports going back several years, which show the bank often had violated its own rules, has failed to protect people, has failed to monitor what happens to them and hasn't held its part as accountable for their actions.</p>   <p><strong>Is it inevitable, on some level, that people may be harmed when you replace a low-level economy with a corner of the global economy via these projects?</strong></p>   <p>There's always a price tag for development. But the question is: Who should pay the price? Should poor people be the ones who sacrifice when the government tries to do a big project? Even the World Bank says the budget for a project should include money to cover people's losses, that you can't just show up at someone's house and tell them to leave — that there has to be a process and that people have to be made whole.</p>
+</div>
+<div class="fullattribution">Copyright 2015 NPR. To see more, visit <a href="http://www.npr.org/">http://www.npr.org/</a>.<img src="http://www.google-analytics.com/__utm.gif?utmac=UA-5828686-4&utmdt=When+The+World+Bank+Does+More+Harm+Than+Good&utme=8(APIKey)9(MDEwNjM4Njk3MDEzNjM4OTI0MjRiYjdkMg001)"/></div>]]></fullText>
+    </story>
+  </list>
+</nprml>
