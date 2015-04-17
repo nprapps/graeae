@@ -6,7 +6,10 @@ import requests
 
 from pyquery import PyQuery
 
+from app_config import get_secrets
 from models import ApiEntry, Article
+
+SECRETS = get_secrets()
 
 class HomepageScraper:
     url = 'http://npr.org'
@@ -68,7 +71,9 @@ class HomepageScraper:
         Scrape NPR API for a single article.
         """
         if not kwargs:
-            response = requests.get('http://api.npr.org/query?id=%s&apiKey=%s' % (article.story_id, os.environ['NPR_API_KEY']))
+            response = requests.get('http://api.npr.org/query', params={
+                'id': article.story_id,
+                'apiKey': SECRETS['NPR_API_KEY']})
 
             element = PyQuery(response.content)
         else:
