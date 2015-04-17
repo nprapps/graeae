@@ -10,7 +10,7 @@ from scrapers.homepage import HomepageScraper
 from time import time
 
 
-class TestScraper(object):
+class TestScraper(unittest.TestCase):
     """
     Test the scraper
     """
@@ -26,16 +26,14 @@ class TestScraper(object):
         local('dropdb %s' % klass.temp_db_name)
 
     def setUp(self):
-        self.scraper = HomepageScraper()
         self.db = dataset.connect('postgres:///%s' % self.temp_db_name)
-        self.scraper.table = self.db['homepage']
+        self.scraper = HomepageScraper(self.db)
 
-    def test_scrape(self):
+    def test_db_write(self):
         self.scraper.scrape()
-        assert_equal("B", "B")
+        rows = list(self.scraper.table.all())
+        self.assertGreater(len(rows), 0)
 
-    def test_scrape2(self):
-        assert_equal("B", "B")
 
 
 
