@@ -10,16 +10,20 @@ from pprint import pprint as pp
 class HomepageScraper:
     url = 'http://npr.org'
 
-    def __init__(self):
+    def __init__(self, db):
         self.run_time = datetime.utcnow()
-        self.page = PyQuery(url=self.url)
-        self.table = app_config.db['homepage']
+        self.table = db['homepage']
 
-    def scrape(self):
+    def scrape(self, **kwargs):
         """
         Scrape!
         """
-        article_elements = self.page('.stories-wrap article')
+        if not kwargs:
+            page = PyQuery(url=self.url)
+        else:
+            page = PyQuery(**kwargs)
+
+        article_elements = page('.stories-wrap article')
         slot = 0
         for el in article_elements:
             element = PyQuery(el)
