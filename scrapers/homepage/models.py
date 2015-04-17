@@ -64,6 +64,13 @@ class Article:
         return None
 
     @property
+    def homepage_image(self):
+        if self.layout in ('big-image', 'small-image'):
+            return self.element.find('.bucketwrap img').attr('data-original')
+
+        return None
+
+    @property
     def has_audio(self):
         return bool(self.element.hasClass('post-type-audio'))
 

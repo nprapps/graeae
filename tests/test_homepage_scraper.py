@@ -74,6 +74,9 @@ class TestScrapeHomepage(unittest.TestCase):
     def test_num_articles(self):
         self.assertEqual(len(self.articles), 20)
 
+    def test_homepage_image(self):
+        self.assertEqual(self.articles[0].homepage_image, 'http://media.npr.org/assets/img/2015/04/17/463942430_wide-d7202aafc983e9d09794299786231f0f284b2b7d-s900.jpg')
+        self.assertIs(self.articles[8].homepage_image, None)
 
 class TestScrapeApi(unittest.TestCase):
     def setUp(self):
