@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import os
 
 from pyquery import PyQuery
@@ -9,15 +10,15 @@ class Article:
         self.run_time = run_time
 
     def serialize(self):
-        return {
-            'layout': self.layout,
-            'headline': self.headline,
-            'is_bullet': self.is_bullet,
-            'run_time': self.run_time,
-            'slot': self.slot,
-            'story_id': self.story_id,
-            'url': self.url,
-        }
+        return OrderedDict([
+            ('layout', self.layout),
+            ('headline', self.headline),
+            ('is_bullet', self.is_bullet),
+            ('run_time', self.run_time),
+            ('slot', self.slot),
+            ('story_id', self.story_id),
+            ('url', self.url)
+        ])
 
     @property
     def headline(self):
@@ -65,6 +66,14 @@ class ApiEntry:
     def __init__(self, element):
         self.element = element
 
+    def serialize(self):
+        return OrderedDict([
+            ('has_story_image', self.has_story_image),
+            ('has_lead_art', self.has_lead_art),
+            ('lead_art_provider', self.lead_art_provider),
+            ('lead_art_url', self.lead_art_url)
+        ])
+
     @property
     def has_story_image(self):
         return self.element.find('layout').find('image').length > 0
@@ -87,10 +96,16 @@ class ApiEntry:
     def lead_art_provider(self):
         el = self._lead_art_element()
 
+        if not el:
+            return None
+
         return el.find('provider').text()
 
     @property
     def lead_art_url(self):
         el = self._lead_art_element()
+
+        if not el:
+            return None
 
         return PyQuery(el.find('enlargement')).attr('src')

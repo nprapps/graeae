@@ -6,6 +6,7 @@ Cron jobs
 
 from fabric.api import local, require, task
 
+from app_config import db
 from scrapers.homepage.scraper import HomepageScraper
 
 @task
@@ -26,3 +27,4 @@ def scrape():
     scraper = HomepageScraper()
     articles = scraper.scrape_homepage()
     api_entries = scraper.scrape_api_entries(articles)
+    scraper.write(db, articles, api_entries)

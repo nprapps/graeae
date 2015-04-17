@@ -52,7 +52,7 @@ class HomepageScraper:
         """
         Scrape NPR API for all articles.
         """
-        print 'Scraping API'
+        print 'Scraping API         '
         print '------------'
 
         api_entries = []
@@ -76,10 +76,13 @@ class HomepageScraper:
 
         return ApiEntry(element)
 
-    def write(self, articles, db):
+    def write(self, db, articles, api_entries):
         """
         Write to database
         """
         table = db['homepage']
-        for article in articles:
-            table.insert(article.serialize())
+
+        for article, api_entry in zip(articles, api_entries):
+            row = article.serialize()
+            row.update(api_entry.serialize())
+            table.insert(row)
