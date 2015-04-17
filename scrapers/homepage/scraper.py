@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import os
+import requests
 
 from pyquery import PyQuery
 
@@ -17,19 +18,33 @@ class HomepageScraper:
         """
         Scrape!
         """
+        print 'Scraping homepage'
+        print '-----------------'
+
         if not kwargs:
-            page = PyQuery(url=self.url)
+            response = requests.get(self.url)
+
+            page = PyQuery(response.content)
         else:
             page = PyQuery(**kwargs)
 
         article_elements = page('.stories-wrap article')
         slot = 0
         articles = []
+
         for el in article_elements:
             element = PyQuery(el)
+
+            if not element.attr('id'):
+                continue
+
             if not element.hasClass('attachment'):
                 slot += 1
-            articles.append(Article(element, slot, self.run_time))
+
+            article = Article(element, slot, self.run_time)
+            print article.headline
+
+            articles.append(article)
 
         return articles
 
@@ -37,10 +52,14 @@ class HomepageScraper:
         """
         Scrape NPR API for all articles.
         """
+        print 'Scraping API'
+        print '------------'
+
         api_entries = []
 
         for article in articles:
-            api_entries.append(scrape_api_entry(article))
+            print article.story_id
+            api_entries.append(self.scrape_api_entry(article))
 
         return api_entries
 
@@ -49,7 +68,9 @@ class HomepageScraper:
         Scrape NPR API for a single article.
         """
         if not kwargs:
-            element = PyQuery(url='http://api.npr.org/query?id=%s&apiKey=%s' % (article.story_id, os.environ['NPR_API_KEY']))
+            response = requests.get('http://api.npr.org/query?id=%s&apiKey=%s' % (article.story_id, os.environ['NPR_API_KEY']))
+
+            element = PyQuery(response.content)
         else:
             element = PyQuery(**kwargs)
 
