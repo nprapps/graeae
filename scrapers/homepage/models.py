@@ -68,3 +68,29 @@ class ApiEntry:
     @property
     def has_story_image(self):
         return self.element.find('layout').find('image').length > 0
+
+    def _lead_art_element(self):
+        el = PyQuery(self.element.find('layout').find('storytext').children()[0])
+
+        if el[0].tag != 'image':
+            return None
+
+        image_id = el.attr('refId')
+
+        return PyQuery(self.element.find('image[id="%s"]' % image_id))
+
+    @property
+    def has_lead_art(self):
+        return bool(self._lead_art_element())
+
+    @property
+    def lead_art_provider(self):
+        el = self._lead_art_element()
+
+        return el.find('provider').text()
+
+    @property
+    def lead_art_url(self):
+        el = self._lead_art_element()
+
+        return PyQuery(el.find('enlargement')).attr('src')

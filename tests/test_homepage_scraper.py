@@ -81,3 +81,12 @@ class TestScrapeApi(unittest.TestCase):
 
     def test_has_story_image(self):
         self.assertTrue(self.api_entry.has_story_image)
+
+    def test_has_lead_art(self):
+        self.assertTrue(self.api_entry.has_lead_art)
+
+    def test_lead_art_provider(self):
+        self.assertEqual(self.api_entry.lead_art_provider, 'AFP/Getty Images')
+
+    def test_lead_art_url(self):
+        self.assertEqual(self.api_entry.lead_art_url, 'http://media.npr.org/assets/img/2015/04/15/463942430-a6ceb5d9f82976adf38dfa46c6eb125b7af2ce62.jpg')
