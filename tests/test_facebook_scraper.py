@@ -33,3 +33,12 @@ class TestScrapeInsights(unittest.TestCase):
 
     def test_comments(self):
         self.assertEqual(self.insights.comments, 0)
+
+    def test_link_clicks(self):
+        self.assertEqual(self.insights.link_clicks, 24)
+
+    def test_photo_view_clicks(self):
+        self.assertEqual(self.insights.photo_view_clicks, 0)
+
+    def test_people_reached(self):
+        self.assertEqual(self.insights.people_reached, 1160)
