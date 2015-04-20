@@ -26,7 +26,9 @@ class FacebookScraper:
         posts = []
 
         for api_post in api_posts['data']:
-            posts.append(Post(api_post, self.run_time))
+            insights_path = '/v2.3/%s/insights/' % api_post['id']
+            insights = graph.request(insights_path)
+            posts.append(Post(api_post, insights, self.run_time))
 
         return posts
 
