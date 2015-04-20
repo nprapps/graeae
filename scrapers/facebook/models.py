@@ -14,6 +14,8 @@ class Post:
             ('run_time', self.run_time),
             ('headline', self.headline),
             ('post_type', self.post_type),
+            ('art_url', self.art_url),
+            ('link_url', self.link_url),
         ])
 
     @property
@@ -27,6 +29,15 @@ class Post:
     @property
     def post_type(self):
         return self.api_post['type']
+
+    @property
+    def art_url(self):
+        return self.api_post['picture']
+
+    @property
+    def link_url(self):
+        return self.api_post['link']
+
 
 class Insights:
     def __init__(self, post, api_insights):
