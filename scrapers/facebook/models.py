@@ -12,7 +12,8 @@ class Post:
     def serialize(self):
         return OrderedDict([
             ('run_time', self.run_time),
-            ('headline', self.headline)
+            ('headline', self.headline),
+            ('post_type', self.post_type),
         ])
 
     @property
@@ -22,6 +23,10 @@ class Post:
     @property
     def headline(self):
         return self.api_post['name']
+
+    @property
+    def post_type(self):
+        return self.api_post['type']
 
 class Insights:
     def __init__(self, post, api_insights):
