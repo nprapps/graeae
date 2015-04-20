@@ -80,7 +80,7 @@ class HomepageScraper:
         else:
             element = PyQuery(**kwargs)
 
-        return ApiEntry(element)
+        return ApiEntry(article, element)
 
     def write(self, db, articles, api_entries):
         """

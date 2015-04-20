@@ -18,7 +18,7 @@ class Article:
             ('slot', self.slot),
             ('story_id', self.story_id),
             ('url', self.url),
-            ('homepage_image', self.homepage_image),
+            ('homepage_art_url', self.homepage_art_url),
         ])
 
     @property
@@ -64,7 +64,7 @@ class Article:
         return None
 
     @property
-    def homepage_image(self):
+    def homepage_art_url(self):
         if self.layout in ('big-image', 'small-image'):
             return self.element.find('.bucketwrap img').attr('data-original')
 
@@ -75,15 +75,17 @@ class Article:
         return bool(self.element.hasClass('post-type-audio'))
 
 class ApiEntry:
-    def __init__(self, element):
+    def __init__(self, article, element):
+        self.article = article
         self.element = element
 
     def serialize(self):
         return OrderedDict([
-            ('has_story_image', self.has_story_image),
+            ('has_story_art', self.has_story_art),
             ('has_lead_art', self.has_lead_art),
             ('lead_art_provider', self.lead_art_provider),
-            ('lead_art_url', self.lead_art_url)
+            ('lead_art_url', self.lead_art_url),
+            ('homepage_art_provider', self.homepage_art_provider)
         ])
 
     def _lead_art_element(self):
@@ -97,7 +99,7 @@ class ApiEntry:
         return PyQuery(self.element.find('image[id="%s"]' % image_id))
 
     @property
-    def has_story_image(self):
+    def has_story_art(self):
         return self.element.find('layout').find('image').length > 0
 
     @property
@@ -121,3 +123,28 @@ class ApiEntry:
             return None
 
         return PyQuery(el.find('enlargement')).attr('src')
+
+    def _parse_art_id_from_url(self, url):
+        prefix = url[:url.rfind('_')]
+        art_id = prefix.split('/')[-1]
+
+        return art_id
+
+    @property
+    def homepage_art_provider(self):
+        # http://media.npr.org/assets/img/2015/04/17/463942430_wide-d7202aafc983e9d09794299786231f0f284b2b7d-s900-c85.jpg
+        url = self.article.homepage_art_url
+
+        if not url:
+            return None
+
+        art_id = self._parse_art_id_from_url(url)
+
+        for image_el in self.element.find('story > image'):
+            src = PyQuery(image_el).attr('src')
+            src_art_id = self._parse_art_id_from_url(src)
+
+            if art_id == src_art_id:
+                break
+
+        return image_el.find('provider').text
