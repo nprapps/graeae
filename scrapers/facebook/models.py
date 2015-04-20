@@ -2,7 +2,7 @@ from collections import OrderedDict
 from itertools import groupby
 
 import os
-
+import urlparse
 
 class Post:
     def __init__(self, api_post, run_time):
@@ -32,11 +32,15 @@ class Post:
 
     @property
     def art_url(self):
-        return self.api_post['picture']
+        url = self.api_post['picture']
+        params = urlparse.parse_qs(url[url.find('?'):])
+        image_url = params['url'][0]
+        return image_url[:image_url.find('?')]
 
     @property
     def link_url(self):
-        return self.api_post['link']
+        url = self.api_post['link']
+        return url[:url.find('?')]
 
 
 class Insights:
