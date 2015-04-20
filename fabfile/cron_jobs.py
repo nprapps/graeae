@@ -7,7 +7,8 @@ Cron jobs
 from fabric.api import local, require, task
 
 from app_config import db
-from scrapers.homepage.scraper import HomepageScraper
+from scrapers.facebook import FacebookScraper
+from scrapers.homepage import HomepageScraper
 
 @task
 def test():
@@ -20,7 +21,7 @@ def test():
     local('echo $DEPLOYMENT_TARGET > /tmp/cron_test.txt')
 
 @task
-def scrape():
+def scrape_homepage():
     """
     Run scrapers!
     """
@@ -28,3 +29,10 @@ def scrape():
     articles = scraper.scrape_homepage()
     api_entries = scraper.scrape_api_entries(articles)
     scraper.write(db, articles, api_entries)
+
+@task
+def scrape_facebook():
+    scraper = FacebookScraper()
+    posts = scraper.scrape_facebook()
+    insights = scraper.scrape_insights(posts)
+    scraper.write(db, posts, insights)

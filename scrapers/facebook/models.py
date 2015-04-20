@@ -31,7 +31,10 @@ class Insights:
         return OrderedDict([
             ('shares', self.shares),
             ('likes', self.likes),
-            ('comments', self.comments)
+            ('comments', self.comments),
+            ('people_reached', self.people_reached),
+            ('photo_view_clicks', self.photo_view_clicks),
+            ('link_clicks', self.link_clicks)
         ])
 
     def _insights(self):
@@ -54,6 +57,18 @@ class Insights:
 
         return value[action_type]
 
+    def _post_consumptions_by_type(self, action_type):
+        insight =  self._insights()['post_consumptions_by_type']
+        value = insight['values'][0]['value']
+
+        if not value:
+            return 0
+
+        if action_type not in value:
+            return 0
+
+        return value[action_type]
+
     @property
     def shares(self):
         return self._post_stories_by_action_type('share')
@@ -65,3 +80,23 @@ class Insights:
     @property
     def comments(self):
         return self._post_stories_by_action_type('comment')
+
+    @property
+    def people_reached(self):
+        return self._insights()['post_impressions_unique']['values'][0]['value']
+
+    @property
+    def photo_view_clicks(self):
+        return self._post_consumptions_by_type('photo view')
+
+    @property
+    def link_clicks(self):
+        return self._post_consumptions_by_type('link clicks')
+
+    @property
+    def other_clicks(self):
+        """
+        Numbers for this metric don't seem to match what is displayed on the
+        post insights popup. Leaving out of reporting.
+        """
+        return self._post_consumptions_by_type('other clicks')

@@ -22,6 +22,9 @@ class FacebookScraper:
         """
         Scrape!
         """
+        print 'Scraping Facebook'
+        print '-----------------'
+
         if profile_filename:
             with open(profile_filename) as f:
                 profile = json.load(f)
@@ -43,14 +46,19 @@ class FacebookScraper:
         posts = []
 
         for api_post in api_posts['data']:
+            print api_post['id']
             posts.append(Post(api_post, self.run_time))
 
         return posts
 
     def scrape_insights(self, posts):
+        print 'Scraping Insights'
+        print '-----------------'
+
         insights = []
 
         for post in posts:
+            print post.id
             insights.append(self.scrape_post_insights(post))
 
         return insights
@@ -67,14 +75,13 @@ class FacebookScraper:
 
         return Insights(post, api_insights)
 
-    def write(self, db, posts):
+    def write(self, db, posts, insights):
         """
         Write to database
         """
-        # table = db['homepage']
-        #
-        # for article, api_entry in zip(articles, api_entries):
-        #     row = article.serialize()
-        #     row.update(api_entry.serialize())
-        #     table.insert(row)
-        pass
+        table = db['facebook']
+
+        for post, insight in zip(posts, insights):
+            row = post.serialize()
+            row.update(insight.serialize())
+            table.insert(row)
