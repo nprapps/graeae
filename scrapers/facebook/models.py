@@ -11,6 +11,7 @@ class Post:
 
     def serialize(self):
         return OrderedDict([
+            ('run_time', self.run_time),
             ('headline', self.headline)
         ])
 
