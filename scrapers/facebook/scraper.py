@@ -16,7 +16,6 @@ class FacebookScraper:
 
     def __init__(self):
         self.run_time = datetime.utcnow()
-        self.graph = GraphAPI(self.access_token)
 
     def scrape_facebook(self, profile_filename=None, posts_filename=None):
         """
@@ -25,20 +24,20 @@ class FacebookScraper:
         print 'Scraping Facebook'
         print '-----------------'
 
-        if profile_filename:
+        if profile_filename and posts_filename:
             with open(profile_filename) as f:
                 profile = json.load(f)
-        else:
-            profile = self.graph.get_object(self.user)
 
-        # with open('tests/snapshots/fb-profile-04-20-2015.json', 'w') as f:
-        #     f.write(json.dumps(profile))
-
-        if posts_filename:
             with open(posts_filename) as f:
                 api_posts = json.load(f)
         else:
+            self.graph = GraphAPI(self.access_token)
+
+            profile = self.graph.get_object(self.user)
             api_posts = self.graph.get_connections(profile['id'], 'posts')
+
+        # with open('tests/snapshots/fb-profile-04-20-2015.json', 'w') as f:
+        #     f.write(json.dumps(profile))
 
         # with open('tests/snapshots/fb-posts-04-20-2015.json', 'w') as f:
         #     f.write(json.dumps(api_posts))

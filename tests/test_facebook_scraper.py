@@ -16,10 +16,22 @@ class TestScrapeFacebook(unittest.TestCase):
     def test_headline(self):
         self.assertEqual(self.posts[0].headline, 'How D.C. Is Turning A \'Pedestrian Dead-Zone\' Into An Eco-Showcase')
 
+    def test_post_type(self):
+        self.assertEqual(self.posts[0].post_type, 'link')
+
+    def test_art_url(self):
+        self.assertEqual(self.posts[0].art_url, '')
+
+    def test_link_url(self):
+        self.assertEqual(self.posts[0].link_url, 'http://wamu.org/programs/metro_connection/15/04/17/southwest_ecodistrict')
+
 class TestScrapeInsights(unittest.TestCase):
     def setUp(self):
         self.scraper = FacebookScraper()
-        self.posts = self.scraper.scrape_facebook()
+        self.posts = self.scraper.scrape_facebook(
+            profile_filename='tests/snapshots/fb-profile-04-20-2015.json',
+            posts_filename='tests/snapshots/fb-posts-04-20-2015.json'
+        )
         self.insights = self.scraper.scrape_post_insights(
             self.posts[0],
             filename='tests/snapshots/fb-insights-04-20-2015.json'
