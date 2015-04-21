@@ -31,7 +31,51 @@ graeae
 What is this?
 -------------
 
-**TKTK: Describe graeae here.**
+Graeae is a tool for aggregating data about our content from: our story API (Seamus), our homepage, our Facebook page and qualitative review by human experts (e.g. photo quality).
+
+This project currently contains three scrapers:
+
+### FacebookScraper
+
+This scraper collects an event stream by scanning our Facebook feed every N minutes.
+
+* headline
+* post_type
+* art_url
+* link_url
+* shares
+* likes
+* comments
+* link_clicks
+* photo_view_clicks
+
+### HomepageScraper
+
+This scraper collects an event stream by scanning our homepage every N minutes.
+
+* headline
+* url
+* is_bullet
+* story_id
+* layout
+* has_audio
+* num_articles
+* homepage_art_url
+
+This additional data is knitted in from the Seamus API:
+
+* has_story_art
+* has_lead_art
+* lead_art_provider
+* lead_art_url
+* homepage_art_provider
+
+### SeamusScraper
+
+This scraper collects a canonical dataset of every NPR story in the API. (It is not an event stream.)
+
+* id
+* headline
 
 Assumptions
 -----------
