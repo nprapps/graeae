@@ -35,12 +35,18 @@ class Post:
         url = self.api_post['picture']
         params = urlparse.parse_qs(url[url.find('?'):])
         image_url = params['url'][0]
-        return image_url[:image_url.find('?')]
+        if image_url.find('?') > -1:
+            return image_url[:image_url.find('?')]
+        else:
+            return image_url
 
     @property
     def link_url(self):
         url = self.api_post['link']
-        return url[:url.find('?')]
+        if url.find('?') > -1:
+            return url[:url.find('?')]
+        else:
+            return url
 
 
 class Insights:
