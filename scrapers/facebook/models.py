@@ -4,12 +4,20 @@ from itertools import groupby
 import os
 import urlparse
 
+
 class Post:
+    """
+    Represent a Facebook post pulled from the Graph API
+    """
+
     def __init__(self, api_post, run_time):
         self.api_post = api_post
         self.run_time = run_time
 
     def serialize(self):
+        """
+        Serialize post data
+        """
         return OrderedDict([
             ('run_time', self.run_time),
             ('headline', self.headline),
@@ -22,26 +30,44 @@ class Post:
 
     @property
     def id(self):
+        """
+        Get post ID
+        """
         return self.api_post['id']
 
     @property
     def headline(self):
+        """
+        Get headline (headlines are optional)
+        """
         return self.api_post.get('name')
 
     @property
     def post_type(self):
+        """
+        Get post type (e.g. 'link')
+        """
         return self.api_post['type']
 
     @property
     def created_time(self):
+        """
+        Get created time
+        """
         return self.api_post['created_time']
 
     @property
     def updated_time(self):
+        """
+        Get updated time
+        """
         return self.api_post['updated_time']
 
     @property
     def art_url(self):
+        """
+        Get url to featured image
+        """
         url = self.api_post['picture']
 
         # If there's a URL parameter, use it, otherwise the image was directly
@@ -58,6 +84,9 @@ class Post:
 
     @property
     def link_url(self):
+        """
+        Get post link url
+        """
         url = self.api_post['link']
         if url.find('?') > -1:
             return url[:url.find('?')]
@@ -66,11 +95,18 @@ class Post:
 
 
 class Insights:
+    """
+    Represent insights data for a Facebook post from the Graph API
+    """
+
     def __init__(self, post, api_insights):
         self.post = post
         self.api_insights = api_insights
 
     def serialize(self):
+        """
+        Serialize insights data
+        """
         return OrderedDict([
             ('shares', self.shares),
             ('likes', self.likes),
@@ -81,6 +117,9 @@ class Insights:
         ])
 
     def _insights(self):
+        """
+        Coerce insights data into dict
+        """
         insights = {}
 
         for row in self.api_insights['data']:
@@ -89,6 +128,9 @@ class Insights:
         return insights
 
     def _post_stories_by_action_type(self, action_type):
+        """
+        Parse 'post_stories_by_action_type'
+        """
         insight =  self._insights()['post_stories_by_action_type']
         value = insight['values'][0]['value']
 
@@ -101,6 +143,9 @@ class Insights:
         return value[action_type]
 
     def _post_consumptions_by_type(self, action_type):
+        """
+        Parse 'post_consumptions_by_type'
+        """
         insight =  self._insights()['post_consumptions_by_type']
         value = insight['values'][0]['value']
 
@@ -114,31 +159,51 @@ class Insights:
 
     @property
     def shares(self):
+        """
+        Get shares value
+        """
         return self._post_stories_by_action_type('share')
 
     @property
     def likes(self):
+        """
+        Get likes value
+        """
         return self._post_stories_by_action_type('like')
 
     @property
     def comments(self):
+        """
+        Get comments value
+        """
         return self._post_stories_by_action_type('comment')
 
     @property
     def people_reached(self):
+        """
+        Get people reached value
+        """
         return self._insights()['post_impressions_unique']['values'][0]['value']
 
     @property
     def photo_view_clicks(self):
+        """
+        Get photo view value
+        """
         return self._post_consumptions_by_type('photo view')
 
     @property
     def link_clicks(self):
+        """
+        Get link clicks value
+        """
         return self._post_consumptions_by_type('link clicks')
 
     @property
     def other_clicks(self):
         """
+        Get other clicks value
+
         Numbers for this metric don't seem to match what is displayed on the
         post insights popup. Leaving out of reporting.
         """
