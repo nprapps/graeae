@@ -43,6 +43,12 @@ class Article:
         return self.story_id.isdigit()
 
     @property
+    def teaser(self):
+        if self.is_bullet:
+            return None
+        return self.element('.teaser').text()
+
+    @property
     def layout(self):
         """
         Possible layouts: ['bullet', 'video', 'big-image', 'small-image']

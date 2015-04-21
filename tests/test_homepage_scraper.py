@@ -50,6 +50,9 @@ class TestScrapeHomepage(unittest.TestCase):
         self.assertEqual(self.articles[0].homepage_art_url, 'http://media.npr.org/assets/img/2015/04/17/463942430_wide-d7202aafc983e9d09794299786231f0f284b2b7d-s900.jpg')
         self.assertIs(self.articles[8].homepage_art_url, None)
 
+    def test_teaser(self):
+        self.assertEqual(self.articles[0].teaser, 'Large projects funded by the bank have left millions of poor people worse off, an investigation found. The bank says the vast majority of its projects don\'t fall into this category.')
+
 class TestScrapeApi(unittest.TestCase):
     def setUp(self):
         self.scraper = HomepageScraper()
