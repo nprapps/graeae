@@ -26,6 +26,8 @@ class Post:
             ('link_url', self.link_url),
             ('created_time', self.created_time),
             ('updated_time', self.updated_time),
+            ('message', self.message),
+            ('description', self.description),
         ])
 
     @property
@@ -92,6 +94,20 @@ class Post:
             return url[:url.find('?')]
         else:
             return url
+
+    @property
+    def message(self):
+        """
+        Get message (the text above the photo)
+        """
+        return self.api_post.get('message')
+
+    @property
+    def description(self):
+        """
+        Get description (the text associated with the photo)
+        """
+        return self.api_post.get('description')
 
 
 class Insights:
