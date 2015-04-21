@@ -20,7 +20,7 @@ class TestScrapeFacebook(unittest.TestCase):
         self.assertEqual(self.posts[0].post_type, 'link')
 
     def test_art_url(self):
-        self.assertEqual(self.posts[0].art_url, '')
+        self.assertEqual(self.posts[0].art_url, 'http://amplify.nprstations.org/files/201504/viewmalltobanneker.jpg_itok_KBLvGBLY')
 
     def test_link_url(self):
         self.assertEqual(self.posts[0].link_url, 'http://wamu.org/programs/metro_connection/15/04/17/southwest_ecodistrict')
