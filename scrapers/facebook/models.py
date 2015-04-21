@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from dateutil import parser
 from itertools import groupby
 
 import os
@@ -56,14 +57,14 @@ class Post:
         """
         Get created time
         """
-        return self.api_post['created_time']
+        return parser.parse(self.api_post['created_time'])
 
     @property
     def updated_time(self):
         """
         Get updated time
         """
-        return self.api_post['updated_time']
+        return parser.parse(self.api_post['updated_time'])
 
     @property
     def art_url(self):
