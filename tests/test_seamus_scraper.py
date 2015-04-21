@@ -25,3 +25,6 @@ class TestScrapeSeamus(unittest.TestCase):
 
     def test_last_modified_date(self):
         self.assertEqual(self.stories[0].last_modified_date, 'Tue, 21 Apr 2015 08:40:23 -0400')
+
+    def test_canonical_url(self):
+        self.assertEqual(self.stories[0].canonical_url, 'http://www.npr.org/blogs/thetwo-way/2015/04/21/401157787/top-stories-ex-egypt-leader-sentenced-blue-bell-recall-expands')

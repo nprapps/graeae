@@ -16,6 +16,7 @@ class Story:
             ('publication_date', self.publication_date),
             ('story_date', self.story_date),
             ('last_modified_date', self.last_modified_date),
+            ('canonical_url', self.canonical_url),
         ])
 
     @property
@@ -37,3 +38,11 @@ class Story:
     @property
     def last_modified_date(self):
         return self.api_story.children('lastModifiedDate').text()
+
+    @property
+    def canonical_url(self):
+        url = self.api_story.children('link[type="html"]').text()
+        if url.find('?') > -1:
+            return url[:url.find('?')]
+        else:
+            return url
