@@ -16,6 +16,8 @@ class Post:
             ('post_type', self.post_type),
             ('art_url', self.art_url),
             ('link_url', self.link_url),
+            ('created_time', self.created_time),
+            ('updated_time', self.updated_time),
         ])
 
     @property
@@ -29,6 +31,14 @@ class Post:
     @property
     def post_type(self):
         return self.api_post['type']
+
+    @property
+    def created_time(self):
+        return self.api_post['created_time']
+
+    @property
+    def updated_time(self):
+        return self.api_post['updated_time']
 
     @property
     def art_url(self):
