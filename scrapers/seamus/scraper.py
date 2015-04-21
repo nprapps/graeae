@@ -28,15 +28,15 @@ class SeamusScraper:
                 'orgId': '1',
                 'apiKey': SECRETS['NPR_API_KEY']})
 
-            element = PyQuery(response.content)
+            element = PyQuery(response.content, parser='xml')
         else:
-            element = PyQuery(**kwargs)
+            element = PyQuery(parser='xml', **kwargs)
 
         story_elements = element.find('story')
         stories = []
 
         for story_el in story_elements:
-            story_el = PyQuery(story_el)
+            story_el = PyQuery(story_el, parser='xml')
             print story_el.attr('id')
             stories.append(Story(story_el, self.run_time))
 
