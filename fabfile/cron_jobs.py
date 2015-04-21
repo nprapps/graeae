@@ -9,6 +9,7 @@ from fabric.api import local, require, task
 from app_config import db
 from scrapers.facebook import FacebookScraper
 from scrapers.homepage import HomepageScraper
+from scrapers.seamus import SeamusScraper
 
 @task
 def test():
@@ -36,3 +37,9 @@ def scrape_facebook():
     posts = scraper.scrape_facebook()
     insights = scraper.scrape_insights(posts)
     scraper.write(db, posts, insights)
+
+@task
+def scrape_seamus():
+    scraper = SeamusScraper()
+    stories = scraper.scrape_seamus()
+    scraper.write(db, stories)
