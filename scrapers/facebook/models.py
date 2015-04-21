@@ -26,7 +26,7 @@ class Post:
 
     @property
     def headline(self):
-        return self.api_post['name']
+        return self.api_post.get('name')
 
     @property
     def post_type(self):
