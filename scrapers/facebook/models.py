@@ -43,12 +43,18 @@ class Post:
     @property
     def art_url(self):
         url = self.api_post['picture']
-        params = urlparse.parse_qs(url[url.find('?'):])
-        image_url = params['url'][0]
-        if image_url.find('?') > -1:
-            return image_url[:image_url.find('?')]
-        else:
-            return image_url
+
+        # If there's a URL parameter, use it, otherwise the image was directly
+        # uploaded to FB
+        try:
+            params = urlparse.parse_qs(url[url.find('?'):])
+            image_url = params['url'][0]
+            if image_url.find('?') > -1:
+                image_url = image_url[:image_url.find('?')]
+        except KeyError:
+            image_url = url
+
+        return image_url
 
     @property
     def link_url(self):
