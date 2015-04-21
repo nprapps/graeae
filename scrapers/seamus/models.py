@@ -12,7 +12,10 @@ class Story:
         return OrderedDict([
             ('run_time', self.run_time),
             ('id', self.id),
-            ('title', self.title)
+            ('title', self.title),
+            ('publication_date', self.publication_date),
+            ('story_date', self.story_date),
+            ('last_modified_date', self.last_modified_date),
         ])
 
     @property
@@ -22,3 +25,15 @@ class Story:
     @property
     def title(self):
         return self.api_story.children('title').text()
+
+    @property
+    def publication_date(self):
+        return self.api_story.children('pubDate').text()
+
+    @property
+    def story_date(self):
+        return self.api_story.children('storyDate').text()
+
+    @property
+    def last_modified_date(self):
+        return self.api_story.children('lastModifiedDate').text()

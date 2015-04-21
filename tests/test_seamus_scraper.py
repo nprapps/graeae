@@ -16,3 +16,12 @@ class TestScrapeSeamus(unittest.TestCase):
 
     def test_headline(self):
         self.assertEqual(self.stories[0].title, 'Top Stories: Ex-Egypt Leader Sentenced; Blue Bell Recall Expands')
+
+    def test_story_date(self):
+        self.assertEqual(self.stories[0].story_date, 'Tue, 21 Apr 2015 08:40:23 -0400')
+
+    def test_publication_date(self):
+        self.assertEqual(self.stories[0].publication_date, 'Tue, 21 Apr 2015 08:40:00 -0400')
+
+    def test_last_modified_date(self):
+        self.assertEqual(self.stories[0].last_modified_date, 'Tue, 21 Apr 2015 08:40:23 -0400')
