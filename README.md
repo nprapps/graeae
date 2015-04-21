@@ -35,10 +35,11 @@ Graeae is a tool for aggregating data about our content from: our story API (Sea
 
 This project currently contains three scrapers:
 
-### FacebookScraper
+#### FacebookScraper
 
 This scraper collects an event stream by scanning our Facebook feed every N minutes.
 
+* run_time (of the scrape)
 * headline
 * post_type
 * art_url
@@ -49,10 +50,11 @@ This scraper collects an event stream by scanning our Facebook feed every N minu
 * link_clicks
 * photo_view_clicks
 
-### HomepageScraper
+#### HomepageScraper
 
 This scraper collects an event stream by scanning our homepage every N minutes.
 
+* run_time (of the scrape)
 * headline
 * url
 * is_bullet
@@ -70,10 +72,11 @@ This additional data is knitted in from the Seamus API:
 * lead_art_url
 * homepage_art_provider
 
-### SeamusScraper
+#### SeamusScraper
 
 This scraper collects a canonical dataset of every NPR story in the API. (It is not an event stream.)
 
+* run_time (of the scrape)
 * id
 * headline
 
