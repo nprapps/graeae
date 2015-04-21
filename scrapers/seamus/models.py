@@ -4,6 +4,9 @@ from itertools import groupby
 import os
 
 class Story:
+    """
+    Represents a story in the Seamus API
+    """
     def __init__(self, api_story, run_time):
         self.api_story = api_story
         self.run_time = run_time
