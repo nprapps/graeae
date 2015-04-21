@@ -55,6 +55,7 @@ This scraper collects an event stream by scanning our Facebook feed every N minu
 This scraper collects an event stream by scanning our homepage every N minutes.
 
 * run_time (of the scrape)
+* slot
 * headline
 * url
 * is_bullet
