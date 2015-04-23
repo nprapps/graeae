@@ -146,7 +146,13 @@ class ApiEntry:
 
         art_id = self._parse_art_id_from_url(url)
 
-        for image_el in self.element.find('story > image'):
+        image_elements = self.element.find('story > image')
+
+        # work around for https://github.com/nprapps/graeae/issues/82
+        if not len(image_elements):
+            return None
+
+        for image_el in image_elements:
             src = PyQuery(image_el).attr('src')
             src_art_id = self._parse_art_id_from_url(src)
 
