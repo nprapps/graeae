@@ -55,7 +55,7 @@ ASSETS_S3_BUCKET = {
 
 PRODUCTION_POSTGRES_URL = 'TKTK'
 
-STAGING_POSTGRES_URL = 'TKTK'
+STAGING_POSTGRES_URL = 'postgresql://%s:%s@stage-graeae.csvimglbktzx.us-west-2.rds.amazonaws.com:5432/%s' % (os.environ.get('graeae_POSTGRES_USER'), os.environ.get('graeae_POSTGRES_PASSWORD'), PROJECT_SLUG)
 
 LOCAL_POSTGRES_URL = 'postgresql:///%s' % PROJECT_SLUG
 
