@@ -57,14 +57,14 @@ class Post:
         """
         Get created time
         """
-        return parser.parse(self.api_post['created_time'])
+        return parser.parse(self.api_post['created_time'], ignoretz=True)
 
     @property
     def updated_time(self):
         """
         Get updated time
         """
-        return parser.parse(self.api_post['updated_time'])
+        return parser.parse(self.api_post['updated_time'], ignoretz=True)
 
     @property
     def art_url(self):
