@@ -23,7 +23,6 @@ class Story(ApiEntry):
             ('story_date', self.story_date),
             ('last_modified_date', self.last_modified_date),
             ('canonical_url', self.canonical_url),
-            ('has_story_art', self.has_story_art),
             ('has_lead_art', self.has_lead_art),
             ('lead_art_provider', self.lead_art_provider),
             ('lead_art_url', self.lead_art_url),

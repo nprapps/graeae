@@ -91,7 +91,6 @@ This scraper collects a canonical dataset of every NPR story in the API. (It is 
 * story_date
 * last_modified_date
 * canonical_url
-* has_story_art
 * has_lead_art
 * lead_art_provider
 * lead_art_url
