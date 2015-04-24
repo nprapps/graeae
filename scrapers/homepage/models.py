@@ -91,7 +91,7 @@ class ApiEntry:
             ('has_lead_art', self.has_lead_art),
             ('lead_art_provider', self.lead_art_provider),
             ('lead_art_url', self.lead_art_url),
-            ('homepage_art_provider', self.homepage_art_provider)
+            ('homepage_art_provider', self.homepage_art_provider),
         ])
 
     def _lead_art_element(self):

@@ -2,15 +2,16 @@ from collections import OrderedDict
 from dateutil import parser
 from itertools import groupby
 from pytz import timezone
+from scrapers.homepage.models import ApiEntry
 
 import os
 
-class Story:
+class Story(ApiEntry):
     """
     Represents a story in the Seamus API
     """
-    def __init__(self, api_story, run_time):
-        self.api_story = api_story
+    def __init__(self, element, run_time):
+        self.element = element
         self.run_time = run_time
 
     def serialize(self):
@@ -22,6 +23,10 @@ class Story:
             ('story_date', self.story_date),
             ('last_modified_date', self.last_modified_date),
             ('canonical_url', self.canonical_url),
+            ('has_story_art', self.has_story_art),
+            ('has_lead_art', self.has_lead_art),
+            ('lead_art_provider', self.lead_art_provider),
+            ('lead_art_url', self.lead_art_url),
         ])
 
     def _parse_date(self, date_string):
@@ -34,42 +39,42 @@ class Story:
         """
         Get the story ID
         """
-        return self.api_story.attr('id')
+        return self.element.attr('id')
 
     @property
     def title(self):
         """
         Get the title
         """
-        return self.api_story.children('title').text()
+        return self.element.children('title').text()
 
     @property
     def publication_date(self):
         """
         Get the publication date
         """
-        return self._parse_date(self.api_story.children('pubDate').text())
+        return self._parse_date(self.element.children('pubDate').text())
 
     @property
     def story_date(self):
         """
         Get the story date
         """
-        return self._parse_date(self.api_story.children('storyDate').text())
+        return self._parse_date(self.element.children('storyDate').text())
 
     @property
     def last_modified_date(self):
         """
         Get the last modified date
         """
-        return self._parse_date(self.api_story.children('lastModifiedDate').text())
+        return self._parse_date(self.element.children('lastModifiedDate').text())
 
     @property
     def canonical_url(self):
         """
         Get the canonical URL
         """
-        url = self.api_story.children('link[type="html"]').text()
+        url = self.element.children('link[type="html"]').text()
         if url.find('?') > -1:
             return url[:url.find('?')]
         else:
