@@ -12,46 +12,47 @@ from time import time
 class TestScrapeHomepage(unittest.TestCase):
     def setUp(self):
         self.scraper = HomepageScraper()
-        self.articles = self.scraper.scrape_homepage(filename='tests/snapshots/index-04-17-2015-1000.html')
+        self.articles = self.scraper.scrape_homepage(filename='tests/snapshots/index-04-24-2015.html')
         self.first = self.articles[0]
-        self.first_bullet = self.articles[2]
+        self.first_bullet = self.articles[1]
 
     def test_headline(self):
-        self.assertEqual(self.first.headline, 'When The World Bank Does More Harm Than Good')
-        self.assertEqual(self.first_bullet.headline, 'For Marathon Bombing Survivors, World Still Feels Out Of Control')
+        self.assertEqual(self.first.headline, 'Remembering Gallipoli, A WWI Battle That Shaped Today\'s Middle East')
+        self.assertEqual(self.first_bullet.headline, 'Turks And Armenians Prepare For Dueling Anniversaries')
 
     def test_url(self):
-        self.assertEqual(self.first.url, 'http://www.npr.org/blogs/goatsandsoda/2015/04/17/399816448/when-the-world-bank-does-more-harm-than-good')
-        self.assertEqual(self.first_bullet.url, 'http://www.npr.org/blogs/health/2015/04/15/399616139/bombing-survivors-face-a-world-that-still-feels-out-of-control')
+        self.assertEqual(self.first.url, 'http://www.npr.org/blogs/parallels/2015/04/24/401963898/remembering-gallipoli-a-wwi-battle-that-shaped-todays-middle-east')
+        self.assertEqual(self.first_bullet.url, 'http://www.npr.org/blogs/parallels/2015/04/22/401508242/turks-and-armenians-prepare-for-dueling-anniversaries-on-friday')
 
     def test_is_bullet(self):
         self.assertFalse(self.first.is_bullet)
         self.assertTrue(self.first_bullet.is_bullet)
 
     def test_story_id(self):
-        self.assertEqual(self.first.story_id, '399816448')
-        self.assertEqual(self.first_bullet.story_id, '399616139')
+        self.assertEqual(self.first.story_id, '401963898')
+        self.assertEqual(self.first_bullet.story_id, '401508242')
 
     def test_layout(self):
-        self.assertEqual(self.articles[2].layout, 'bullet')
-        self.assertEqual(self.articles[12].layout, 'video')
         self.assertEqual(self.articles[0].layout, 'big-image')
-        self.assertEqual(self.articles[1].layout, 'small-image')
-        self.assertEqual(self.articles[8].layout, None)
+        self.assertEqual(self.articles[1].layout, 'bullet')
+        self.assertEqual(self.articles[2].layout, 'small-image')
+        self.assertEqual(self.articles[4].layout, 'video')
+        self.assertEqual(self.articles[9].layout, 'slideshow')
+        self.assertEqual(self.articles[11].layout, None)
 
     def test_has_audio(self):
-        self.assertTrue(self.articles[0].has_audio)
-        self.assertFalse(self.articles[3].has_audio)
+        self.assertTrue(self.articles[14].has_audio)
+        self.assertFalse(self.articles[0].has_audio)
 
     def test_num_articles(self):
-        self.assertEqual(len(self.articles), 20)
+        self.assertEqual(len(self.articles), 28)
 
     def test_homepage_art_url(self):
-        self.assertEqual(self.articles[0].homepage_art_url, 'http://media.npr.org/assets/img/2015/04/17/463942430_wide-d7202aafc983e9d09794299786231f0f284b2b7d-s900.jpg')
-        self.assertIs(self.articles[8].homepage_art_url, None)
+        self.assertEqual(self.articles[0].homepage_art_url, 'http://media.npr.org/assets/img/2015/04/24/gallipoli-getty-01_wide-906fbf6d89a2544d138bbd29b4cb317a0e015dda-s900.jpg')
+        self.assertIs(self.articles[11].homepage_art_url, None)
 
     def test_teaser(self):
-        self.assertEqual(self.articles[0].teaser, 'Large projects funded by the bank have left millions of poor people worse off, an investigation found. The bank says the vast majority of its projects don\'t fall into this category.')
+        self.assertEqual(self.articles[0].teaser, 'The Gallipoli campaign saw Ottoman forces, fighting under German command, repel an allied attack led by Britain and France. Its reverberations are still felt to this day in the chaotic Middle East.')
 
 class TestScrapeApi(unittest.TestCase):
     def setUp(self):
