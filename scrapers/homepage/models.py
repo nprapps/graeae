@@ -51,7 +51,7 @@ class Article:
     @property
     def layout(self):
         """
-        Possible layouts: ['bullet', 'video', 'big-image', 'small-image']
+        Possible layouts: ['bullet', 'video', 'big-image', 'small-image', 'slideshow']
         """
         if self.is_bullet:
             return 'bullet'
@@ -66,6 +66,9 @@ class Article:
 
         if bucketwrap.hasClass('homeThumb'):
             return 'small-image'
+
+        if bucketwrap.hasClass('slideshow'):
+            return 'slideshow'
 
         return None
 
