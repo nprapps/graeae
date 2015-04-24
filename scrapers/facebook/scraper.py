@@ -39,12 +39,6 @@ class FacebookScraper:
             profile = self.graph.get_object(self.user)
             api_posts = self.graph.get_connections(profile['id'], 'posts')
 
-        # with open('tests/snapshots/fb-profile-04-20-2015.json', 'w') as f:
-        #     f.write(json.dumps(profile))
-
-        # with open('tests/snapshots/fb-posts-04-20-2015.json', 'w') as f:
-        #     f.write(json.dumps(api_posts))
-
         posts = []
 
         for api_post in api_posts['data']:
@@ -70,9 +64,6 @@ class FacebookScraper:
                 api_insights = json.load(f)
         else:
             api_insights = self.graph.get_object('%s/insights/' % post.id)
-
-        # with open('tests/snapshots/fb-insights-04-20-2015.json', 'w') as f:
-        #     f.write(json.dumps(api_insights))
 
         return Insights(post, api_insights)
 
