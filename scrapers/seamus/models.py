@@ -2,6 +2,7 @@ from collections import OrderedDict
 from dateutil import parser
 from itertools import groupby
 from pytz import timezone
+from pyquery import PyQuery
 from scrapers.homepage.models import ApiEntry
 
 import os
@@ -26,6 +27,7 @@ class Story(ApiEntry):
             ('has_lead_art', self.has_lead_art),
             ('lead_art_provider', self.lead_art_provider),
             ('lead_art_url', self.lead_art_url),
+            ('word_count', self.word_count),
         ])
 
     def _parse_date(self, date_string):
@@ -78,3 +80,10 @@ class Story(ApiEntry):
             return url[:url.find('?')]
         else:
             return url
+
+    @property
+    def word_count(self):
+        html = self.element.find('textWithHtml').text()
+        text_parts = PyQuery(html).text().split(' ')
+        return len(text_parts)
+
