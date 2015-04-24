@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from datetime import datetime
+import logging
 import os
 import requests
 
@@ -12,6 +13,11 @@ from models import Story
 SECRETS = get_secrets()
 SEAMUS_API_PAGE_SIZE = 20
 
+
+logging.basicConfig(level=logging.INFO)
+logging.getLogger('requests').setLevel(logging.WARNING)
+logger = logging.getLogger(__name__)
+
 class SeamusScraper:
     def __init__(self):
         self.run_time = datetime.utcnow()
@@ -20,8 +26,7 @@ class SeamusScraper:
         """
         Scrape!
         """
-        print 'Scraping Seamus'
-        print '---------------'
+        logger.info('Scraping Seamus API (start time: %s)' % self.run_time)
 
         if not kwargs:
             stories = self._get_stories_from_api()
@@ -60,8 +65,9 @@ class SeamusScraper:
 
         for story_el in story_elements:
             story_el = PyQuery(story_el, parser='xml')
-            print story_el.attr('id')
-            stories.append(Story(story_el, self.run_time))
+            story = Story(story_el, self.run_time)
+            stories.append(story)
+            logger.info('Scraped %s from Seamus API (%s)' % (story.id, story.title))
 
         return stories
 

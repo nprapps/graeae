@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import json
+import logging
 
 from facebook import GraphAPI
 
@@ -9,6 +10,9 @@ from app_config import get_secrets
 from models import Post, Insights
 
 SECRETS = get_secrets()
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class FacebookScraper:
     access_token = SECRETS['FACEBOOK_TOKEN']
@@ -21,8 +25,7 @@ class FacebookScraper:
         """
         Scrape!
         """
-        print 'Scraping Facebook'
-        print '-----------------'
+        logger.info('Scraping Facebook (start time: %s)' % self.run_time)
 
         if profile_filename and posts_filename:
             with open(profile_filename) as f:
@@ -45,20 +48,19 @@ class FacebookScraper:
         posts = []
 
         for api_post in api_posts['data']:
-            print api_post['id']
-            posts.append(Post(api_post, self.run_time))
+            post = Post(api_post, self.run_time)
+            posts.append(post)
+            logger.info('Scraped basic information for %s from Facebook (%s)' % (post.id, post.headline))
 
         return posts
 
     def scrape_insights(self, posts):
-        print 'Scraping Insights'
-        print '-----------------'
-
         insights = []
 
         for post in posts:
-            print post.id
-            insights.append(self.scrape_post_insights(post))
+            insight = self.scrape_post_insights(post)
+            insights.append(insight)
+            logger.info('Scraped insights for %s from Facebook (%s)' % (post.id, post.headline))
 
         return insights
 

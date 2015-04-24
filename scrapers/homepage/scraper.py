@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from datetime import datetime
+import logging
 import os
 import requests
 
@@ -10,6 +11,10 @@ from app_config import get_secrets
 from models import ApiEntry, Article
 
 SECRETS = get_secrets()
+
+logging.basicConfig(level=logging.INFO)
+logging.getLogger('requests').setLevel(logging.WARNING)
+logger = logging.getLogger(__name__)
 
 class HomepageScraper:
     url = 'http://npr.org'
@@ -21,8 +26,7 @@ class HomepageScraper:
         """
         Scrape!
         """
-        print 'Scraping homepage'
-        print '-----------------'
+        logger.info('Scraping homepage (start time: %s)' % self.run_time)
 
         if not kwargs:
             response = requests.get(self.url)
@@ -47,8 +51,8 @@ class HomepageScraper:
                 slot += 1
 
             article.slot = slot
-
             articles.append(article)
+            logger.info('Scraped %s from homepage (%s)' % (article.story_id, article.headline))
 
         return articles
 
@@ -56,14 +60,11 @@ class HomepageScraper:
         """
         Scrape NPR API for all articles.
         """
-        print 'Scraping API         '
-        print '------------'
-
         api_entries = []
 
         for article in articles:
-            print article.story_id
             api_entries.append(self.scrape_api_entry(article, **kwargs))
+            logger.info('Scraped %s from Seamus API (%s)' % (article.story_id, article.headline))
 
         return api_entries
 
