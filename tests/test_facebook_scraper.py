@@ -3,6 +3,7 @@
 import unittest
 import app_config
 
+from datetime import datetime
 from scrapers.facebook import FacebookScraper
 
 class TestScrapeFacebook(unittest.TestCase):
@@ -26,10 +27,10 @@ class TestScrapeFacebook(unittest.TestCase):
         self.assertEqual(self.posts[0].link_url, 'http://wamu.org/programs/metro_connection/15/04/17/southwest_ecodistrict')
 
     def test_created_time(self):
-        self.assertEqual(self.posts[0].created_time, '2015-04-20T17:09:40+0000')
+        self.assertEqual(self.posts[0].created_time, datetime(2015, 4, 20, 17, 9, 40))
 
     def test_updated_time(self):
-        self.assertEqual(self.posts[0].updated_time, '2015-04-20T17:09:40+0000')
+        self.assertEqual(self.posts[0].updated_time, datetime(2015, 4, 20, 17, 9, 40))
 
 class TestScrapeInsights(unittest.TestCase):
     def setUp(self):
