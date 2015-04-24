@@ -37,22 +37,30 @@ This project currently contains three scrapers:
 
 #### FacebookScraper
 
-This scraper collects an event stream by scanning our Facebook feed every N minutes.
+This scraper collects an event stream by scanning our Facebook feed every 15 minutes.
 
 * run_time (of the scrape)
 * headline
 * post_type
 * art_url
 * link_url
+* created_time
+* updated_time
+* message (the text above the link/photo)
+* description (the text below the link/photo)
+
+This additional data is knitted in from Facebook insights:
+
 * shares
 * likes
 * comments
 * link_clicks
 * photo_view_clicks
+* people_reached
 
 #### HomepageScraper
 
-This scraper collects an event stream by scanning our homepage every N minutes.
+This scraper collects an event stream by scanning our homepage every 15 minutes.
 
 * run_time (of the scrape)
 * slot
@@ -62,7 +70,6 @@ This scraper collects an event stream by scanning our homepage every N minutes.
 * story_id
 * layout
 * has_audio
-* num_articles
 * homepage_art_url
 
 This additional data is knitted in from the Seamus API:
@@ -79,7 +86,15 @@ This scraper collects a canonical dataset of every NPR story in the API. (It is 
 
 * run_time (of the scrape)
 * id
-* headline
+* title (aka headline)
+* publication_date
+* story_date
+* last_modified_date
+* canonical_url
+* has_story_art
+* has_lead_art
+* lead_art_provider
+* lead_art_url
 
 Assumptions
 -----------

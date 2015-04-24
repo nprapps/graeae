@@ -19,6 +19,7 @@ class Article:
             ('story_id', self.story_id),
             ('url', self.url),
             ('homepage_art_url', self.homepage_art_url),
+            ('has_audio', self.has_audio),
         ])
 
     @property
