@@ -18,7 +18,7 @@ class Story(ApiEntry):
     def serialize(self):
         return OrderedDict([
             ('run_time', self.run_time),
-            ('id', self.id),
+            ('story_id', self.story_id),
             ('title', self.title),
             ('publication_date', self.publication_date),
             ('story_date', self.story_date),
@@ -35,7 +35,7 @@ class Story(ApiEntry):
         return adjusted
 
     @property
-    def id(self):
+    def story_id(self):
         """
         Get the story ID
         """

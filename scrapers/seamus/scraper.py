@@ -67,10 +67,9 @@ class SeamusScraper:
             story_el = PyQuery(story_el, parser='xml')
             story = Story(story_el, self.run_time)
             stories.append(story)
-            logger.info('Scraped %s from Seamus API (%s)' % (story.id, story.title))
+            logger.info('Scraped %s from Seamus API (%s)' % (story.story_id, story.title))
 
         return stories
-
 
     def write(self, db, stories):
         """
@@ -79,7 +78,7 @@ class SeamusScraper:
         table = db['seamus']
 
         for story in stories:
-            exists = table.find_one(id=story.id)
+            exists = table.find_one(id=story.story_id)
 
             if exists:
                 continue
