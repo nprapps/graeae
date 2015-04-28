@@ -99,7 +99,11 @@ class ApiEntry:
         ])
 
     def _lead_art_element(self):
-        el = PyQuery(self.element.find('layout').find('storytext').children()[0])
+        art_elements = self.element.find('layout').find('storytext').children()
+        if not len(art_elements):
+            return None
+
+        el = PyQuery(art_elements[0])
 
         if el[0].tag != 'image':
             return None
