@@ -29,6 +29,3 @@ class TestScrapeSeamus(unittest.TestCase):
 
     def test_canonical_url(self):
         self.assertEqual(self.stories[0].canonical_url, 'http://www.npr.org/blogs/thetwo-way/2015/04/21/401157787/top-stories-ex-egypt-leader-sentenced-blue-bell-recall-expands')
-
-    def test_word_count(self):
-        self.assertAlmostEqual(self.stories[0].word_count, 97)
