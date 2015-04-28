@@ -68,17 +68,17 @@ This scraper collects an event stream by scanning our homepage every 15 minutes.
 * url
 * is_bullet
 * story_id
-* layout
+* layout: One of 'bullet', 'video', 'big-image', 'small-image', 'slideshow'
 * has_audio
 * homepage_art_url
 
 This additional data is knitted in from the Seamus API:
 
-* has_story_art
-* has_lead_art
+* homepage_art_provider
+* has_story_art: True if any image is present in the story
+* has_lead_art: True if there is an image at the top of the story
 * lead_art_provider
 * lead_art_url
-* homepage_art_provider
 
 #### SeamusScraper
 
