@@ -35,10 +35,8 @@ class TestScrapeSeamus(unittest.TestCase):
         self.assertEqual(self.stories[6].has_lead_art, True)
 
     def test_lead_art_provider(self):
-        print self.stories[6].canonical_url
-        self.assertEqual(self.stories[6].lead_art_provider, 'Mohamed El-Shahed/AFP/Getty Images')
+        self.assertEqual(self.stories[6].lead_art_provider, 'AFP/Getty Images')
 
     def test_lead_art_url(self):
-        print self.stories[6].lead_art_url
-        self.assertEqual(self.stories[6].lead_art_url, 'http://media.npr.org/assets/img/2015/04/21/morsi-court_wide-27506a416e57aafb2da92954aa1b28a88df7d467.jpg')
+        self.assertEqual(self.stories[6].lead_art_url, 'http://media.npr.org/assets/img/2015/04/21/morsi-court_wide-905d13041b11b20aea8771f3a950a7b8c1e6b5d8.jpg')
 

@@ -100,6 +100,7 @@ class ApiEntry:
 
     def _lead_art_element(self):
         art_elements = self.element.find('layout').find('storytext').children()
+
         if not len(art_elements):
             return None
 
@@ -110,7 +111,7 @@ class ApiEntry:
 
         image_id = el.attr('refId')
 
-        return PyQuery(self.element.find('image[id="%s"]' % image_id))
+        return PyQuery(self.element.children('image[id="%s"]' % image_id))
 
     @property
     def has_story_art(self):
