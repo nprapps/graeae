@@ -46,8 +46,8 @@ This scraper collects an event stream by scanning our Facebook feed every 15 min
 * link_url
 * created_time
 * updated_time
-* message (the text above the link/photo)
-* description (the text below the link/photo)
+* message: the text above the link/photo
+* description: the text below the link/photo
 
 This additional data is knitted in from Facebook insights:
 
@@ -63,21 +63,21 @@ This additional data is knitted in from Facebook insights:
 This scraper collects an event stream by scanning our homepage every 15 minutes.
 
 * run_time (of the scrape)
-* slot
+* story_id: Internal unique ID
+* slot: Position on the home page (e.g. the top story is slot 0)
 * headline
 * url
-* is_bullet
-* story_id
+* is_bullet: True if the item is a bullet link related to another story
 * layout: One of 'bullet', 'video', 'big-image', 'small-image', 'slideshow'
-* has_audio
-* homepage_art_url
+* has_audio: Has audio player on the home page
+* homepage_art_url: URL to image or video on homepage
 
 This additional data is knitted in from the Seamus API:
 
-* homepage_art_provider
+* homepage_art_provider: Who provided the homepage art (e.g. AFP/Getty)
 * has_story_art: True if any image is present in the story
 * has_lead_art: True if there is an image at the top of the story
-* lead_art_provider
+* lead_art_provider: Who provided the lead art (e.g. Reuters)
 * lead_art_url
 
 #### SeamusScraper
@@ -86,7 +86,7 @@ This scraper collects a canonical dataset of every NPR story in the API. (It is 
 
 * run_time (of the scrape)
 * id
-* title (aka headline)
+* title: also known as the headline
 * publication_date
 * story_date
 * last_modified_date
