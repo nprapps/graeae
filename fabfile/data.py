@@ -4,8 +4,10 @@
 Commands that update or process the application data.
 """
 import app_config
+import dataset
 
 from fabric.api import local, task
+
 
 @task
 def local_bootstrap():
@@ -14,7 +16,9 @@ def local_bootstrap():
 
 @task
 def drop_tables():
-    for table in app_config.db.tables:
+    db = dataset.connect(app_config.POSTGRES_URL)
+
+    for table in db.tables:
         print 'Dropping %s' % table
-        table_obj = app_config.db[table]
+        table_obj = db[table]
         table_obj.drop()
