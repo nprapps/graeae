@@ -155,7 +155,7 @@ class ApiEntry:
 
         art_id = self._parse_art_id_from_url(url)
 
-        image_elements = self.element.find('story > image')
+        image_elements = self.element.children('image')
 
         # work around for https://github.com/nprapps/graeae/issues/82
         if not len(image_elements):

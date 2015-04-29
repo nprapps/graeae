@@ -77,9 +77,9 @@ class HomepageScraper:
                 'id': article.story_id,
                 'apiKey': SECRETS['NPR_API_KEY']})
 
-            element = PyQuery(response.content, parser='xml')
+            element = PyQuery(response.content, parser='xml').find('story')
         else:
-            element = PyQuery(parser='xml', **kwargs)
+            element = PyQuery(parser='xml', **kwargs).find('story')
 
         return ApiEntry(article, element)
 
