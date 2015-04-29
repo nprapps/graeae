@@ -31,6 +31,8 @@ graeae
 What is this?
 -------------
 
+*Current scraper started around 6:00pm on April 29, 2015*
+
 Graeae is a tool for aggregating data about our content from: our story API (Seamus), our homepage, our Facebook page and qualitative review by human experts (e.g. photo quality).
 
 This project currently contains three scrapers:
