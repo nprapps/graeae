@@ -7,6 +7,9 @@ from scrapers.homepage.models import ApiEntry
 
 import os
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 class Story(ApiEntry):
     """
     Represents a story in the Seamus API
@@ -31,8 +34,12 @@ class Story(ApiEntry):
 
     def _parse_date(self, date_string):
         parsed = parser.parse(date_string)
-        adjusted = parsed.astimezone(timezone('UTC')).replace(tzinfo=None)
-        return adjusted
+        try:
+            adjusted = parsed.astimezone(timezone('UTC')).replace(tzinfo=None)
+            return adjusted
+        except ValueError:
+            logger.warning('Datetime for %s was naive' % self.story_id)
+            return parsed
 
     @property
     def story_id(self):
