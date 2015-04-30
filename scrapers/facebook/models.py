@@ -124,14 +124,24 @@ class Insights:
         """
         Serialize insights data
         """
-        return OrderedDict([
-            ('shares', self.shares),
-            ('likes', self.likes),
-            ('comments', self.comments),
-            ('people_reached', self.people_reached),
-            ('photo_view_clicks', self.photo_view_clicks),
-            ('link_clicks', self.link_clicks)
-        ])
+        try:
+            return OrderedDict([
+                ('shares', self.shares),
+                ('likes', self.likes),
+                ('comments', self.comments),
+                ('people_reached', self.people_reached),
+                ('photo_view_clicks', self.photo_view_clicks),
+                ('link_clicks', self.link_clicks)
+            ])
+        except KeyError:
+            return OrderedDict([
+                ('shares', None),
+                ('likes', None),
+                ('comments', None),
+                ('people_reached', None),
+                ('photo_view_clicks', None),
+                ('link_clicks', None)
+            ])
 
     def _insights(self):
         """
