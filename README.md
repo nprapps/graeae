@@ -31,7 +31,7 @@ graeae
 What is this?
 -------------
 
-*Current scraper started around 6:00pm on April 29, 2015*
+*Current scraper started around 12:50pm EST on April 30, 2015*
 
 Graeae is a tool for aggregating data about our content from: our story API (Seamus), our homepage, our Facebook page and qualitative review by human experts (e.g. photo quality).
 
