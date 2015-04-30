@@ -6,6 +6,7 @@ from pyquery import PyQuery
 from scrapers.homepage.models import ApiEntry
 
 import os
+import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
