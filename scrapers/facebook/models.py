@@ -71,7 +71,10 @@ class Post:
         """
         Get url to featured image
         """
-        url = self.api_post['picture']
+        try:
+            url = self.api_post['picture']
+        except KeyError:
+            return None
 
         # If there's a URL parameter, use it, otherwise the image was directly
         # uploaded to FB
