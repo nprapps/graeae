@@ -11,8 +11,9 @@ from models import Post, Insights
 
 SECRETS = get_secrets()
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig()
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class FacebookScraper:
     access_token = SECRETS['FACEBOOK_TOKEN']

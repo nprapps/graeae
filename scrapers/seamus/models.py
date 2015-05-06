@@ -8,8 +8,9 @@ from scrapers.homepage.models import ApiEntry
 import os
 import logging
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig()
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class Story(ApiEntry):
     """

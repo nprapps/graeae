@@ -13,10 +13,9 @@ from models import Story
 SECRETS = get_secrets()
 SEAMUS_API_PAGE_SIZE = 20
 
-
-logging.basicConfig(level=logging.INFO)
-logging.getLogger('requests').setLevel(logging.WARNING)
+logging.basicConfig()
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class SeamusScraper:
     def __init__(self):

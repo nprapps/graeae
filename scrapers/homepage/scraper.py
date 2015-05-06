@@ -12,9 +12,9 @@ from models import ApiEntry, Article
 
 SECRETS = get_secrets()
 
-logging.basicConfig(level=logging.INFO)
-logging.getLogger('requests').setLevel(logging.WARNING)
+logging.basicConfig()
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class HomepageScraper:
     url = 'http://npr.org'
