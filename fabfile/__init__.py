@@ -116,14 +116,6 @@ Changes to deployment requires a full-stack test. Deployment
 has two primary functions: Pushing flat files to S3 and deploying
 code to a remote server if required.
 """
-@task
-def update():
-    """
-    Update all application data not in repository (copy, assets, etc).
-    """
-    text.update()
-    assets.sync()
-    data.update()
 
 @task
 def deploy(remote='origin'):
@@ -144,7 +136,6 @@ def deploy(remote='origin'):
 
         servers.fabcast('text.update')
         servers.fabcast('assets.sync')
-        servers.fabcast('data.update')
 
         if app_config.DEPLOY_CRONTAB:
             servers.install_crontab()
