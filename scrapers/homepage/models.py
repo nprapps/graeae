@@ -20,6 +20,7 @@ class Article:
             ('url', self.url),
             ('homepage_art_url', self.homepage_art_url),
             ('has_audio', self.has_audio),
+            ('is_apps_project', self.is_apps_project),
         ])
 
     @property
@@ -37,11 +38,16 @@ class Article:
     @property
     def story_id(self):
         url_parts = self.url.split('/')
-        return url_parts[-2]
+        id = url_parts[-2]
+        if id.isdigit():
+            return id
+        else:
+            return None
 
     @property
-    def is_story_link(self):
-        return self.story_id.isdigit()
+    def is_apps_project(self):
+        url_parts = self.url.split('/')
+        return url_parts[2].startswith('apps.')
 
     @property
     def teaser(self):

@@ -44,7 +44,7 @@ class HomepageScraper:
 
             article = Article(element, self.run_time)
 
-            if not article.is_story_link:
+            if not article.story_id and not article.is_apps_project:
                 continue
 
             if not element.hasClass('attachment'):

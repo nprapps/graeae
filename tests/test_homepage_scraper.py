@@ -40,12 +40,16 @@ class TestScrapeHomepage(unittest.TestCase):
         self.assertEqual(self.articles[9].layout, 'slideshow')
         self.assertEqual(self.articles[11].layout, None)
 
+    def test_is_apps_project(self):
+        self.assertEqual(self.articles[0].is_apps_project, False)
+        self.assertEqual(self.articles[22].is_apps_project, True)
+
     def test_has_audio(self):
         self.assertTrue(self.articles[14].has_audio)
         self.assertFalse(self.articles[0].has_audio)
 
     def test_num_articles(self):
-        self.assertEqual(len(self.articles), 28)
+        self.assertEqual(len(self.articles), 29)
 
     def test_homepage_art_url(self):
         self.assertEqual(self.articles[0].homepage_art_url, 'http://media.npr.org/assets/img/2015/04/24/gallipoli-getty-01_wide-906fbf6d89a2544d138bbd29b4cb317a0e015dda-s900.jpg')
