@@ -122,16 +122,19 @@ def uninstall_crontab():
 @task
 def install_google_oauth_creds():
     """
-    Install Google Oauth credentials file from workinprivate repo
+    Install Google Oauth credentials file (global) from workinprivate repo
     """
     run('git clone git@github.com:nprapps/workinprivate.git /tmp/workinprivate-tmp')
     run('cp /tmp/workinprivate-tmp/.google_oauth_credentials %s' % OAUTH_CREDENTIALS_PATH)
     run('rm -Rf /tmp/workinprivate-tmp')
 
-
 @task
 def remove_google_oauth_creds():
+    """
+    Remove Google oauth credentials file (global)
+    """
     run('rm %s' % OAUTH_CREDENTIALS_PATH)
+
 
 def delete_project():
     """
