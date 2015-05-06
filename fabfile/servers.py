@@ -12,6 +12,8 @@ from jinja2 import Template
 
 import app_config
 
+OAUTH_CREDENTIALS_PATH='~/.google_oauth_credentials'
+
 """
 Setup
 """
@@ -31,6 +33,7 @@ def setup():
 
         return
 
+    install_google_oauth_creds()
     create_directories()
     create_virtualenv()
     clone_repo()
@@ -115,6 +118,20 @@ def uninstall_crontab():
     require('settings', provided_by=['production', 'staging'])
 
     sudo('rm /etc/cron.d/%(PROJECT_FILENAME)s' % app_config.__dict__)
+
+@task
+def install_google_oauth_creds():
+    """
+    Install Google Oauth credentials file from workinprivate repo
+    """
+    run('git clone git@github.com:nprapps/workinprivate.git /tmp/workinprivate-tmp')
+    run('cp /tmp/workinprivate-tmp/.google_oauth_credentials %s' % OAUTH_CREDENTIALS_PATH)
+    run('rm -Rf /tmp/workinprivate-tmp')
+
+
+@task
+def remove_google_oauth_creds():
+    run('rm %s' % OAUTH_CREDENTIALS_PATH)
 
 def delete_project():
     """
