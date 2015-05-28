@@ -36,6 +36,7 @@ def get_insights_and_art():
 	result_list = list(result)
 	for row in result_list:
 		row['provider_category'] = _get_provider_category(row)
+		row['provider_type'] = _get_provider_type(row)
 
 	dataset.freeze(result_list, format='csv', filename='output/insights_and_art.csv')
 
@@ -53,11 +54,21 @@ def _get_provider_category(row):
 	else:
 		return None
 
-
-
-
-
-
+def _get_provider_type(row):
+	"""
+	groups provider by type
+	"""
+	if row['provider_category']:
+		if 'npr' in row['provider_category'].lower():
+			return 'NPR'
+		elif 'getty' in row['provider_category'].lower() or 'istock' in row['provider_category'].lower() or 'corbis' in row['provider_category'].lower():
+			return 'Stock'
+		elif 'AP' in row['provider_category']:
+			return 'Wire'
+		else:
+			return 'Other'
+	else:
+		return None
 
 
 
