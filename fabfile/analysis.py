@@ -33,7 +33,31 @@ def get_insights_and_art():
 			seamus s
 			on f1.link_url = s.canonical_url
 			""")
-	dataset.freeze(result, format='csv', filename='output/insights_and_art.csv')
+	result_list = list(result)
+	for row in result_list:
+		row['provider_category'] = _get_provider_category(row)
+
+	dataset.freeze(result_list, format='csv', filename='output/insights_and_art.csv')
+
+def _get_provider_category(row):
+	"""
+	determine provider category from lead art provider
+	"""
+	if row['lead_art_provider']:
+		if 'courtesy of' in row['lead_art_provider'].lower():
+			return 'Courtesy'
+		elif 'for npr' in row['lead_art_provider'].lower():
+			return 'For NPR'
+		else:
+			return row['lead_art_provider']
+	else:
+		return None
+
+
+
+
+
+
 
 
 
