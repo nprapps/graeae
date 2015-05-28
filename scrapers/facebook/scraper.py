@@ -45,7 +45,7 @@ class FacebookScraper:
         for api_post in api_posts['data']:
             post = Post(api_post, self.run_time)
             posts.append(post)
-            logger.info('Scraped basic information for %s from Facebook (%s)' % (post.id, post.headline))
+            logger.info('Scraped basic information for %s from Facebook (%s)' % (post.facebook_id, post.headline))
 
         return posts
 
@@ -55,7 +55,7 @@ class FacebookScraper:
         for post in posts:
             insight = self.scrape_post_insights(post)
             insights.append(insight)
-            logger.info('Scraped insights for %s from Facebook (%s)' % (post.id, post.headline))
+            logger.info('Scraped insights for %s from Facebook (%s)' % (post.facebook_id, post.headline))
 
         return insights
 
@@ -64,7 +64,7 @@ class FacebookScraper:
             with open(filename) as f:
                 api_insights = json.load(f)
         else:
-            api_insights = self.graph.get_object('%s/insights/' % post.id)
+            api_insights = self.graph.get_object('%s/insights/' % post.facebook_id)
 
         return Insights(post, api_insights)
 

@@ -21,6 +21,7 @@ class Post:
         """
         return OrderedDict([
             ('run_time', self.run_time),
+            ('facebook_id', self.facebook_id),
             ('headline', self.headline),
             ('post_type', self.post_type),
             ('art_url', self.art_url),
@@ -32,7 +33,7 @@ class Post:
         ])
 
     @property
-    def id(self):
+    def facebook_id(self):
         """
         Get post ID
         """

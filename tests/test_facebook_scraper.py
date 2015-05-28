@@ -14,6 +14,9 @@ class TestScrapeFacebook(unittest.TestCase):
             posts_filename='tests/snapshots/fb-posts-04-20-2015.json'
         )
 
+    def test_facebook_id(self):
+        self.assertEqual(self.posts[0].facebook_id, '10643211755_10153419389686756')
+
     def test_headline(self):
         self.assertEqual(self.posts[0].headline, 'How D.C. Is Turning A \'Pedestrian Dead-Zone\' Into An Eco-Showcase')
 
