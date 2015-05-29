@@ -8,6 +8,7 @@ App Template for static publishing.
 """
 
 import app_config
+import csv
 import json
 import oauth
 import static
@@ -30,8 +31,9 @@ def index():
     """
     context = make_context()
 
-    with open('data/featured.json') as f:
-        context['featured'] = json.load(f)
+    with open('output/insights_summary.csv') as f:
+        reader = csv.DictReader(f)
+        context['insights_summary'] = list(reader)
 
     return make_response(render_template('index.html', **context))
 
