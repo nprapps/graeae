@@ -57,8 +57,8 @@ def fix_facebook_ids():
                 done = True
                 break
 
-            print 'updating %s (%s)' % (link, post['id'])
             link = post['link'].split('?')[0]
+            print 'updating %s (%s)' % (link, post['id'])
             table.update({
                 'facebook_id': post['id'],
                 'link_url': link,
