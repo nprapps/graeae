@@ -1,10 +1,17 @@
 import dataset
 import app_config
-import unicodecsv as csv
+import csv
+# import unicodecsv as csv
 from fabric.api import task
+from journalism import Table, TextType, NumberType, DateType, BooleanType
+
+text_type = TextType()
+number_type = NumberType()
+date_type = DateType()
+boolean_type = BooleanType()
 
 @task
-def get_insights():
+def get_raw_insights():
 	"""
 	gets insights and art and writes csv
 	"""
@@ -25,7 +32,59 @@ def get_insights():
 		row['provider_type'] = _get_provider_type(row)
 		row['post_url'] = _make_post_url(row)
 
+	dataset.freeze(result_list, format='csv', filename='output/insights_raw.csv')
+
+@task
+def get_insights():
+	"""
+	gets insights for summary
+	"""
+	db = dataset.connect(app_config.POSTGRES_URL)
+	result = db.query("""
+	select f1.created_time, f1.people_reached, f1.shares, f1.likes, f1.comments, f1.link_clicks, s.has_lead_art, s.lead_art_provider
+		from facebook f1
+		inner join
+			(select link_url, max(run_time) as max_run_time from facebook group by link_url) f2 
+			on f1.link_url = f2.link_url and f1.run_time = f2.max_run_time
+		join 
+			seamus s
+			on f1.link_url = s.canonical_url
+			""")
+	result_list = list(result)
+	for row in result_list:
+		row['provider_category'] = _get_provider_category(row)
+		row['provider_type'] = _get_provider_type(row)
+
 	dataset.freeze(result_list, format='csv', filename='output/insights.csv')
+
+@task
+def analyse_insights():
+	"""
+	generate reports from insights data
+	"""
+	column_types = (date_type, number_type, number_type, number_type, number_type, number_type, boolean_type, text_type, text_type, text_type)
+
+	with open('output/insights.csv') as f:
+		rows = list(csv.reader(f))
+
+	column_names = rows.pop(0)
+
+	table = Table(rows, column_types, column_names)
+
+	summary_definition = (
+		('likes', 'sum'),
+		('comments', 'sum'),
+		('shares', 'sum'),
+		('people_reached', 'sum')
+	)
+
+	summary = table.aggregate('provider_type', summary_definition)
+	
+	with open('output/insights_summary.csv', 'w') as f:
+		writer = csv.writer(f)
+
+		writer.writerow(summary.get_column_names())
+		writer.writerows(summary.rows)
 
 def _get_provider_category(row):
 	"""
