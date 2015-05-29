@@ -37,6 +37,7 @@ def get_insights_and_art():
 	for row in result_list:
 		row['provider_category'] = _get_provider_category(row)
 		row['provider_type'] = _get_provider_type(row)
+		row['post_url'] = _make_post_url(row)
 
 	dataset.freeze(result_list, format='csv', filename='output/insights_and_art.csv')
 
@@ -70,5 +71,10 @@ def _get_provider_type(row):
 	else:
 		return None
 
-
-
+def _make_post_url(row):
+	"""
+	create the facebook post URL from ID
+	"""
+	post_url = "http://facebook.com/{0}".format(row['facebook_id'])
+	return post_url
+	
