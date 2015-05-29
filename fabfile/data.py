@@ -57,6 +57,10 @@ def fix_facebook_ids():
                 done = True
                 break
 
+            if 'link' not in post.keys():
+                print 'skipping %s (no link)' % post['id']
+                continue
+
             link = post['link'].split('?')[0]
             print 'updating %s (%s)' % (link, post['id'])
             table.update({
