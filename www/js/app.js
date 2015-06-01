@@ -5,15 +5,7 @@ var $commentCount = null;
  * Run on page load.
  */
 var onDocumentLoad = function(e) {
-    // Cache jQuery references
-    $commentCount = $('.comment-count');
-
-    renderExampleTemplate();
-    getCommentCount(showCommentCount);
-
-    SHARE.setup();
 }
-
 /*
  * Basic templating example.
  */
