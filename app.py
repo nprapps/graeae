@@ -32,7 +32,7 @@ def index():
     """
     context = make_context()
 
-    with open('output/insights_summary.csv') as f:
+    with open('www/live-data/insights_summary.csv') as f:
         reader = csv.DictReader(f)
         context['insights_summary'] = list(reader)
 

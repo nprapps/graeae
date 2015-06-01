@@ -32,7 +32,7 @@ def get_raw_insights():
 		row['provider_type'] = _get_provider_type(row)
 		row['post_url'] = _make_post_url(row)
 
-	dataset.freeze(result_list, format='csv', filename='output/insights_raw.csv')
+	dataset.freeze(result_list, format='csv', filename='www/live-data/insights_raw.csv')
 
 @task
 def get_insights():
@@ -55,7 +55,7 @@ def get_insights():
 		row['provider_category'] = _get_provider_category(row)
 		row['provider_type'] = _get_provider_type(row)
 
-	dataset.freeze(result_list, format='csv', filename='output/insights.csv')
+	dataset.freeze(result_list, format='csv', filename='www/live-data/insights.csv')
 
 @task
 def analyse_insights():
@@ -64,7 +64,7 @@ def analyse_insights():
 	"""
 	column_types = (date_type, number_type, number_type, number_type, number_type, number_type, boolean_type, text_type, text_type, text_type)
 
-	with open('output/insights.csv') as f:
+	with open('www/live-data/insights.csv') as f:
 		rows = list(csv.reader(f))
 
 	column_names = rows.pop(0)
@@ -86,7 +86,7 @@ def analyse_insights():
 		summary = summary.compute(normalized_name, number_type,
 			lambda row: row[computed_name] / row['provider_type_count'])
 
-	with open('output/insights_summary.csv', 'w') as f:
+	with open('www/live-data/insights_summary.csv', 'w') as f:
 		writer = csv.writer(f)
 
 		writer.writerow(summary.get_column_names())
