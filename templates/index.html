@@ -26,22 +26,22 @@
     <thead>
         <tr>
             <th>Art Provider</th>
-            <th>Posts</th>
-            <th>Likes</th>
-            <th>Comments</th>
-            <th>Shares</th>
-            <th>People Reached</th>
+            <th class="value">Posts</th>
+            <th class="value">Likes</th>
+            <th class="value">Comments</th>
+            <th class="value">Shares</th>
+            <th class="value">People Reached</th>
         </tr>
     </thead>
     <tbody>
         {% for row in insights_summary %}
         <tr>
             <td>{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
-            <td>{{ row.provider_type_count|format_commas(0) }}</td>
-            <td>{{ row.likes_sum|format_commas(0) }}</td>
-            <td>{{ row.comments_sum|format_commas(0) }}</td>
-            <td>{{ row.shares_sum|format_commas(0) }}</td>
-            <td>{{ row.people_reached_sum|format_commas(0) }}</td>
+            <td class="value">{{ row.provider_type_count|format_commas(0) }}</td>
+            <td class="value">{{ row.likes_sum|format_commas(0) }}</td>
+            <td class="value">{{ row.comments_sum|format_commas(0) }}</td>
+            <td class="value">{{ row.shares_sum|format_commas(0) }}</td>
+            <td class="value">{{ row.people_reached_sum|format_commas(0) }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -52,22 +52,22 @@
     <thead>
         <tr>
             <th>Art Provider</th>
-            <th>Posts</th>
-            <th>Likes</th>
-            <th>Comments</th>
-            <th>Shares</th>
-            <th>People Reached</th>
+            <th class="value">Posts</th>
+            <th class="value">Likes/post</th>
+            <th class="value">Comments/post</th>
+            <th class="value">Shares/post</th>
+            <th class="value">People Reached/post</th>
         </tr>
     </thead>
     <tbody>
         {% for row in insights_summary %}
         <tr>
             <td>{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
-            <td>{{ row.provider_type_count|format_commas(0) }}</td>
-            <td>{{ row.normalized_likes|format_commas }}</td>
-            <td>{{ row.normalized_comments|format_commas }}</td>
-            <td>{{ row.normalized_shares|format_commas }}</td>
-            <td>{{ row.normalized_people_reached|format_commas }}</td>
+            <td class="value">{{ row.provider_type_count|format_commas(0) }}</td>
+            <td class="value">{{ row.normalized_likes|format_commas }}</td>
+            <td class="value">{{ row.normalized_comments|format_commas }}</td>
+            <td class="value">{{ row.normalized_shares|format_commas }}</td>
+            <td class="value">{{ row.normalized_people_reached|format_commas }}</td>
         </tr>
         {% endfor %}
     </tbody>
