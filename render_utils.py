@@ -7,6 +7,7 @@ import time
 import urllib
 import subprocess
 
+from decimal import Decimal
 from flask import Markup, g, render_template, request
 from slimit import minify
 from smartypants import smartypants
@@ -222,3 +223,9 @@ def smarty_filter(s):
         print 'This string failed to encode: %s' % s
         return Markup(s)
 
+def format_commas_filter(s, precision=1):
+    """
+    Formats numbers nicely
+    """
+    fmt = '{{:,.{0}f}}'.format(precision)
+    return fmt.format(Decimal(s))

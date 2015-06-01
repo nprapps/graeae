@@ -14,7 +14,7 @@ import oauth
 import static
 
 from flask import Flask, make_response, render_template
-from render_utils import make_context, smarty_filter, urlencode_filter
+from render_utils import make_context, smarty_filter, urlencode_filter, format_commas_filter
 from werkzeug.debug import DebuggedApplication
 
 app = Flask(__name__)
@@ -22,6 +22,7 @@ app.debug = app_config.DEBUG
 
 app.add_template_filter(smarty_filter, name='smarty')
 app.add_template_filter(urlencode_filter, name='urlencode')
+app.add_template_filter(format_commas_filter, name='format_commas')
 
 @app.route('/')
 @oauth.oauth_required
