@@ -8,9 +8,13 @@
             <th>Art Provider</th>
             <th>Posts</th>
             <th>Likes</th>
+            <th>Likes per Post</th>
             <th>Comments</th>
+            <th>Comments per Post</th>
             <th>Shares</th>
+            <th>Shares per Post</th>
             <th>People Reached</th>
+            <th>People Reached per Post</th>
         </tr>
     </thead>
     <tbody>
@@ -19,9 +23,13 @@
             <td>{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
             <td>{{ row.provider_type_count }}</td>
             <td>{{ row.likes_sum }}</td>
+            <td>{{ row.normalized_likes }}</td>
             <td>{{ row.comments_sum }}</td>
+            <td>{{ row.normalized_comments }}</td>
             <td>{{ row.shares_sum }}</td>
+            <td>{{ row.normalized_shares }}</td>
             <td>{{ row.people_reached_sum }}</td>
+            <td>{{ row.normalized_people_reached }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -45,7 +53,7 @@
         <li></li>
         <li></li>
     </ul>
-<p class="muted">Note:</p>
+    <p class="muted">Note:</p>
 </section>
 
 
@@ -66,7 +74,7 @@ TEMPLATE FOR SECTION
         <li></li>
         <li></li>
     </ul>
-<p class="muted">Note:</p>
+    <p class="muted">Note:</p>
 </section>
 
 -->
