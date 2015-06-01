@@ -4,6 +4,7 @@ import csv
 # import unicodecsv as csv
 from fabric.api import task
 from journalism import Table, TextType, NumberType, DateType, BooleanType
+from journalism.columns import NumberColumn
 
 text_type = TextType()
 number_type = NumberType()
@@ -79,7 +80,13 @@ def analyse_insights():
 	)
 
 	summary = table.aggregate('provider_type', summary_definition)
-	
+
+	for column_name, aggregation_function in summary_definition:
+		computed_name = '{0}_{1}'.format(column_name, aggregation_function)
+		normalized_name = 'normalized_{0}'.format(column_name)
+		summary = summary.compute(normalized_name, number_type,
+			lambda row: row[computed_name] / row['provider_type_count'])
+
 	with open('output/insights_summary.csv', 'w') as f:
 		writer = csv.writer(f)
 
