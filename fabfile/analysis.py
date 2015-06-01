@@ -4,7 +4,6 @@ import csv
 # import unicodecsv as csv
 from fabric.api import task
 from journalism import Table, TextType, NumberType, DateType, BooleanType
-from journalism.columns import NumberColumn
 
 text_type = TextType()
 number_type = NumberType()
