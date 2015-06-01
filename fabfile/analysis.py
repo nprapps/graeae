@@ -10,6 +10,15 @@ number_type = NumberType()
 date_type = DateType()
 boolean_type = BooleanType()
 
+@task(default=True)
+def analyse():
+    """
+    Run the full analysis suite
+    """
+    get_raw_insights()
+    get_insights()
+    analyse_insights()
+
 @task
 def get_raw_insights():
     """
