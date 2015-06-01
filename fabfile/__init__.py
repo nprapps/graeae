@@ -144,6 +144,26 @@ def deploy(remote='origin'):
         if app_config.DEPLOY_SERVICES:
             servers.deploy_confs()
 
+    analysis.analyse()
+    render.render_all()
+
+    flat.deploy_folder(
+        'www',
+        app_config.PROJECT_SLUG,
+        headers={
+            'Cache-Control': 'max-age=%i' % app_config.DEFAULT_MAX_AGE
+        },
+        ignore=['www/assets/*']
+    )
+
+    flat.deploy_folder(
+        'www/assets',
+        '%s/assets' % app_config.PROJECT_SLUG,
+        headers={
+            'Cache-Control': 'max-age=%i' % app_config.ASSETS_MAX_AGE
+        })
+
+
 """
 Destruction
 
