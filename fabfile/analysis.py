@@ -14,6 +14,7 @@ def analyse():
     """
     Run the full analysis suite
     """
+    print 'Analysing ALL the data'
     get_raw_insights()
     get_insights()
     analyse_insights()
