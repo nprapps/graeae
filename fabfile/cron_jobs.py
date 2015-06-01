@@ -8,9 +8,11 @@ import dataset
 
 from fabric.api import local, require, task
 
+from oauth import get_document
 from scrapers.facebook import FacebookScraper
 from scrapers.homepage import HomepageScraper
 from scrapers.seamus import SeamusScraper
+from scrapers.spreadsheet import SpreadsheetScraper
 
 @task
 def test():
@@ -46,4 +48,13 @@ def scrape_seamus():
     db = dataset.connect(app_config.POSTGRES_URL)
     scraper = SeamusScraper()
     stories = scraper.scrape_seamus()
+    scraper.write(db, stories)
+
+
+@task
+def scrape_spreadsheet():
+    db = dataset.connect(app_config.POSTGRES_URL)
+    get_document(app_config.STORIES_GOOGLE_DOC_KEY, app_config.STORIES_PATH)
+    scraper = SpreadsheetScraper()
+    stories = scraper.scrape_spreadsheet(app_config.STORIES_PATH)
     scraper.write(db, stories)
