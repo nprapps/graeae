@@ -5,9 +5,9 @@ class SpreadsheetScraper:
     """
     Scrape the NPR Visuals 'did we touch it?' spreadsheet
     """
-    def scrape_spreadsheet(self, spreadsheet_filename):
+    def scrape_spreadsheet(self, filename):
         stories = []
-        spreadsheet = copytext.Copy(spreadsheet_filename)
+        spreadsheet = copytext.Copy(filename)
         data = spreadsheet['Form Responses 1']
         for row in data:
             story = Story(row)

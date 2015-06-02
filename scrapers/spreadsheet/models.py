@@ -21,19 +21,20 @@ class Story:
     @property
     def timestamp(self):
         seconds = (float(self.story['Timestamp']) - 25569) * 86400.0
-        return datetime.datetime.utcfromtimestamp(seconds)
+        dt = datetime.datetime.utcfromtimestamp(seconds)
+        return dt.replace(microsecond=0)
 
     @property
     def seamus_id(self):
-        return self.story['Seamus ID']
+        return str(int(float(self.story['Seamus ID'])))
 
     @property
     def contribution(self):
-        return self.story['What did you do?']
+        return str(self.story['What did you do?'])
 
     @property
     def contributors(self):
-        contributors = [contributor.strip() for contributor in self.story['Who worked on it?'].split(',')]
+        contributors = [str(contributor.strip()) for contributor in self.story['Who worked on it?'].split(',')]
         return contributors
 
     @property
