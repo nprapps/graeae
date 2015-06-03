@@ -81,5 +81,5 @@ def backup():
     dump_directory = '/tmp/graeae-backup/{0}'.format(today)
     data.dump_db(dump_directory)
     flat.deploy_folder(app_config.BACKUP_S3_BUCKET, dump_directory, dst_directory)
-    local('rm -Rf backup/*')
+    local('rm -Rf /tmp/graeae-backup')
 
