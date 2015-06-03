@@ -43,5 +43,4 @@ class Story:
         if value:
             return abs(float(value))
         else:
-            return 0
-
+            return float(0)
