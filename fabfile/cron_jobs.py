@@ -30,7 +30,7 @@ def test():
 @task
 def scrape_homepage():
     """
-    Run scrapers!
+    Scrape homepage
     """
     db = dataset.connect(app_config.POSTGRES_URL)
     scraper = HomepageScraper()
@@ -40,6 +40,9 @@ def scrape_homepage():
 
 @task
 def scrape_facebook():
+    """
+    Scrape Facebook
+    """
     db = dataset.connect(app_config.POSTGRES_URL)
     scraper = FacebookScraper()
     posts = scraper.scrape_facebook()
@@ -48,6 +51,9 @@ def scrape_facebook():
 
 @task
 def scrape_seamus():
+    """
+    Scrape Seamus API
+    """
     db = dataset.connect(app_config.POSTGRES_URL)
     scraper = SeamusScraper()
     stories = scraper.scrape_seamus()
@@ -56,6 +62,9 @@ def scrape_seamus():
 
 @task
 def scrape_spreadsheet():
+    """
+    Scrape 'Did we touch it?' spreadsheet
+    """
     db = dataset.connect(app_config.POSTGRES_URL)
     get_document(app_config.STORIES_GOOGLE_DOC_KEY, app_config.STORIES_PATH)
     scraper = SpreadsheetScraper()

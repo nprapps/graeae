@@ -28,10 +28,10 @@ def local_bootstrap():
 def drop_tables():
     db = dataset.connect(app_config.POSTGRES_URL)
 
-    for table in db.tables:
-        print 'Dropping %s' % table
-        table_obj = db[table]
-        table_obj.drop()
+    for table_name in db.tables:
+        print 'Dropping %s' % table_name
+        table = db[table_name]
+        table.drop()
 
 @task
 def fix_facebook_ids():
