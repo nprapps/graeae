@@ -39,7 +39,11 @@ def index():
     with open('www/live-data/homepage_summary.csv') as f:
         reader = csv.DictReader(f)
         context['homepage_summary'] = list(reader)
-        
+
+    with open('www/live-data/contribution_summary.csv') as f:
+        reader = csv.DictReader(f)
+        context['contribution_summary'] = list(reader)
+
     return make_response(render_template('index.html', **context))
 
 app.register_blueprint(static.static)
