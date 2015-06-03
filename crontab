@@ -2,3 +2,4 @@
 5,20,35,50 * * * * ubuntu /bin/bash /home/ubuntu/apps/graeae/repository/run_on_server.sh fab $DEPLOYMENT_TARGET cron_jobs.scrape_facebook >> /var/log/graeae/facebook.log 2>&1
 10 */4 * * * ubuntu /bin/bash /home/ubuntu/apps/graeae/repository/run_on_server.sh fab $DEPLOYMENT_TARGET cron_jobs.scrape_seamus >> /var/log/graeae/seamus.log 2>&1
 40 */4 * * * ubuntu /bin/bash /home/ubuntu/apps/graeae/repository/run_on_server.sh fab $DEPLOYMENT_TARGET cron_jobs.scrape_spreadsheet >> /var/log/graeae/spreadsheet.log 2>&1
+0 6 * * * ubuntu /bin/bash /home/ubuntu/apps/graeae/repository/run_on_server.sh fab $DEPLOYMENT_TARGET data.backup_db >> /var/log/graeae/backup.log 2>&1

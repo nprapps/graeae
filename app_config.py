@@ -53,6 +53,8 @@ ASSETS_S3_BUCKET = {
     'region': 'us-east-1'
 }
 
+BACKUP_S3_BUCKET = 'graeae-backup.nprapps.org'
+
 PRODUCTION_POSTGRES_URL = 'TKTK'
 
 STAGING_POSTGRES_URL = 'postgresql://%s:%s@stage-graeae.csvimglbktzx.us-west-2.rds.amazonaws.com:5432/%s' % (os.environ.get('graeae_POSTGRES_USER'), os.environ.get('graeae_POSTGRES_PASSWORD'), PROJECT_SLUG)

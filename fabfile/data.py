@@ -69,3 +69,17 @@ def fix_facebook_ids():
             }, ['link_url'])
 
         posts = requests.get(posts['paging']['next']).json()
+
+@task
+def dump_db(directory):
+    """
+    Dump the database. Directory required.
+    """
+    db = dataset.connect(app_config.POSTGRES_URL)
+    local('mkdir -p {0}'.format(directory))
+    for table_name in db.tables:
+        table = db[table_name]
+        results = table.all()
+        backup_filename = '{0}/{1}.csv'.format(directory, table_name)
+        with open(backup_filename, 'w') as f:
+            dataset.freeze(results, format='csv', fileobj=f)

@@ -4,7 +4,10 @@
 Cron jobs
 """
 import app_config
+import data
 import dataset
+import flat
+import time
 
 from fabric.api import local, require, task
 
@@ -58,3 +61,16 @@ def scrape_spreadsheet():
     scraper = SpreadsheetScraper()
     stories = scraper.scrape_spreadsheet(app_config.STORIES_PATH)
     scraper.write(db, stories)
+
+@task
+def backup():
+    """
+    Back up the database
+    """
+    today = time.strftime('%Y-%m-%d') 
+    dst_directory = 'backup/{0}'.format(today)
+    dump_directory = '/tmp/graeae-backup/{0}'.format(today)
+    data.dump_db(dump_directory)
+    flat.deploy_folder(app_config.BACKUP_S3_BUCKET, dump_directory, dst_directory)
+    local('rm -Rf backup/*')
+
