@@ -18,6 +18,8 @@ def analyse():
     get_raw_insights()
     get_insights()
     analyse_insights()
+    get_photo_efforts()
+    analyse_photo_efforts()
 
 @task
 def get_raw_insights():
