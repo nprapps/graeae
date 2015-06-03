@@ -103,6 +103,9 @@ def analyse_insights():
 
 @task
 def get_photo_efforts():
+    """
+    Get did we touch it db combined with homepage db
+    """
     db = dataset.connect(app_config.POSTGRES_URL)
     result = db.query("""
         select s.duration, s.contribution, s.seamus_id, hp.url
@@ -119,6 +122,30 @@ def get_photo_efforts():
         row['on_homepage'] = (row['url'] != None)
 
     dataset.freeze(result_list, format='csv', filename='www/live-data/photo_efforts.csv')
+
+@task
+def analyse_photo_efforts():
+    column_types = (number_type, text_type, text_type, text_type, boolean_type)
+
+    with open('www/live-data/photo_efforts.csv') as f:
+        rows = list(csv.reader(f))
+
+    column_names = rows.pop(0)
+    table = Table(rows, column_types, column_names)
+
+    homepage_summary = table.aggregate('on_homepage', (('duration', 'sum'),))
+    with open('www/live-data/homepage_summary.csv', 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(homepage_summary.get_column_names())
+        writer.writerows(homepage_summary.rows)
+
+    contribution_summary = table.aggregate('contribution', (('duration', 'sum'),))
+    contribution_summary = contribution_summary.order_by('contribution_count', reverse=True)
+    with open('www/live-data/contribution_summary.csv', 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(contribution_summary.get_column_names())
+        writer.writerows(contribution_summary.rows)
+
 
 
 def _get_provider_category(row):
