@@ -147,6 +147,34 @@
 <section>
     <h2>Does the Visuals Team effort affect performance?</h2>
     <p><strong>Promoting and Driving Traffic</strong></p>
+    <h4>
+        Stories Visuals worked on vs. homepage
+    </h4>
+    <table class="table table-striped table-hover"> 
+        <thead> 
+            <tr>
+                <th>
+                    On Homepage
+                </th>
+                <th class="value">
+                    Count
+                </th>
+                <th class="value">
+                    Total Duration
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in homepage_summary %}
+            <tr>
+                <td>{{ row.on_homepage }}</td>
+                <td class="value">{{row.on_homepage_count}}</td>
+                <td class="value">{{row.duration_sum}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <ul>Data:
         <li>FB Likes x “Touched by Visuals/not”</li>
         <li>FB Shares x “Touched by Visuals/not”</li>
