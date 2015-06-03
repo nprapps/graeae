@@ -148,6 +148,7 @@ def deploy(remote='origin'):
     render.render_all()
 
     flat.deploy_folder(
+        app_config.S3_BUCKET['bucket_name'],
         'www',
         app_config.PROJECT_SLUG,
         headers={
@@ -157,6 +158,7 @@ def deploy(remote='origin'):
     )
 
     flat.deploy_folder(
+        app_config.S3_BUCKET['bucket_name'],
         'www/assets',
         '%s/assets' % app_config.PROJECT_SLUG,
         headers={
@@ -184,7 +186,7 @@ def shiva_the_destroyer():
     )
 
     with settings(warn_only=True):
-        flat.delete_folder(app_config.PROJECT_SLUG)
+        flat.delete_folder(app_config.S3_BUCKET['bucket_name'], app_config.PROJECT_SLUG)
 
         if app_config.DEPLOY_TO_SERVERS:
             servers.delete_project()
