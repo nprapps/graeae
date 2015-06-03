@@ -101,6 +101,26 @@ def analyse_insights():
         writer.writerow(summary.get_column_names())
         writer.writerows(summary.rows)
 
+@task
+def get_photo_efforts():
+    db = dataset.connect(app_config.POSTGRES_URL)
+    result = db.query("""
+        select s.duration, s.contribution, s.seamus_id, hp.url
+        from homepage hp
+        inner join
+            (select story_id, max(run_time) as max_run_time from homepage group by story_id) hp2
+            on hp.story_id = hp2.story_id and hp.run_time = hp2.max_run_time
+        right join
+            spreadsheet s
+            on hp.story_id = s.seamus_id
+    """)
+    result_list = list(result)
+    for row in result_list:
+        row['on_homepage'] = (row['url'] != None)
+
+    dataset.freeze(result_list, format='csv', filename='www/live-data/photo_efforts.csv')
+
+
 def _get_provider_category(row):
     """
     determine provider category from lead art provider
