@@ -99,11 +99,25 @@ def analyse_insights():
 
     summary = table.aggregate('provider_type', summary_definition)
 
+    count_grand_total = summary.columns['provider_type_count'].sum()
+    summary = summary.compute('provider_type_count_pct', number_type,
+        lambda x: (x['provider_type_count']/count_grand_total) * 100)
+
     with open('www/live-data/insights_summary.csv', 'w') as f:
         writer = csv.writer(f)
 
         writer.writerow(summary.get_column_names())
         writer.writerows(summary.rows)
+
+        grand_totals_row = []
+        for column_name in summary.get_column_names():
+            column = summary.columns[column_name]
+            if column_name == 'provider_type':
+                grand_totals_row.append('Grand total')
+            else:
+                grand_totals_row.append(column.sum())
+
+        writer.writerow(grand_totals_row)
 
 @task
 def get_photo_efforts():
