@@ -83,19 +83,21 @@ def analyse_insights():
     table = Table(rows, column_types, column_names)
 
     summary_definition = (
-        ('likes', 'sum'),
+        ('likes', 'sum'), 
+        ('likes', 'median'),
+        ('likes', 'mean'),
         ('comments', 'sum'),
+        ('comments', 'median'),
+        ('comments', 'mean'),
         ('shares', 'sum'),
-        ('people_reached', 'sum')
+        ('shares', 'median'),
+        ('shares', 'mean'),
+        ('people_reached', 'sum'),
+        ('people_reached', 'median'),
+        ('people_reached', 'mean'),
     )
 
     summary = table.aggregate('provider_type', summary_definition)
-
-    for column_name, aggregation_function in summary_definition:
-        computed_name = '{0}_{1}'.format(column_name, aggregation_function)
-        normalized_name = 'normalized_{0}'.format(column_name)
-        summary = summary.compute(normalized_name, number_type,
-            lambda row: row[computed_name] / row['provider_type_count'])
 
     with open('www/live-data/insights_summary.csv', 'w') as f:
         writer = csv.writer(f)

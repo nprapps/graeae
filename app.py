@@ -32,6 +32,13 @@ def index():
     """
     context = make_context()
 
+    context['facebook_metrics'] = (
+        ('likes', 'Likes'),
+        ('shares', 'Shares'),
+        ('comments', 'Comments'),
+        ('people_reached', 'People Reached'),
+    )
+
     with open('www/live-data/insights_summary.csv') as f:
         reader = csv.DictReader(f)
         context['insights_summary'] = list(reader)
