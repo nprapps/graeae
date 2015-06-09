@@ -147,15 +147,10 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>
-                    Contribution Type
-                </th>
-                <th class="value">
-                    Count
-                </th>
-                <th class="value">
-                    Total Duration
-                </th>
+                <th>Contribution Type</th>
+                <th class="value">Count</th>
+                <th class="value">Count Percentage</th>
+                <th class="value">Total Duration</th>
                 <th class="value">Duration Percentage</th>
             </tr>
         </thead>
@@ -164,6 +159,7 @@
             <tr {% if loop.last %}class="last"{% endif %}>
                 <td>{{ row.contribution }}</td>
                 <td class="value">{{row.contribution_count}}</td>
+                <td class="value">{{row.contribution_count_pct|format_commas(2) }}%</td>
                 <td class="value">{{row.duration_sum}}</td>
                 <td class="value">{{row.duration_sum_pct|format_commas(2) }}%</td>
             </tr>

@@ -149,9 +149,11 @@ def analyse_photo_efforts():
 
     _write_summary_csv(homepage_summary, 'www/live-data/homepage_summary.csv')
 
-
     contribution_summary = table.aggregate('contribution', (('duration', 'sum'),))
     contribution_summary = contribution_summary.order_by('contribution_count', reverse=True)
+    contribution_summary = contribution_summary.compute('contribution_count_pct', number_type,
+        lambda x: (x['contribution_count']/count_grand_total) * 100)
+
     contribution_summary = contribution_summary.compute('duration_sum_pct', number_type,
         lambda x: (x['duration_sum']/count_grand_total) * 100)
 
