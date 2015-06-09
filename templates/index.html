@@ -131,7 +131,7 @@
                 </thead>
                 <tbody>
                     {% for row in homepage_summary %}
-                    <tr>
+                    <tr {% if loop.last %}class="last"{% endif %}>
                         <td>{{ row.on_homepage }}</td>
                         <td class="value">{{row.on_homepage_count}}</td>
                         <td class="value">{{row.duration_sum}}</td>
@@ -161,7 +161,7 @@
         </thead>
         <tbody>
             {% for row in contribution_summary %}
-            <tr>
+            <tr {% if loop.last %}class="last"{% endif %}>
                 <td>{{ row.contribution }}</td>
                 <td class="value">{{row.contribution_count}}</td>
                 <td class="value">{{row.duration_sum}}</td>

@@ -103,21 +103,7 @@ def analyse_insights():
     summary = summary.compute('provider_type_count_pct', number_type,
         lambda x: (x['provider_type_count']/count_grand_total) * 100)
 
-    with open('www/live-data/insights_summary.csv', 'w') as f:
-        writer = csv.writer(f)
-
-        writer.writerow(summary.get_column_names())
-        writer.writerows(summary.rows)
-
-        grand_totals_row = []
-        for column_name in summary.get_column_names():
-            column = summary.columns[column_name]
-            if column_name == 'provider_type':
-                grand_totals_row.append('Grand total')
-            else:
-                grand_totals_row.append(column.sum())
-
-        writer.writerow(grand_totals_row)
+    _write_summary_csv(summary, 'www/live-data/insights_summary.csv')
 
 @task
 def get_photo_efforts():
@@ -152,19 +138,11 @@ def analyse_photo_efforts():
     table = Table(rows, column_types, column_names)
 
     homepage_summary = table.aggregate('on_homepage', (('duration', 'sum'),))
-    with open('www/live-data/homepage_summary.csv', 'w') as f:
-        writer = csv.writer(f)
-        writer.writerow(homepage_summary.get_column_names())
-        writer.writerows(homepage_summary.rows)
+    _write_summary_csv(homepage_summary, 'www/live-data/homepage_summary.csv')
 
     contribution_summary = table.aggregate('contribution', (('duration', 'sum'),))
     contribution_summary = contribution_summary.order_by('contribution_count', reverse=True)
-    with open('www/live-data/contribution_summary.csv', 'w') as f:
-        writer = csv.writer(f)
-        writer.writerow(contribution_summary.get_column_names())
-        writer.writerows(contribution_summary.rows)
-
-
+    _write_summary_csv(contribution_summary, 'www/live-data/contribution_summary.csv')
 
 def _get_provider_category(row):
     """
@@ -202,4 +180,24 @@ def _make_post_url(row):
     """
     post_url = "http://facebook.com/{0}".format(row['facebook_id'])
     return post_url
+
+def _write_summary_csv(table, path):
+    """
+    create csv with grand totals
+    """
+    with open(path, 'w') as f:
+        writer = csv.writer(f)
+
+        writer.writerow(table.get_column_names())
+        writer.writerows(table.rows)
+
+        grand_totals_row = []
+        for i, column_name in enumerate(table.get_column_names()):
+            column = table.columns[column_name]
+            if i == 0:
+                grand_totals_row.append('Grand total')
+            else:
+                grand_totals_row.append(column.sum())
+
+        writer.writerow(grand_totals_row)
     
