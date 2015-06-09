@@ -180,10 +180,16 @@ def _get_provider_type(row):
     if row['provider_category']:
         if 'npr' in row['provider_category'].lower():
             return 'NPR'
-        elif 'getty' in row['provider_category'].lower() or 'istock' in row['provider_category'].lower() or 'corbis' in row['provider_category'].lower():
-            return 'Stock'
-        elif 'AP' in row['provider_category']:
+        elif 'getty' in row['provider_category'].lower():
+            return 'Getty'
+        elif 'istock' in row['provider_category'].lower():
+            return 'iStock'
+        elif 'corbis' in row['provider_category'].lower():
+            return 'Corbis'
+        elif 'AP' in row['provider_category'] or 'landov' in row['provider_category'].lower():
             return 'Wire'
+        elif row['provider_category'] == 'Courtesy':
+            return 'Courtesy'
         else:
             return 'Other'
     else:
