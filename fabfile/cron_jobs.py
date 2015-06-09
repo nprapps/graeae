@@ -4,7 +4,6 @@
 Cron jobs
 """
 import app_config
-import data
 import dataset
 import flat
 import time
@@ -76,6 +75,7 @@ def backup():
     """
     Back up the database
     """
+    import data
     today = time.strftime('%Y-%m-%d') 
     dst_directory = 'backup/{0}'.format(today)
     dump_directory = '/tmp/graeae-backup/{0}'.format(today)
