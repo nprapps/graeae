@@ -138,11 +138,25 @@ def analyse_photo_efforts():
     table = Table(rows, column_types, column_names)
 
     homepage_summary = table.aggregate('on_homepage', (('duration', 'sum'),))
+
+    count_grand_total = homepage_summary.columns['on_homepage_count'].sum()
+    homepage_summary = homepage_summary.compute('on_homepage_count_pct', number_type,
+        lambda x: (x['on_homepage_count']/count_grand_total) * 100)
+
+    count_grand_total = homepage_summary.columns['duration_sum'].sum()
+    homepage_summary = homepage_summary.compute('duration_sum_pct', number_type,
+        lambda x: (x['duration_sum']/count_grand_total) * 100)
+
     _write_summary_csv(homepage_summary, 'www/live-data/homepage_summary.csv')
+
 
     contribution_summary = table.aggregate('contribution', (('duration', 'sum'),))
     contribution_summary = contribution_summary.order_by('contribution_count', reverse=True)
+    contribution_summary = contribution_summary.compute('duration_sum_pct', number_type,
+        lambda x: (x['duration_sum']/count_grand_total) * 100)
+
     _write_summary_csv(contribution_summary, 'www/live-data/contribution_summary.csv')
+
 
 def _get_provider_category(row):
     """
