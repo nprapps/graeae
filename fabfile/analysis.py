@@ -159,6 +159,31 @@ def analyse_photo_efforts():
 
     _write_summary_csv(contribution_summary, 'www/live-data/contribution_summary.csv')
 
+@task
+def get_daily_output():
+    """
+    count daily stories published
+    """
+    db = dataset.connect(app_config.POSTGRES_URL)
+    result = list(db.query("""
+        select count(distinct(story_id))
+        from seamus
+    """)).pop(0)
+
+    max_result = list(db.query("""
+        select max(publication_date)
+        from seamus
+    """)).pop(0)
+
+    min_result = list(db.query("""
+        select min(publication_date)
+        from seamus
+    """)).pop(0)
+
+    difference = max_result['max'] - min_result['min']
+    avg = result['count'] / float(difference.days)
+    print avg
+
 def _get_provider_category(row):
     """
     determine provider category from lead art provider
