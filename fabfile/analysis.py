@@ -159,7 +159,6 @@ def analyse_photo_efforts():
 
     _write_summary_csv(contribution_summary, 'www/live-data/contribution_summary.csv')
 
-
 def _get_provider_category(row):
     """
     determine provider category from lead art provider
