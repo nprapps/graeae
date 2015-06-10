@@ -55,9 +55,9 @@ class TestScrapeHomepage(unittest.TestCase):
         self.assertEqual(self.articles[0].homepage_art_url, 'http://media.npr.org/assets/img/2015/04/24/gallipoli-getty-01_wide-906fbf6d89a2544d138bbd29b4cb317a0e015dda-s900.jpg')
         self.assertIs(self.articles[11].homepage_art_url, None)
 
-    def test_homepage_root_art_url(self):
-        self.assertEqual(self.articles[0].homepage_root_art_url, 'http://media.npr.org/assets/img/2015/04/24/gallipoli-getty-01.jpg')
-        self.assertIs(self.articles[11].homepage_root_art_url, None)
+    def test_homepage_art_root_url(self):
+        self.assertEqual(self.articles[0].homepage_art_root_url, 'http://media.npr.org/assets/img/2015/04/24/gallipoli-getty-01.jpg')
+        self.assertIs(self.articles[11].homepage_art_root_url, None)
 
     def test_teaser(self):
         self.assertEqual(self.articles[0].teaser, 'The Gallipoli campaign saw Ottoman forces, fighting under German command, repel an allied attack led by Britain and France. Its reverberations are still felt to this day in the chaotic Middle East.')
@@ -80,8 +80,8 @@ class TestScrapeApi(unittest.TestCase):
     def test_lead_art_url(self):
         self.assertEqual(self.api_entry.lead_art_url, 'http://media.npr.org/assets/img/2015/04/15/463942430-a6ceb5d9f82976adf38dfa46c6eb125b7af2ce62.jpg')
 
-    def test_lead_root_art_url(self):
-        self.assertEqual(self.api_entry.lead_root_art_url, 'http://media.npr.org/assets/img/2015/04/15/463942430-a6ceb5d9f82976adf38dfa46c6eb125b7af2ce62.jpg')
+    def test_lead_art_root_url(self):
+        self.assertEqual(self.api_entry.lead_art_root_url, 'http://media.npr.org/assets/img/2015/04/15/463942430-a6ceb5d9f82976adf38dfa46c6eb125b7af2ce62.jpg')
 
     def test_homepage_art_provider(self):
         self.assertEqual(self.api_entry.homepage_art_provider, 'AFP/Getty Images')

@@ -1,4 +1,4 @@
-def get_root_art_url(url):
+def get_art_root_url(url):
     """
     extract common bits of an art url
     """

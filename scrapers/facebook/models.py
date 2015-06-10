@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from dateutil import parser
-from scrapers.utils import get_root_art_url
+from scrapers.utils import get_art_root_url
 
 import os
 import urlparse
@@ -25,7 +25,7 @@ class Post:
             ('headline', self.headline),
             ('post_type', self.post_type),
             ('art_url', self.art_url),
-            ('root_art_url', self.root_art_url),
+            ('art_root_url', self.art_root_url),
             ('link_url', self.link_url),
             ('created_time', self.created_time),
             ('updated_time', self.updated_time),
@@ -91,9 +91,9 @@ class Post:
         return image_url
 
     @property
-    def root_art_url(self):
+    def art_root_url(self):
         if self.art_url:
-            return get_root_art_url(self.art_url)
+            return get_art_root_url(self.art_url)
         return None
 
     @property
