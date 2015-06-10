@@ -36,7 +36,7 @@ def index():
         ('likes', 'Likes'),
         ('shares', 'Shares'),
         ('comments', 'Comments'),
-        ('people_reached', 'People Reached'),
+        ('link_clicks', 'Link clicks'),
     )
 
     with open('www/live-data/insights_summary.csv') as f:

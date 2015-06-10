@@ -95,6 +95,9 @@ def analyse_insights():
         ('people_reached', 'sum'),
         ('people_reached', 'median'),
         ('people_reached', 'mean'),
+        ('link_clicks', 'sum'),
+        ('link_clicks', 'median'),
+        ('link_clicks', 'mean'),
     )
 
     summary = table.aggregate('provider_type', summary_definition)
