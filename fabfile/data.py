@@ -5,6 +5,7 @@ Commands that update or process the application data.
 """
 import app_config
 import dataset
+import ipdb
 import logging
 import requests
 
@@ -112,6 +113,14 @@ def fix_seamus_art_urls():
             }
             print 'updating %s' % update
             seamus.update(update, ['id']) 
+
+
+@task
+def db_shell():
+    db = dataset.connect(app_config.POSTGRES_URL)
+    print 'Dropping to interactive shell. The `db` variable has access to the current live database.'
+    ipdb.set_trace()
+    pass
 
 @task
 def dump_db(directory):
