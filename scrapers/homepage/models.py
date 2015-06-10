@@ -168,7 +168,6 @@ class ApiEntry:
 
     @property
     def homepage_art_provider(self):
-        # http://media.npr.org/assets/img/2015/04/17/463942430_wide-d7202aafc983e9d09794299786231f0f284b2b7d-s900-c85.jpg
         url = self.article.homepage_art_url
 
         if not url:

@@ -28,7 +28,7 @@ def get_raw_insights():
     """
     db = dataset.connect(app_config.POSTGRES_URL)
     result = db.query("""
-    select f1.*, s.has_lead_art, s.lead_art_provider, s.lead_art_url, s.title, s.story_id
+        select f1.*, s.has_lead_art, s.lead_art_provider, s.lead_art_url, s.title, s.story_id
         from facebook f1
         inner join
             (select link_url, max(run_time) as max_run_time from facebook group by link_url) f2 
@@ -36,7 +36,7 @@ def get_raw_insights():
         join 
             seamus s
             on f1.link_url = s.canonical_url
-            """)
+    """)
     result_list = list(result)
     for row in result_list:
         row['provider_category'] = _get_provider_category(row)
@@ -52,7 +52,7 @@ def get_insights():
     """
     db = dataset.connect(app_config.POSTGRES_URL)
     result = db.query("""
-    select f1.created_time, f1.people_reached, f1.shares, f1.likes, f1.comments, f1.link_clicks, s.has_lead_art, s.lead_art_provider
+        select f1.created_time, f1.people_reached, f1.shares, f1.likes, f1.comments, f1.link_clicks, s.has_lead_art, s.lead_art_provider
         from facebook f1
         inner join
             (select link_url, max(run_time) as max_run_time from facebook group by link_url) f2 
@@ -60,7 +60,7 @@ def get_insights():
         join 
             seamus s
             on f1.link_url = s.canonical_url
-            """)
+    """)
     result_list = list(result)
     for row in result_list:
         row['provider_category'] = _get_provider_category(row)
@@ -168,6 +168,7 @@ def get_daily_output():
     count daily stories published
     """
     db = dataset.connect(app_config.POSTGRES_URL)
+
     result = list(db.query("""
         select count(distinct(story_id))
         from seamus
