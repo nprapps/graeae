@@ -72,7 +72,7 @@ def fix_facebook_ids():
         posts = requests.get(posts['paging']['next']).json()
 
 @task
-def fix_art_urls():
+def fix_fb_art_urls():
     db = dataset.connect(app_config.POSTGRES_URL)
 
     fb = db['facebook']
@@ -85,23 +85,29 @@ def fix_art_urls():
             print 'updating %s' % update
             fb.update(update, ['id'])
 
+
+@task
+def fix_homepage_art_urls():
+    db = dataset.connect(app_config.POSTGRES_URL)
     hp = db['homepage']
     for row in hp.all():
         if row['homepage_art_url']:
             update = {
                 'homepage_art_root_url': get_art_root_url(row['homepage_art_url']),
-
                 'id': row['id']
             }
             print 'updating %s' % update
             hp.update(update, ['id'])
 
+
+@task
+def fix_seamus_art_urls():
+    db = dataset.connect(app_config.POSTGRES_URL)
     seamus = db['seamus']
     for row in seamus.all():
         if row['lead_art_url']:
             update = {
                 'lead_art_root_url': get_art_root_url(row['lead_art_url']),
-
                 'id': row['id']
             }
             print 'updating %s' % update
