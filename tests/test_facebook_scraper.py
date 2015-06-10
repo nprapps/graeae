@@ -26,6 +26,9 @@ class TestScrapeFacebook(unittest.TestCase):
     def test_art_url(self):
         self.assertEqual(self.posts[0].art_url, 'http://amplify.nprstations.org/files/201504/viewmalltobanneker.jpg_itok_KBLvGBLY')
 
+    def test_root_art_url(self):
+        self.assertEqual(self.posts[2].root_art_url, 'http://media.npr.org/assets/img/2015/04/17/englishname.jpg')
+
     def test_link_url(self):
         self.assertEqual(self.posts[0].link_url, 'http://wamu.org/programs/metro_connection/15/04/17/southwest_ecodistrict')
 

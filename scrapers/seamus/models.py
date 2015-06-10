@@ -32,6 +32,7 @@ class Story(ApiEntry):
             ('has_lead_art', self.has_lead_art),
             ('lead_art_provider', self.lead_art_provider),
             ('lead_art_url', self.lead_art_url),
+            ('lead_root_art_url', self.lead_root_art_url),
         ])
 
     def _parse_date(self, date_string):

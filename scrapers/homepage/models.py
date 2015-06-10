@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from scrapers.utils import get_root_art_url
 import os
 
 from pyquery import PyQuery
@@ -19,6 +20,7 @@ class Article:
             ('story_id', self.story_id),
             ('url', self.url),
             ('homepage_art_url', self.homepage_art_url),
+            ('homepage_root_art_url', self.homepage_root_art_url),
             ('has_audio', self.has_audio),
             ('is_apps_project', self.is_apps_project),
         ])
@@ -87,6 +89,12 @@ class Article:
         return None
 
     @property
+    def homepage_root_art_url(self):
+        if self.homepage_art_url:
+            return get_root_art_url(self.homepage_art_url)
+        return None
+
+    @property
     def has_audio(self):
         return bool(self.element.hasClass('post-type-audio'))
 
@@ -101,6 +109,7 @@ class ApiEntry:
             ('has_lead_art', self.has_lead_art),
             ('lead_art_provider', self.lead_art_provider),
             ('lead_art_url', self.lead_art_url),
+            ('lead_root_art_url', self.lead_root_art_url),
             ('homepage_art_provider', self.homepage_art_provider),
         ])
 
@@ -144,6 +153,12 @@ class ApiEntry:
             return None
 
         return PyQuery(el.find('enlargement')).attr('src')
+
+    @property
+    def lead_root_art_url(self):
+        if self.lead_art_url:
+            return get_root_art_url(self.lead_art_url)
+        return None
 
     def _parse_art_id_from_url(self, url):
         prefix = url[:url.rfind('_')]
