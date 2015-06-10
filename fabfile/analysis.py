@@ -52,29 +52,55 @@ def get_insights():
     """
     db = dataset.connect(app_config.POSTGRES_URL)
     result = db.query("""
-        select f1.created_time, f1.people_reached, f1.shares, f1.likes, f1.comments, f1.link_clicks, s.has_lead_art, s.lead_art_provider
+        select f1.created_time, f1.people_reached, f1.shares, f1.likes,
+               f1.comments, f1.link_clicks, s.has_lead_art, s.lead_art_provider,
+               f1.art_root_url, s.lead_art_root_url
         from facebook f1
         inner join
-            (select link_url, max(run_time) as max_run_time from facebook group by link_url) f2 
+            (select link_url, max(run_time) as max_run_time from facebook group by link_url) f2
             on f1.link_url = f2.link_url and f1.run_time = f2.max_run_time
         join
             seamus s
             on f1.link_url = s.canonical_url
-        where f1.art_root_url = s.lead_art_root_url
     """)
     result_list = list(result)
-    for row in result_list:
-        row['provider_category'] = _get_provider_category(row)
-        row['provider_type'] = _get_provider_type(row)
 
-    dataset.freeze(result_list, format='csv', filename='www/live-data/insights.csv')
+    matching_results = []
+    matching = 0
+    no_lead_art = 0
+    non_matching = 0
+
+    for row in result_list:
+        if row['art_root_url'] == row['lead_art_root_url']:
+            row['provider_category'] = _get_provider_category(row)
+            row['provider_type'] = _get_provider_type(row)
+            matching_results.append(row)
+            matching += 1
+        elif row['lead_art_root_url']:
+            non_matching += 1
+        else:
+            no_lead_art += 1
+
+    dataset.freeze(matching_results, format='csv', filename='www/live-data/insights.csv')
+
+    total_rows = matching + non_matching + no_lead_art
+    insights_art_match = [{
+        'matching': matching,
+        'matching_pct': 100 * float(matching) / total_rows,
+        'no_lead_art': no_lead_art,
+        'no_lead_art_pct': 100 * float(no_lead_art) / total_rows,
+        'non_matching': non_matching,
+        'non_matching_pct': 100 * float(non_matching) / total_rows,
+        'total': total_rows,
+    }]
+    dataset.freeze(insights_art_match, format='csv', filename='www/live-data/insights_art_match.csv')
 
 @task
 def analyse_insights():
     """
     generate reports from insights data
     """
-    column_types = (date_type, number_type, number_type, number_type, number_type, number_type, boolean_type, text_type, text_type, text_type)
+    column_types = (date_type, number_type, number_type, number_type, number_type, number_type, boolean_type, text_type, text_type, text_type, text_type, text_type)
 
     with open('www/live-data/insights.csv') as f:
         rows = list(csv.reader(f))

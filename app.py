@@ -43,6 +43,10 @@ def index():
         reader = csv.DictReader(f)
         context['insights_summary'] = list(reader)
 
+    with open('www/live-data/insights_art_match.csv') as f:
+        reader = csv.DictReader(f)
+        context['insights_art_match'] = list(reader).pop()
+
     with open('www/live-data/homepage_summary.csv') as f:
         reader = csv.DictReader(f)
         context['homepage_summary'] = list(reader)
