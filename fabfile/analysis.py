@@ -28,7 +28,7 @@ def get_raw_insights():
     """
     db = dataset.connect(app_config.POSTGRES_URL)
     result = db.query("""
-        select f1.*, s.has_lead_art, s.lead_art_provider, s.lead_art_url, s.title, s.story_id
+        select f1.*, s.has_lead_art, s.lead_art_provider, s.lead_art_url, s.lead_art_root_url, s.title, s.story_id
         from facebook f1
         inner join
             (select link_url, max(run_time) as max_run_time from facebook group by link_url) f2 
@@ -57,9 +57,10 @@ def get_insights():
         inner join
             (select link_url, max(run_time) as max_run_time from facebook group by link_url) f2 
             on f1.link_url = f2.link_url and f1.run_time = f2.max_run_time
-        join 
+        join
             seamus s
             on f1.link_url = s.canonical_url
+        where f1.art_root_url = s.lead_art_root_url
     """)
     result_list = list(result)
     for row in result_list:
