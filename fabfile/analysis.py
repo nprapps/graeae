@@ -107,6 +107,8 @@ def analyse_insights():
     summary = summary.compute('provider_type_count_pct', number_type,
         lambda x: (x['provider_type_count']/count_grand_total) * 100)
 
+    summary = summary.order_by('provider_type')
+
     _write_summary_csv(summary, 'www/live-data/insights_summary.csv')
 
 @task
