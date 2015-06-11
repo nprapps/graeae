@@ -127,6 +127,18 @@ def fix_seamus_art_urls():
             print 'updating %s' % update
             seamus.update(update, ['id']) 
 
+@task
+def fix_seamus_dupes():
+    db = dataset.connect(app_config.POSTGRES_URL)
+    seamus = db['seamus']
+    found_ids = []
+    for row in seamus.all():
+        if row['story_id'] not in found_ids:
+            print 'found id %s' % row['story_id']
+            found_ids.append(row['story_id'])
+        else:
+            print 'found dupe for %s, deleting %s' % (row['story_id'], row['id'])
+            seamus.delete(id=row['id'])
 
 @task
 def db_shell():
