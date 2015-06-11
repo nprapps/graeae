@@ -144,12 +144,35 @@
                     {% endfor %}
                 </tbody>
             </table>
+ 
+            <h4>Stories Visuals worked on vs. Facebook</h4>
+            <table class="table table-striped table-hover"> 
+                <thead> 
+                    <tr>
+                        <th>On Facebook</th>
+                        <th class="value">Count</th>
+                        <th class="value">Count Percentage</th>
+                        <th class="value">Total Duration
+                        <th class="value">Duration Percentage</th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in facebook_summary %}
+                    <tr {% if loop.last %}class="last"{% endif %}>
+                        <td>{{ row.on_facebook }}</td>
+                        <td class="value">{{row.on_facebook_count}}</td>
+                        <td class="value">{{row.on_facebook_count_pct|format_commas(2) }}%</td>
+                        <td class="value">{{row.duration_sum}}</td>
+                        <td class="value">{{row.duration_sum_pct|format_commas(2) }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <h4> 
-        Effort by type of contribution
-    </h4>
+    <h4>Effort by type of contribution</h4>
     <table class="table table-striped table-hover">
         <thead>
             <tr>

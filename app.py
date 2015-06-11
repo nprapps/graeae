@@ -51,6 +51,10 @@ def index():
         reader = csv.DictReader(f)
         context['homepage_summary'] = list(reader)
 
+    with open('www/live-data/facebook_summary.csv') as f:
+        reader = csv.DictReader(f)
+        context['facebook_summary'] = list(reader)
+
     with open('www/live-data/contribution_summary.csv') as f:
         reader = csv.DictReader(f)
         context['contribution_summary'] = list(reader)

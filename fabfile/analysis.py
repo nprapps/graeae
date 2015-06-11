@@ -20,6 +20,8 @@ def analyse():
     analyse_insights()
     get_photo_efforts()
     analyse_photo_efforts()
+    get_photo_efforts_fb()
+    analyse_photo_efforts_fb()
 
 @task
 def get_raw_insights():
@@ -160,6 +162,28 @@ def get_photo_efforts():
     dataset.freeze(result_list, format='csv', filename='www/live-data/photo_efforts.csv')
 
 @task
+def get_photo_efforts_fb():
+    """
+    Get did we touch it db combined with facebook db
+    """
+    db = dataset.connect(app_config.POSTGRES_URL)
+    result = db.query("""
+        select s.duration, s.contribution, s.seamus_id, f1.facebook_id
+        from facebook f1
+        inner join
+            (select link_url, max(run_time) as max_run_time from facebook group by link_url) f2
+            on f1.link_url = f2.link_url and f1.run_time = f2.max_run_time
+    right join
+        spreadsheet s
+        on f1.seamus_id = s.seamus_id
+    """)
+    result_list = list(result)
+    for row in result_list:
+        row['on_facebook'] = (row['facebook_id'] != None)
+
+    dataset.freeze(result_list, format='csv', filename='www/live-data/photo_efforts_fb.csv')
+
+@task
 def analyse_photo_efforts():
     column_types = (number_type, text_type, text_type, text_type, boolean_type)
 
@@ -190,6 +214,28 @@ def analyse_photo_efforts():
         lambda x: (x['duration_sum']/count_grand_total) * 100)
 
     _write_summary_csv(contribution_summary, 'www/live-data/contribution_summary.csv')
+
+@task
+def analyse_photo_efforts_fb():
+    column_types = (number_type, text_type, text_type, text_type, boolean_type)
+
+    with open('www/live-data/photo_efforts_fb.csv') as f:
+        rows = list(csv.reader(f))
+
+    column_names = rows.pop(0)
+    table = Table(rows, column_types, column_names)
+
+    facebook_summary = table.aggregate('on_facebook', (('duration', 'sum'),))
+
+    count_grand_total = facebook_summary.columns['on_facebook_count'].sum()
+    facebook_summary = facebook_summary.compute('on_facebook_count_pct', number_type,
+        lambda x: (x['on_facebook_count']/count_grand_total) * 100)
+
+    count_grand_total = facebook_summary.columns['duration_sum'].sum()
+    facebook_summary = facebook_summary.compute('duration_sum_pct', number_type,
+        lambda x: (x['duration_sum']/count_grand_total) * 100)
+
+    _write_summary_csv(facebook_summary, 'www/live-data/facebook_summary.csv')
 
 @task
 def get_daily_output():
