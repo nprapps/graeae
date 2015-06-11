@@ -24,4 +24,8 @@ class SpreadsheetScraper:
         table = db['spreadsheet']
         for story in stories:
             logger.info('Updating {0}'.format(story.seamus_id))
-            table.upsert(story.serialize(), ['seamus_id'])
+            database_story = table.find_one(seamus_id=story.seamus_id)
+            if not database_story:
+                table.insert(story.serialize())
+            elif story.duration > database_story['duration']:
+                table.upsert(story.serialize(), ['seamus_id'])
