@@ -77,7 +77,7 @@ class SeamusScraper:
         table = db['seamus']
 
         for story in stories:
-            exists = table.find_one(id=story.story_id)
+            exists = table.find_one(story_id=story.story_id)
 
             if exists:
                 continue
