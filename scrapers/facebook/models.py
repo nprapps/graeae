@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from dateutil import parser
-from scrapers.utils import get_art_root_url
+from scrapers.utils import get_art_root_url, get_seamus_id_from_url
 
 import os
 import urlparse
@@ -31,6 +31,7 @@ class Post:
             ('updated_time', self.updated_time),
             ('message', self.message),
             ('description', self.description),
+            ('seamus_id', self.seamus_id),
         ])
 
     @property
@@ -121,6 +122,12 @@ class Post:
         """
         return self.api_post.get('description')
 
+    @property
+    def seamus_id(self):
+        """
+        Get seamus ID from url
+        """
+        return get_seamus_id_from_url(self.link_url)
 
 class Insights:
     """

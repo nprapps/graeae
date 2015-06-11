@@ -32,6 +32,9 @@ class TestScrapeFacebook(unittest.TestCase):
     def test_link_url(self):
         self.assertEqual(self.posts[0].link_url, 'http://wamu.org/programs/metro_connection/15/04/17/southwest_ecodistrict')
 
+    def test_seamus_id(self):
+        self.assertEqual(self.posts[2].seamus_id, '400399802')
+
     def test_created_time(self):
         self.assertEqual(self.posts[0].created_time, datetime(2015, 4, 20, 17, 9, 40))
 

@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from scrapers.utils import get_art_root_url
+from scrapers.utils import get_art_root_url, get_seamus_id_from_url
 
 from pyquery import PyQuery
 
@@ -38,12 +38,7 @@ class Article:
 
     @property
     def story_id(self):
-        url_parts = self.url.split('/')
-        id = url_parts[-2]
-        if id.isdigit():
-            return id
-        else:
-            return None
+        return get_seamus_id_from_url(self.url)
 
     @property
     def is_apps_project(self):
