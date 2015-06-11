@@ -12,7 +12,7 @@ import requests
 from dateutil import parser
 from fabric.api import local, task
 from facebook import GraphAPI
-from scrapers.utils import get_art_root_url
+from scrapers.utils import get_art_root_url, get_seamus_id_from_url
 
 SECRETS = app_config.get_secrets()
 FACEBOOK_USER = 'NPR'
@@ -86,6 +86,19 @@ def fix_fb_art_urls():
             print 'updating %s' % update
             fb.update(update, ['id'])
 
+@task
+def fix_fb_seamus_ids():
+    db = dataset.connect(app_config.POSTGRES_URL)
+
+    fb = db['facebook']
+    for row in fb.all():
+        if row['link_url']:
+            update = {
+                'seamus_id': get_seamus_id_from_url(row['link_url']),
+                'id': row['id']
+            }
+            print 'updating %s' % update
+            fb.update(update, ['id'])
 
 @task
 def fix_homepage_art_urls():
