@@ -2,6 +2,8 @@ import dataset
 import app_config
 import csv
 import itertools
+import math
+import numpy
 from fabric.api import task
 from journalism import Table, TextType, NumberType, DateType, BooleanType
 
@@ -126,6 +128,33 @@ def analyse_insights():
     summary = summary.order_by('provider_type')
 
     _write_summary_csv(summary, 'www/live-data/insights_summary.csv')
+
+    _generate_insights_histograms(table, summary)
+
+
+def _generate_insights_histograms(table, summary, bins=10):
+    providers = [row['provider_type'] for row in summary.rows]
+    for metric in FACEBOOK_METRICS:
+        histogram_table = []
+        min = table.columns[metric].min()
+        max = table.columns[metric].max()
+        difference = max - min
+        increment = difference / bins
+        rounded_min = _round_down(min, 2)
+        rounded_increment = _round_down(increment)
+        bin_range = range(rounded_min, max + rounded_increment, rounded_increment)
+
+        histogram_table.append(['Provider type'] + bin_range)
+
+        for provider in providers:
+            histogram_data = [float(row[metric]) for row in table.rows if row['provider_type'] == provider]
+            histogram_row, bin_edges = numpy.histogram(histogram_data, bins=bin_range)
+            histogram_table.append([provider] + list(histogram_row))
+
+        with open('www/live-data/{0}_histogram.csv'.format(metric), 'w') as f:
+            writer = csv.writer(f)
+            writer.writerows(histogram_table)
+
 
 @task
 def get_photo_efforts():
@@ -313,4 +342,12 @@ def _write_summary_csv(table, path):
                 grand_totals_row.append(column.sum())
 
         writer.writerow(grand_totals_row)
-    
+
+
+def _round_down(number, significant_figures=1):
+    """
+    Round down a number, preserving a number of significant figures
+    """
+    number_length = len(str(int(number))) - significant_figures
+    divisor = int('1{0}'.format(number_length * '0'))
+    return int(math.floor(number / divisor) * divisor)
