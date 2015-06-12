@@ -227,6 +227,8 @@ header {
 // Content
 // -------------------------
 
+.container { width: 100%; }
+
 #content { margin-top: 44px; }
 #story-meta {
 	margin-bottom: 22px;
@@ -409,9 +411,14 @@ footer {
         font-weight: bold;
     }
     &.fb-metrics {
-      td {
-          width: 25%;
-      }
+        td.value {
+            width: 22%;
+        }
+    }
+    &.fb-histogram {
+        td.value {
+            width: 11%;
+        }
     }
 }
 

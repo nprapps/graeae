@@ -229,3 +229,10 @@ def format_commas_filter(s, precision=1):
     """
     fmt = '{{:,.{0}f}}'.format(precision)
     return fmt.format(Decimal(s))
+
+def format_thousands_filter(s, precision=1):
+    """
+    Format 1,000 as 1k
+    """
+    s = int(s) / 1000
+    return '{0}k'.format(s)

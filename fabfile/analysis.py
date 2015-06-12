@@ -8,7 +8,7 @@ from fabric.api import task
 from journalism import Table, TextType, NumberType, DateType, BooleanType
 
 FACEBOOK_METRICS = ('likes', 'shares', 'comments', 'link_clicks')
-SUMMARY_TYPES = ('sum', 'mean', 'median')
+SUMMARY_TYPES = ('sum', 'mean', 'median', 'max')
 
 text_type = TextType()
 number_type = NumberType()
@@ -133,35 +133,36 @@ def analyse_insights():
 
     _write_summary_csv(summary, 'www/live-data/insights_summary.csv')
 
-    _generate_insights_histograms(table, summary)
-
-
-def _generate_insights_histograms(table, summary, bins=10):
-    providers = [row['provider_type'] for row in summary.rows]
     for metric in FACEBOOK_METRICS:
-        histogram_table = []
+        _generate_insights_histograms(metric, table, summary)
 
-        min = table.columns[metric].min()
-        max = table.columns[metric].max()
-        difference = max - min
-        increment = difference / bins
-        rounded_increment = _round_down(increment/4)
-        bin_range = range(0, max + rounded_increment, rounded_increment)
 
-        histogram_table.append(['Provider type'] + bin_range[:bins])
+def _generate_insights_histograms(metric, table, summary, bins=6, increment_divisor=4):
+    providers = [row['provider_type'] for row in summary.rows]
+    histogram_table = []
 
-        for provider in providers:
-            histogram_data = [float(row[metric]) for row in table.rows if row['provider_type'] == provider]
-            histogram, bin_edges = numpy.histogram(histogram_data, bins=bin_range)
-            histogram = list(histogram)
-            histogram_base = histogram[:bins-1]
-            big_numbers_sum = numpy.sum(histogram[bins-1:])
-            histogram_row = histogram_base + [big_numbers_sum]
-            histogram_table.append([provider] + histogram_row)
+    min = table.columns[metric].min()
+    max = table.columns[metric].max()
+    difference = max - min
+    increment = difference / bins
+    rounded_increment = _round_down(increment / increment_divisor)
+    bin_range = range(0, max + rounded_increment, rounded_increment)
 
-        with open('www/live-data/{0}_histogram.csv'.format(metric), 'w') as f:
-            writer = csv.writer(f)
-            writer.writerows(histogram_table)
+    histogram_table.append(['Provider'] + bin_range[:bins])
+
+    for provider in providers:
+        histogram_data = [float(row[metric]) for row in table.rows if row['provider_type'] == provider]
+        histogram, bin_edges = numpy.histogram(histogram_data, bins=bin_range)
+        histogram = list(histogram)
+        histogram_base = histogram[:bins - 1]
+        big_numbers_sum = numpy.sum(histogram[bins - 1:])
+        histogram_row = histogram_base + [big_numbers_sum]
+        histogram_percent = [float(x) / len(histogram_data) * 100 for x in histogram_row]
+        histogram_table.append([provider] + histogram_percent)
+
+    with open('www/live-data/{0}_histogram.csv'.format(metric), 'w') as f:
+        writer = csv.writer(f)
+        writer.writerows(histogram_table)
 
 
 @task
@@ -353,7 +354,7 @@ def _write_summary_csv(table, path):
         for i, column_name in enumerate(table.get_column_names()):
             column = table.columns[column_name]
             if i == 0:
-                grand_totals_row.append('Grand total')
+                grand_totals_row.append('Total')
             else:
                 grand_totals_row.append(column.sum())
 
