@@ -140,20 +140,24 @@ def _generate_insights_histograms(table, summary, bins=10):
     providers = [row['provider_type'] for row in summary.rows]
     for metric in FACEBOOK_METRICS:
         histogram_table = []
+
         min = table.columns[metric].min()
         max = table.columns[metric].max()
         difference = max - min
         increment = difference / bins
-        rounded_min = _round_down(min, 2)
-        rounded_increment = _round_down(increment)
-        bin_range = range(rounded_min, max + rounded_increment, rounded_increment)
+        rounded_increment = _round_down(increment/4)
+        bin_range = range(0, max + rounded_increment, rounded_increment)
 
-        histogram_table.append(['Provider type'] + bin_range)
+        histogram_table.append(['Provider type'] + bin_range[:bins])
 
         for provider in providers:
             histogram_data = [float(row[metric]) for row in table.rows if row['provider_type'] == provider]
-            histogram_row, bin_edges = numpy.histogram(histogram_data, bins=bin_range)
-            histogram_table.append([provider] + list(histogram_row))
+            histogram, bin_edges = numpy.histogram(histogram_data, bins=bin_range)
+            histogram = list(histogram)
+            histogram_base = histogram[:bins-1]
+            big_numbers_sum = numpy.sum(histogram[bins-1:])
+            histogram_row = histogram_base + [big_numbers_sum]
+            histogram_table.append([provider] + histogram_row)
 
         with open('www/live-data/{0}_histogram.csv'.format(metric), 'w') as f:
             writer = csv.writer(f)
