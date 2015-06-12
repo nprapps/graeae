@@ -15,6 +15,7 @@ number_type = NumberType()
 date_type = DateType()
 boolean_type = BooleanType()
 
+
 @task(default=True)
 def analyse():
     """
@@ -28,6 +29,7 @@ def analyse():
     analyse_photo_efforts()
     get_photo_efforts_fb()
     analyse_photo_efforts_fb()
+
 
 @task
 def get_raw_insights():
@@ -52,6 +54,7 @@ def get_raw_insights():
         row['post_url'] = _make_post_url(row)
 
     dataset.freeze(result_list, format='csv', filename='www/live-data/insights_raw.csv')
+
 
 @task
 def get_insights():
@@ -102,6 +105,7 @@ def get_insights():
         'total': total_rows,
     }]
     dataset.freeze(insights_art_match, format='csv', filename='www/live-data/insights_art_match.csv')
+
 
 @task
 def analyse_insights():
@@ -178,6 +182,7 @@ def get_photo_efforts():
 
     dataset.freeze(result_list, format='csv', filename='www/live-data/photo_efforts.csv')
 
+
 @task
 def get_photo_efforts_fb():
     """
@@ -199,6 +204,7 @@ def get_photo_efforts_fb():
         row['on_facebook'] = (row['facebook_id'] != None)
 
     dataset.freeze(result_list, format='csv', filename='www/live-data/photo_efforts_fb.csv')
+
 
 @task
 def analyse_photo_efforts():
@@ -232,6 +238,7 @@ def analyse_photo_efforts():
 
     _write_summary_csv(contribution_summary, 'www/live-data/contribution_summary.csv')
 
+
 @task
 def analyse_photo_efforts_fb():
     column_types = (number_type, text_type, text_type, text_type, boolean_type)
@@ -253,6 +260,7 @@ def analyse_photo_efforts_fb():
         lambda x: (x['duration_sum']/count_grand_total) * 100)
 
     _write_summary_csv(facebook_summary, 'www/live-data/facebook_summary.csv')
+
 
 @task
 def get_daily_output():
@@ -280,6 +288,7 @@ def get_daily_output():
     avg = result['count'] / float(difference.days)
     print avg
 
+
 def _get_provider_category(row):
     """
     determine provider category from lead art provider
@@ -293,6 +302,7 @@ def _get_provider_category(row):
             return row['lead_art_provider']
     else:
         return None
+
 
 def _get_provider_type(row):
     """
@@ -316,12 +326,14 @@ def _get_provider_type(row):
     else:
         return None
 
+
 def _make_post_url(row):
     """
     create the facebook post URL from ID
     """
     post_url = "http://facebook.com/{0}".format(row['facebook_id'])
     return post_url
+
 
 def _write_summary_csv(table, path):
     """
