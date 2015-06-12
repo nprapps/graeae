@@ -355,11 +355,10 @@ def _write_summary_csv(table, path):
             column = table.columns[column_name]
             if i == 0:
                 grand_totals_row.append('Total')
+            elif column_name.endswith('_sum') or column_name.endswith('_count') or column_name.endswith('_pct'):
+                grand_totals_row.append(column.sum())
             else:
-                if column_name.endswith('_sum') or column_name.endswith('_count') or column_name.endswith('_pct'):
-                    grand_totals_row.append(column.sum())
-                else:
-                    grand_totals_row.append(None)
+                grand_totals_row.append(None)
 
         writer.writerow(grand_totals_row)
 
