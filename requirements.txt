@@ -31,6 +31,7 @@ jmespath==0.2.1
 journalism==0.4.0
 lxml==3.4.2
 nose==1.2.1
+numpy==1.9.2
 odict==1.5.1
 openpyxl==2.2.0
 paramiko==1.15.2
