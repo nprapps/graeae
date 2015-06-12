@@ -1,8 +1,12 @@
 import dataset
 import app_config
 import csv
+import itertools
 from fabric.api import task
 from journalism import Table, TextType, NumberType, DateType, BooleanType
+
+FACEBOOK_METRICS = ('likes', 'shares', 'comments', 'link_clicks')
+SUMMARY_TYPES = ('sum', 'mean', 'median')
 
 text_type = TextType()
 number_type = NumberType()
@@ -111,23 +115,7 @@ def analyse_insights():
 
     table = Table(rows, column_types, column_names)
 
-    summary_definition = (
-        ('likes', 'sum'), 
-        ('likes', 'median'),
-        ('likes', 'mean'),
-        ('comments', 'sum'),
-        ('comments', 'median'),
-        ('comments', 'mean'),
-        ('shares', 'sum'),
-        ('shares', 'median'),
-        ('shares', 'mean'),
-        ('people_reached', 'sum'),
-        ('people_reached', 'median'),
-        ('people_reached', 'mean'),
-        ('link_clicks', 'sum'),
-        ('link_clicks', 'median'),
-        ('link_clicks', 'mean'),
-    )
+    summary_definition = list(itertools.product(FACEBOOK_METRICS, SUMMARY_TYPES))
 
     summary = table.aggregate('provider_type', summary_definition)
 
