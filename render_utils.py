@@ -227,8 +227,11 @@ def format_commas_filter(s, precision=1):
     """
     Formats numbers nicely
     """
-    fmt = '{{:,.{0}f}}'.format(precision)
-    return fmt.format(Decimal(s))
+    if s:
+        fmt = '{{:,.{0}f}}'.format(precision)
+        return fmt.format(Decimal(s))
+    else:
+        return ''
 
 def format_thousands_filter(s, precision=1):
     """
