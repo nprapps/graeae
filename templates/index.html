@@ -18,17 +18,13 @@
 <hr/>
 
 <section id="image-performance">
-    <h2>Does the presence of an image affect performance?</h2>
-    <p><strong>Promoting and Driving Traffic</strong></p>
-
-    <h3>Facebook and image providers</h3>
+    <h2>Facebook and image providers</h2>
     <div class="row">
-        <div class="col-md-6">
-            <h4>Count</h4>
-            <table class="table table-striped table-hover">
+        <div class="col-md-5">
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Image Provider</th>
+                        <th class="provider">Image Provider</th>
                         <th class="value">Count</th>
                         <th class="value">Percent of total</th>
                     </tr>
@@ -36,7 +32,7 @@
                 <tbody>
                     {% for row in insights_summary %}
                     <tr {% if loop.last %}class="last"{% endif %}>
-                        <td>{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
+                        <td class="provider">{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
                         <td class="value">{{ row.provider_type_count|format_commas(0) }}</td>
                         <td class="value">{{ row.provider_type_count_pct|format_commas(2) }}%</td>
                     </tr>
@@ -44,8 +40,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-6">
-            <h4>Summary</h4>
+        <div class="col-md-7">
+            <h4>Image providers and Facebook impact</h4>
             <p>These summaries contain only those Facebook posts where the art matches the lead art on the story.</p>
             <p>In addition to these posts, there have been:</p>
             <ul>
@@ -57,26 +53,24 @@
     </div>
 
     {% for metric, metric_name in facebook_metrics %}
-    <h4>{{metric_name}}</h4>
+    <h3>{{metric_name}}</h3>
     <table class="table fb-metrics">
         <thead>
             <tr>
                 <th class="provider">Provider</th>
-                <th class="value">Total</th>
-                <th class="value">Max</th>
-                <th class="value">Mean</th>
                 <th class="value">Median</th>
-                <th class="histogram">Histogram</th>
+                <th class="value">Max</th>
+                <th class="value">Total</th>
+                <th class="histogram">Distribution</th>
             </tr>
         </thead>
         <tbody>
             {% for row in insights_summary %}
             <tr {% if loop.last %}class="last"{% endif %}>
                 <td class="provider">{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
-                <td class="value">{{ row['{0}_sum'.format(metric)]|format_commas(0) }}</td>
-                <td class="value">{{ row['{0}_max'.format(metric)]|format_commas(0) }}</td>
-                <td class="value">{{ row['{0}_mean'.format(metric)]|format_commas(0) }}</td>
                 <td class="value">{{ row['{0}_median'.format(metric)]|format_commas(0) }}</td>
+                <td class="value">{{ row['{0}_max'.format(metric)]|format_commas(0) }}</td>
+                <td class="value">{{ row['{0}_sum'.format(metric)]|format_commas(0) }}</td>
                 <td class="histogram">
                     <table class="histogram-chart">
                         <tbody>
@@ -84,6 +78,9 @@
                                 {% for column in histograms[metric][loop.index][1:] %}
                                 <td>
                                     <div class="cell-wrapper">
+                                        {% if column|float > 0 %}
+                                        <div class="cell-label" style="bottom: {{ column }}%">{{ column|format_commas(0) }}%</div>
+                                        {% endif %}
                                         <div class="cell-bar" style="height: {{ column }}%;">
                                         </div>
                                     </div>
