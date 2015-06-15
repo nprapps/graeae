@@ -137,7 +137,7 @@ def analyse_insights():
         _generate_insights_histograms(metric, table, summary)
 
 
-def _generate_insights_histograms(metric, table, summary, bins=12, increment_divisor=4):
+def _generate_insights_histograms(metric, table, summary, bins=8, increment_divisor=4):
     providers = [row['provider_type'] for row in summary.rows]
     histogram_table = []
 
