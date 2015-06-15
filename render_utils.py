@@ -237,8 +237,11 @@ def format_thousands_filter(s, show_k=True, precision=1):
     """
     Format 1,000 as 1k
     """
-    s = int(s) / 1000
-    if show_k:
-        return '{0}k'.format(s)
+    if int(s) % 1000 == 0:
+        s = int(s) / 1000
+        if show_k:
+            return '{0}k'.format(s)
+        else:
+            return s
     else:
-        return s
+        return format_commas_filter(s, 0)
