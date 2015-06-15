@@ -462,6 +462,8 @@ footer {
     }
 }
 
+	.metric-toggle { display: none; }
+
 // Media queries
 // -------------------------
 
@@ -471,7 +473,6 @@ footer {
 		.primary { float: none; }
 		.secondary ul, .secondary p { margin-left: 0; float: left; }
 	}
-	.btn-group { display: none; }
 }
 @media (max-width: 767px) {
 	header { margin-left: -20px; margin-right: -20px; }
@@ -483,6 +484,7 @@ footer {
 		.secondary li { font-size: 10px; text-transform: none; }
 		.secondary a { color: #bccae5; }
 	}
+	.metric-toggle { display: block; }
 }
 @media (max-width: 480px) {
 	h1 { font-size: 26px; }
@@ -499,5 +501,4 @@ footer {
 	footer .secondary li {
 		margin-left: 5px;
 	}
-	.btn-group { display: block; }
 }
