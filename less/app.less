@@ -402,26 +402,64 @@ footer {
 }
 
 .table {
-    font-size: 14px;
+    font-size: 20px;
     font-family: Helvetica, Arial, sans-serif;
     .value {
         text-align: right;
     }
     tr.last td {
-        font-weight: bold;
+        /*font-weight: bold;*/
     }
-    &.fb-metrics {
-        td.value {
-            width: 22%;
+    td, th {
+        vertical-align: middle !important;
+        &.provider {
+            width: 90px;
         }
-    }
-    &.fb-histogram {
-        td.value {
-            width: 13%;
+        &.value {
+            width: 130px;
         }
     }
 }
-
+.histogram-chart {
+    thead, tfoot {
+        th {
+            font-size: 11px;
+            text-align: center;
+            font-weight: normal;
+            padding: 5px 0;
+        }
+    }
+    tbody {
+        tr {
+            height: 70px;
+        }
+        td {
+            width: 60px;
+            border-right: 2px solid #fff;
+            .cell-wrapper {
+                position: relative;
+                height: 70px;
+                background-color: #eee;
+                .cell-bar {
+                    width: 100%;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    background-color: rgb(81, 170, 222);
+                }
+                .cell-label {
+                    color: #999;
+                    font-size: 11px;
+                    position: absolute;
+                    width: 100%;
+                    top: 0;
+                    left: 0;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
 
 // Media queries
 // -------------------------

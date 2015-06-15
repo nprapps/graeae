@@ -137,7 +137,7 @@ def analyse_insights():
         _generate_insights_histograms(metric, table, summary)
 
 
-def _generate_insights_histograms(metric, table, summary, bins=6, increment_divisor=4):
+def _generate_insights_histograms(metric, table, summary, bins=12, increment_divisor=4):
     providers = [row['provider_type'] for row in summary.rows]
     histogram_table = []
 
@@ -350,17 +350,17 @@ def _write_summary_csv(table, path):
         writer.writerow(table.get_column_names())
         writer.writerows(table.rows)
 
-        grand_totals_row = []
-        for i, column_name in enumerate(table.get_column_names()):
-            column = table.columns[column_name]
-            if i == 0:
-                grand_totals_row.append('Total')
-            elif column_name.endswith('_sum') or column_name.endswith('_count') or column_name.endswith('_pct'):
-                grand_totals_row.append(column.sum())
-            else:
-                grand_totals_row.append(None)
+        #grand_totals_row = []
+        #for i, column_name in enumerate(table.get_column_names()):
+            #column = table.columns[column_name]
+            #if i == 0:
+                #grand_totals_row.append('Total')
+            #elif column_name.endswith('_sum') or column_name.endswith('_count') or column_name.endswith('_pct'):
+                #grand_totals_row.append(column.sum())
+            #else:
+                #grand_totals_row.append(None)
 
-        writer.writerow(grand_totals_row)
+        #writer.writerow(grand_totals_row)
 
 
 def _round_down(number, significant_figures=1):
