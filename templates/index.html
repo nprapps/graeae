@@ -53,14 +53,20 @@
     </div>
 
     {% for metric, metric_name in facebook_metrics %}
-    <h3>{{metric_name}}</h3>
-    <div class="btn-group metric-toggle" data-toggle="buttons">
-      <label class="btn btn-primary active">
-        <input type="radio" name="options" id="option1" autocomplete="off" checked> Key Metrics
-      </label>
-      <label class="btn btn-primary">
-        <input type="radio" name="options" id="option2" autocomplete="off"> Distribution
-      </label>
+    <div class="row fb-metrics-row">
+        <div class="col-xs-5">
+            <h3>{{metric_name}}</h3>
+        </div>
+        <div class="col-xs-7">
+            <div class="btn-group metric-toggle" data-toggle="buttons">
+                <label class="btn btn-sm btn-primary active">
+                    <input type="radio" name="options" id="metrics" autocomplete="off" checked> Key Metrics
+                </label>
+                <label class="btn btn-sm btn-primary">
+                    <input type="radio" name="options" id="distribution" autocomplete="off"> Distribution
+                </label>
+            </div>
+        </div>
     </div>
     <table class="table fb-metrics">
         <thead>

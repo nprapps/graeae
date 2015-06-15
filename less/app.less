@@ -462,7 +462,7 @@ footer {
     }
 }
 
-	.metric-toggle { display: none; }
+.metric-toggle { display: none; }
 
 // Media queries
 // -------------------------
@@ -484,7 +484,23 @@ footer {
 		.secondary li { font-size: 10px; text-transform: none; }
 		.secondary a { color: #bccae5; }
 	}
-	.metric-toggle { display: block; }
+	.metric-toggle {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: block;
+    }
+    .fb-metrics {
+        font-size: 14px;
+        .histogram {
+            display: none;
+        }
+    }
+    .fb-metrics-row {
+        margin-bottom: 12px;
+    }
+    h3 {
+        font-size: 25px;
+    }
 }
 @media (max-width: 480px) {
 	h1 { font-size: 26px; }
