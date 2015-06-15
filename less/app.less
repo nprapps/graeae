@@ -432,15 +432,12 @@ footer {
         }
     }
     tbody {
-        tr {
-            height: 70px;
-        }
         td {
             width: 12.5%;
             border-right: 2px solid #fff;
             .cell-wrapper {
                 position: relative;
-                height: 70px;
+                height: 60px;
                 background-color: #eee;
                 .cell-bar {
                     width: 100%;
@@ -486,20 +483,58 @@ footer {
 	}
 	.metric-toggle {
         margin-top: 20px;
-        margin-bottom: 20px;
         display: block;
+        float: right;
+        label {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+    }
+    .table {
+        font-size: 14px;
+        td {
+            &.provider {
+                width: 60px;
+            }
+        }
     }
     .fb-metrics {
-        font-size: 14px;
-        .histogram {
-            display: none;
+        font-size: 12px;
+        td, th {
+            &.histogram {
+                display: none;
+                padding-left: 0px;
+            }
+        }
+        >tbody>tr>td {
+            height: 60px;
+        }
+    }
+    .histogram-chart {
+        tbody {
+            td {
+                .cell-wrapper {
+                    height: 30px;
+                    .cell-label {
+                        font-size: 9px;
+                    }
+                }
+            }
+        }
+        thead, tfoot {
+            th {
+                font-size: 9px;
+                text-align: center;
+                font-weight: normal;
+                padding: 5px 0;
+            }
         }
     }
     .fb-metrics-row {
         margin-bottom: 12px;
     }
     h3 {
-        font-size: 25px;
+        font-size: 20px;
     }
 }
 @media (max-width: 480px) {
