@@ -6,7 +6,7 @@ import json
 import logging
 import static
 
-from flask import Flask, make_response, render_template
+from flask import Flask, make_response, render_template, jsonify
 from render_utils import make_context, smarty_filter, urlencode_filter
 from werkzeug.debug import DebuggedApplication
 
@@ -34,17 +34,21 @@ def _test_app():
     return make_response(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
 # Example of rendering index.html with public_app 
-@app.route ('/%s/' % app_config.PROJECT_SLUG, methods=['GET'])
+@app.route('/%s/' % app_config.PROJECT_SLUG, methods=['GET'])
 def index():
     """
     Example view rendering a simple page.
     """
     context = make_context(asset_depth=1)
 
-    with open('data/featured.json') as f:
-        context['featured'] = json.load(f)
-
     return make_response(render_template('admin/index.html', **context))
+
+@app.route('/%s/get-image/' % app_config.PROJECT_SLUG, methods=['GET'])
+def get_image():
+    data = {
+        'test': 'hola mundo',
+    }
+    return jsonify(**data)
 
 # Enable Werkzeug debug pages
 if app_config.DEBUG:
