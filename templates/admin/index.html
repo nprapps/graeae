@@ -2,7 +2,40 @@
 
 {% block content %}
 
-<div id="image-canvas"></div>
+<div class="row image-wrapper">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div id="image-canvas"></div>
+        <hr/>
+    </div>
+    <div class="col-xs-1 col-sm-pull-9 text-center">
+        <div class="button-wrapper">
+            <button class="quality-button btn btn-danger" data-quality="hate"><span class="fa fa-times"></span></button>
+        </div>
+    </div>
+    <div class="col-xs-1 col-sm-pull-1 text-center">
+        <div class="button-wrapper">
+            <button class="quality-button btn btn-success" data-quality="love"><span class="fa fa-heart"></span></button>
+        </div>
+    </div>
+</div>
+
+
+<div id="user-notice" class="text-center"></div>
+
+<div id="user-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Who are you??!?</h1>
+            </div>
+            <div class="modal-body">
+                {% for user in users %}
+                <p><a class="select-user">{{ user.name }}</a></p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 

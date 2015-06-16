@@ -10,6 +10,13 @@ from flask import Flask, make_response, render_template, jsonify
 from render_utils import make_context, smarty_filter, urlencode_filter
 from werkzeug.debug import DebuggedApplication
 
+SITE_USERS = [
+    {'name': 'Ariel'},
+    {'name': 'Kainaz'},
+    {'name': 'Emily'},
+    {'name': 'Lydia'},
+]
+
 app = Flask(__name__)
 app.debug = app_config.DEBUG
 
@@ -41,19 +48,64 @@ def index():
     """
     context = make_context(asset_depth=1)
 
+    context['users'] = SITE_USERS
+
     return make_response(render_template('admin/index.html', **context))
 
 @app.route('/%s/get-image/' % app_config.PROJECT_SLUG, methods=['GET'])
 def get_image():
-    db = dataset.connect(app_config.POSTGRES_URL)
-    table = db['seamus']
+    from flask import request
 
-    image = table.find_one(has_lead_art=True)
+    db = dataset.connect(app_config.POSTGRES_URL)
+
+    evaluator = request.cookies['graeae_user']
+
+    result = db.query("""
+        select lead_art_url, lead_art_root_url
+        from seamus s
+        left join
+            (select image_url from evaluated_images where evaluator = '{0}') ev
+            on s.lead_art_root_url = ev.image_url
+        where ev.image_url is Null and s.lead_art_url is not Null
+        limit 1
+    """.format(evaluator))
+
+    image_list = list(result)
+
+    if len(image_list):
+        image = image_list.pop(0)
+        print image
+        data = {
+            'image_url': image['lead_art_root_url'],
+        }
+    else:
+        data = {
+            'image_url': None,
+        }
+
+    return jsonify(**data)
+
+
+@app.route('/%s/save-image/' % app_config.PROJECT_SLUG, methods=['POST'])
+def save_image():
+    from flask import request
+
+    db = dataset.connect(app_config.POSTGRES_URL)
+    table = db['evaluated_images']
 
     data = {
-        'image_url': image['lead_art_url'],
+        'evaluator': request.form['evaluator'],
+        'image_url': request.form['image_url'],
     }
-    return jsonify(**data)
+
+    if request.form['quality'] == 'love':
+        data['is_good'] = True
+    else:
+        data['is_good'] = False
+
+    table.upsert(data, ['evaluator', 'image_url'])
+
+    return 'success'
 
 # Enable Werkzeug debug pages
 if app_config.DEBUG:

@@ -39,16 +39,13 @@
     {% endblock outer_content %}
 
     {{ JS.push('js/lib/jquery.js') }}
-    {{ JS.push('js/lib/underscore.js') }}
-    {{ JS.push('js/lib/modernizr.js') }}
     {{ JS.push('js/lib/bootstrap.js') }}
-    {{ JS.push('js/lib/moment.js') }}
+    {{ JS.push('js/lib/jquery.cookie.js') }}
+    {{ JS.push('js/lib/imagesloaded.pkgd.js') }}
     {{ JS.push('js/app_config.js') }}
-    {{ JS.push('js/copy.js') }}
     {{ JS.push('js/templates.js') }}
     {{ JS.push('js/admin.js') }}
     {% block extra_foot_js %}{% endblock extra_foot_js %}
-    {{ JS.push('js/analytics.js') }}
     {{ JS.render('js/admin-footer.min.js') }}
 
     {% block extra_foot %}
