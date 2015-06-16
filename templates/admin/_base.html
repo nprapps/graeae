@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{ COPY.content.project_name }}</title>
+
+    <!-- CHARTBEAT -->
+    <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+    <!-- CSS -->
+    {{ CSS.push('less/admin.less') }}
+    {% block extra_css %}{% endblock extra_css %}
+    {{ CSS.render('css/admin.min.css') }}
+
+    {% block extra_head %}
+    {% endblock extra_head %}
+</head>
+<body>
+    <a class="sr-only" href="#content">Skip To Content</a>
+
+    {% block outer_content %}
+  
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div id="main-content" class="col-md-12">
+                    {% block content %}
+                    <h1>{{ project_name }}</h1>
+                    App content goes here.
+
+                    <i class="icon icon-play"></i>
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {% endblock outer_content %}
+
+    {{ JS.push('js/lib/jquery.js') }}
+    {{ JS.push('js/lib/underscore.js') }}
+    {{ JS.push('js/lib/modernizr.js') }}
+    {{ JS.push('js/lib/bootstrap.js') }}
+    {{ JS.push('js/lib/moment.js') }}
+    {{ JS.push('js/app_config.js') }}
+    {{ JS.push('js/copy.js') }}
+    {{ JS.push('js/templates.js') }}
+    {{ JS.push('js/admin.js') }}
+    {% block extra_foot_js %}{% endblock extra_foot_js %}
+    {{ JS.push('js/analytics.js') }}
+    {{ JS.render('js/admin-footer.min.js') }}
+
+    {% block extra_foot %}
+    {% endblock extra_foot %}
+
+</body>
+</html>

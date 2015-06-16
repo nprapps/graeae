@@ -44,7 +44,7 @@ def index():
     with open('data/featured.json') as f:
         context['featured'] = json.load(f)
 
-    return make_response(render_template('index.html', **context))
+    return make_response(render_template('admin/index.html', **context))
 
 # Enable Werkzeug debug pages
 if app_config.DEBUG:

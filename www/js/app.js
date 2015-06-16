@@ -2,7 +2,6 @@
 var $metricToggleButtons = null;
 
 var onToggleMetricView = function(e) {
-    console.log(this);
     var $el = $(this)
     var targetSelector = $el.parents('.btn-group').data('toggle-target');
     var $target = $(targetSelector);
