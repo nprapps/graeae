@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import app_config
+import dataset
 import datetime
-import json
 import logging
 import static
 
@@ -45,8 +45,13 @@ def index():
 
 @app.route('/%s/get-image/' % app_config.PROJECT_SLUG, methods=['GET'])
 def get_image():
+    db = dataset.connect(app_config.POSTGRES_URL)
+    table = db['seamus']
+
+    image = table.find_one(has_lead_art=True)
+
     data = {
-        'test': 'hola mundo',
+        'image_url': image['lead_art_url'],
     }
     return jsonify(**data)
 
