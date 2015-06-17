@@ -1,28 +1,28 @@
 var $imageCanvas;
+var $imageWrapper;
 var $userModal;
 var $userButtons;
 var $userNotice;
 var $buttonWrappers;
 var $qualityButtons;
 var $alternateUserForm;
-
-var setButtonWrapperHeight = function() {
-    var height = $imageCanvas.height();
-    $buttonWrappers.height(height);
-    $buttonWrappers.show();
-}
+var $window;
+var $footer;
+var $navbar;
+var $spinner;
 
 var onLoadImage = function(data) {
     if (data.image_url) {
         var $newImg = $('<img class="img-responsive">');
-        $newImg.attr('src', data.image_url);
-        $imageCanvas.html($newImg);
+        var maxHeight = $window.height() - $footer.outerHeight() - $header.height() - parseInt($imageWrapper.css('margin-top'));
+        $newImg.attr('src', data.image_url).css('max-height', maxHeight);
+        $imageCanvas.html($newImg).hide();
         imagesLoaded($newImg, function() {
-            setButtonWrapperHeight();
+            $imageCanvas.fadeIn();
         });
     } else {
-        $imageCanvas.html('<h1>No moar images. Awesome!</h1>');
-        setButtonWrapperHeight();
+        $imageCanvas.html('<h1 class="text-center">No moar images. Awesome!</h1>').fadeIn();
+        $spinner.hide();
     }
 }
 
@@ -68,6 +68,8 @@ var drawUserNotice = function(e) {
 var evaluateImage = function(e, quality) {
     var quality = quality||$(this).data('quality');
     var image_url = $imageCanvas.find('img').attr('src');
+
+    $imageCanvas.fadeOut();
     $.ajax({
         url: 'save-image/',
         method: 'POST',
@@ -81,13 +83,17 @@ var evaluateImage = function(e, quality) {
 }
 
 var onDocumentLoad = function(e) {
+    $window = $(window);
     $imageCanvas = $('#image-canvas');
+    $imageWrapper = $('.image-wrapper');
     $userModal = $('#user-modal');
     $userButtons = $('.select-user');
     $userNotice = $('#user-notice');
-    $buttonWrappers = $('.button-wrapper');
     $qualityButtons = $('.quality-button');
     $alternateUserForm = $('#alternate-user');
+    $footer = $('.footer');
+    $header = $('.header');
+    $spinner = $('.spinner');
 
     $userButtons.on('click', selectUser);
     $alternateUserForm.on('submit', selectAlternateUser);

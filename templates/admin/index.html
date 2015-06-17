@@ -1,26 +1,40 @@
 {% extends 'admin/_base.html' %}
 
+{% block navbar %}
+<div class="header navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div id="user-notice"></div>
+    </div>
+</div>
+{% endblock navbar %}
+
 {% block content %}
 
 <div class="row image-wrapper">
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-12">
         <div id="image-canvas"></div>
-        <hr/>
-    </div>
-    <div class="col-xs-1 col-sm-pull-9 text-center">
-        <div class="button-wrapper">
-            <button class="quality-button btn btn-danger" data-quality="hate"><span class="fa fa-times"></span></button>
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
         </div>
     </div>
-    <div class="col-xs-1 col-sm-pull-1 text-center">
-        <div class="button-wrapper">
+</div>
+
+<div class="footer navbar navbar-fixed-bottom">
+    <div class="container">
+        <div class="text-center">
+            <button class="quality-button btn btn-danger" data-quality="hate"><span class="fa fa-times"></span></button>
             <button class="quality-button btn btn-success" data-quality="love"><span class="fa fa-heart"></span></button>
+        </div>
+        <div class="text-center keyboard-help">
+            <p>Press "H" to throw shade. Press "L" if the image is on fleek.</p>
         </div>
     </div>
 </div>
 
 
-<div id="user-notice" class="text-center"></div>
+
 
 <div id="user-modal" class="modal fade">
     <div class="modal-dialog modal-lg">
@@ -46,4 +60,3 @@
 </div>
 
 {% endblock %}
-
