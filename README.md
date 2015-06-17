@@ -33,7 +33,71 @@ What is this?
 
 *Current scraper started around 12:50pm EST on April 30, 2015*
 
-Graeae is a tool for aggregating data about our content from: our story API (Seamus), our homepage, our Facebook page and qualitative review by human experts (e.g. photo quality).
+Graeae is a tool for aggregating data about NPR's content from: the NPR story API (Seamus), the NPR homepage, the NPR Facebook page, a spreadsheet of projects we've handled photos for, and a qualitative review by our team of photo quality.
+
+Assumptions
+-----------
+
+The following things are assumed to be true in this documentation.
+
+* You are running OSX.
+* You are using Python 2.7. (Probably the version that came OSX.)
+* You have [virtualenv](https://pypi.python.org/pypi/virtualenv) and [virtualenvwrapper](https://pypi.python.org/pypi/virtualenvwrapper) installed and working.
+* You have NPR's AWS credentials stored as environment variables locally.
+
+For more details on the technology stack used with the app-template, see our [development environment blog post](http://blog.apps.npr.org/2013/06/06/how-to-setup-a-developers-environment.html).
+
+What's in here?
+---------------
+
+The project contains the following folders and important files:
+
+* ``confs`` -- Server configuration files for nginx and uwsgi. Edit the templates then ``fab <ENV> servers.render_confs``, don't edit anything in ``confs/rendered`` directly.
+* ``data`` -- Data files, such as those used to generate HTML.
+* ``fabfile`` -- [Fabric](http://docs.fabfile.org/en/latest/) commands for automating setup, deployment, data processing, etc.
+* ``etc`` -- Miscellaneous scripts and metadata for project bootstrapping.
+* ``jst`` -- Javascript ([Underscore.js](http://documentcloud.github.com/underscore/#template)) templates.
+* ``less`` -- [LESS](http://lesscss.org/) files, will be compiled to CSS and concatenated for deployment.
+* ``templates`` -- HTML ([Jinja2](http://jinja.pocoo.org/docs/)) templates, to be compiled locally.
+* ``tests`` -- Python unit tests.
+* ``www`` -- Static and compiled assets to be deployed. (a.k.a. "the output")
+* ``www/assets`` -- A symlink to an S3 bucket containing binary assets (images, audio).
+* ``www/live-data`` -- "Live" data deployed to S3 via cron jobs or other mechanisms. (Not deployed with the rest of the project.)
+* ``www/test`` -- Javascript tests and supporting files.
+* ``app.py`` -- A [Flask](http://flask.pocoo.org/) app for rendering the project locally.
+* ``app_config.py`` -- Global project configuration for scripts, deployment, etc.
+* ``copytext.py`` -- Code supporting the [Editing workflow](#editing-workflow)
+* ``crontab`` -- Cron jobs to be installed as part of the project.
+* ``public_app.py`` -- A [Flask](http://flask.pocoo.org/) app for running server-side code.
+* ``render_utils.py`` -- Code supporting template rendering.
+* ``requirements.txt`` -- Python requirements.
+* ``static.py`` -- Static Flask views used in both ``app.py`` and ``public_app.py``.
+
+Bootstrap the project
+---------------------
+
+Node.js is required for the static asset pipeline. If you don't already have it, get it like this:
+
+```
+brew install node
+curl https://npmjs.org/install.sh | sh
+```
+
+Then bootstrap the project:
+
+```
+cd graeae
+mkvirtualenv graeae
+pip install -r requirements.txt
+npm install
+fab data.local_bootstrap
+fab update
+```
+
+**Problems installing requirements?** You may need to run the pip command as ``ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future pip install -r requirements.txt`` to work around an issue with OSX.
+
+Scrapers
+--------
 
 This project currently contains three scrapers:
 
@@ -97,65 +161,7 @@ This scraper collects a canonical dataset of every NPR story in the API. (It is 
 * lead_art_provider
 * lead_art_url
 
-Assumptions
------------
 
-The following things are assumed to be true in this documentation.
-
-* You are running OSX.
-* You are using Python 2.7. (Probably the version that came OSX.)
-* You have [virtualenv](https://pypi.python.org/pypi/virtualenv) and [virtualenvwrapper](https://pypi.python.org/pypi/virtualenvwrapper) installed and working.
-* You have NPR's AWS credentials stored as environment variables locally.
-
-For more details on the technology stack used with the app-template, see our [development environment blog post](http://blog.apps.npr.org/2013/06/06/how-to-setup-a-developers-environment.html).
-
-What's in here?
----------------
-
-The project contains the following folders and important files:
-
-* ``confs`` -- Server configuration files for nginx and uwsgi. Edit the templates then ``fab <ENV> servers.render_confs``, don't edit anything in ``confs/rendered`` directly.
-* ``data`` -- Data files, such as those used to generate HTML.
-* ``fabfile`` -- [Fabric](http://docs.fabfile.org/en/latest/) commands for automating setup, deployment, data processing, etc.
-* ``etc`` -- Miscellaneous scripts and metadata for project bootstrapping.
-* ``jst`` -- Javascript ([Underscore.js](http://documentcloud.github.com/underscore/#template)) templates.
-* ``less`` -- [LESS](http://lesscss.org/) files, will be compiled to CSS and concatenated for deployment.
-* ``templates`` -- HTML ([Jinja2](http://jinja.pocoo.org/docs/)) templates, to be compiled locally.
-* ``tests`` -- Python unit tests.
-* ``www`` -- Static and compiled assets to be deployed. (a.k.a. "the output")
-* ``www/assets`` -- A symlink to an S3 bucket containing binary assets (images, audio).
-* ``www/live-data`` -- "Live" data deployed to S3 via cron jobs or other mechanisms. (Not deployed with the rest of the project.)
-* ``www/test`` -- Javascript tests and supporting files.
-* ``app.py`` -- A [Flask](http://flask.pocoo.org/) app for rendering the project locally.
-* ``app_config.py`` -- Global project configuration for scripts, deployment, etc.
-* ``copytext.py`` -- Code supporting the [Editing workflow](#editing-workflow)
-* ``crontab`` -- Cron jobs to be installed as part of the project.
-* ``public_app.py`` -- A [Flask](http://flask.pocoo.org/) app for running server-side code.
-* ``render_utils.py`` -- Code supporting template rendering.
-* ``requirements.txt`` -- Python requirements.
-* ``static.py`` -- Static Flask views used in both ``app.py`` and ``public_app.py``.
-
-Bootstrap the project
----------------------
-
-Node.js is required for the static asset pipeline. If you don't already have it, get it like this:
-
-```
-brew install node
-curl https://npmjs.org/install.sh | sh
-```
-
-Then bootstrap the project:
-
-```
-cd graeae
-mkvirtualenv graeae
-pip install -r requirements.txt
-npm install
-fab update
-```
-
-**Problems installing requirements?** You may need to run the pip command as ``ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future pip install -r requirements.txt`` to work around an issue with OSX.
 
 Hide project secrets
 --------------------

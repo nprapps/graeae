@@ -27,6 +27,16 @@ def test():
     local('echo $DEPLOYMENT_TARGET > /tmp/cron_test.txt')
 
 @task
+def scrape():
+    """
+    Scrape everything
+    """
+    scrape_homepage()
+    scrape_facebook()
+    scrape_seamus()
+    scrape_spreadsheet()
+
+@task
 def scrape_homepage():
     """
     Scrape homepage
