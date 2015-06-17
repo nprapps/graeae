@@ -65,8 +65,8 @@ var drawUserNotice = function(e) {
     }
 }
 
-var evaluateImage = function(e) {
-    var quality = $(this).data('quality');
+var evaluateImage = function(e, quality) {
+    var quality = quality||$(this).data('quality');
     var image_url = $imageCanvas.find('img').attr('src');
     $.ajax({
         url: 'save-image/',
@@ -92,6 +92,17 @@ var onDocumentLoad = function(e) {
     $userButtons.on('click', selectUser);
     $alternateUserForm.on('submit', selectAlternateUser);
     $qualityButtons.on('click', evaluateImage);
+
+    // Bind keyboard shortcuts
+    $(document).keydown(function(e) {
+        if (e.keyCode == 76) {
+            evaluateImage(e, 'love');
+        }
+
+        if (e.keyCode == 72) {
+            evaluateImage(e, 'hate');
+        }
+    });
 
     loadSelectUser();
     drawUserNotice();
