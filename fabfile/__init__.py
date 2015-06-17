@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from fabric.api import local, require, settings, task
+from fabric.api import execute, local, require, settings, task
 from fabric.state import env
 from termcolor import colored
 
@@ -119,6 +119,18 @@ code to a remote server if required.
 """
 
 @task
+def update():
+    """
+    Update data by running all scrapers
+    """
+    execute('text.update')
+    execute('cron_jobs.scrape_facebook')
+    execute('cron_jobs.scrape_homepage')
+    execute('cron_jobs.scrape_seamus')
+    execute('cron_jobs.scrape_spreadsheet')
+    execute('analysis')
+
+@task
 def deploy(remote='origin'):
     """
     Deploy the latest app to S3 and, if configured, to our servers.
@@ -144,8 +156,8 @@ def deploy(remote='origin'):
         if app_config.DEPLOY_SERVICES:
             servers.deploy_confs()
 
-    analysis.analyse()
-    render.render_all()
+    execute('analysis.analyse')
+    execute('render.render_all')
 
     flat.deploy_folder(
         app_config.S3_BUCKET['bucket_name'],
@@ -189,11 +201,11 @@ def shiva_the_destroyer():
         flat.delete_folder(app_config.S3_BUCKET['bucket_name'], app_config.PROJECT_SLUG)
 
         if app_config.DEPLOY_TO_SERVERS:
-            servers.delete_project()
+            execute('servers.delete_project')
 
             if app_config.DEPLOY_CRONTAB:
-                servers.uninstall_crontab()
+                execute('servers.uninstall_crontab')
 
             if app_config.DEPLOY_SERVICES:
-                servers.nuke_confs()
+                execute('servers.nuke_confs')
 
