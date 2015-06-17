@@ -4,6 +4,7 @@ var $userButtons;
 var $userNotice;
 var $buttonWrappers;
 var $qualityButtons;
+var $alternateUserForm;
 
 var setButtonWrapperHeight = function() {
     var height = $imageCanvas.height();
@@ -47,6 +48,13 @@ var selectUser = function(e) {
     loadImage();
 }
 
+var selectAlternateUser = function(e) {
+    $.cookie('graeae_user', $(this).find('input').val());
+    drawUserNotice();
+    $userModal.modal('hide');
+    e.preventDefault();
+}
+
 var drawUserNotice = function(e) {
     var user = $.cookie('graeae_user');
     if (user) {
@@ -79,8 +87,10 @@ var onDocumentLoad = function(e) {
     $userNotice = $('#user-notice');
     $buttonWrappers = $('.button-wrapper');
     $qualityButtons = $('.quality-button');
+    $alternateUserForm = $('#alternate-user');
 
     $userButtons.on('click', selectUser);
+    $alternateUserForm.on('submit', selectAlternateUser);
     $qualityButtons.on('click', evaluateImage);
 
     loadSelectUser();
