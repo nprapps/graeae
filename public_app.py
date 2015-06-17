@@ -54,6 +54,10 @@ def index():
 
     return make_response(render_template('admin/index.html', **context))
 
+@app.route('/%s/debug/' % app_config.PROJECT_SLUG, methods=['GET'])
+def debug():
+    return jsonify(deployment_target=app_config.DEPLOYMENT_TARGET, postgres_url=app_config.POSTGRES_URL)
+
 @app.route('/%s/get-image/' % app_config.PROJECT_SLUG, methods=['GET'])
 def get_image():
     from flask import request
