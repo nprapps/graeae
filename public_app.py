@@ -8,6 +8,7 @@ import static
 
 from flask import Flask, make_response, render_template, jsonify
 from scrapers.utils import get_art_root_url
+from sqlalchemy.exc import ProgrammingError
 from render_utils import make_context, smarty_filter, urlencode_filter
 from werkzeug.debug import DebuggedApplication
 
@@ -61,20 +62,27 @@ def get_image():
 
     evaluator = request.cookies['graeae_user']
 
-    result = db.query("""
-        select s.lead_art_url as image_url
-        from seamus s
-        left join
-            (select image_url from evaluated_images where evaluator = '{0}') ev
-            on s.lead_art_url = ev.image_url
-        where ev.image_url is Null and s.lead_art_url is not Null
-        limit 1
-    """.format(evaluator))
+    try:
+        result = db.query("""
+            select s.lead_art_url
+            from seamus s
+            left join
+                (select image_url from evaluated_images where evaluator = '{0}') ev
+                on s.lead_art_url = ev.image_url
+            where ev.image_url is Null and s.lead_art_url is not Null
+            limit 1
+        """.format(evaluator))
+    except ProgrammingError:
+        table = db['seamus']
+        result = table.find(has_lead_art=True, _limit=1)
 
     image_list = list(result)
 
     if len(image_list):
-        data = image_list.pop(0)
+        image = image_list.pop()
+        data = {
+            'image_url': image['lead_art_url']
+        }
     else:
         data = {}
 
