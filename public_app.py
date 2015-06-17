@@ -56,7 +56,12 @@ def index():
 
 @app.route('/%s/debug/' % app_config.PROJECT_SLUG, methods=['GET'])
 def debug():
-    return jsonify(deployment_target=app_config.DEPLOYMENT_TARGET, postgres_url=app_config.POSTGRES_URL)
+    import os
+    return jsonify(
+        deployment_target=app_config.DEPLOYMENT_TARGET,
+        postgres_url=app_config.POSTGRES_URL,
+        deploy_target_env=os.environ.get('DEPLOYMENT_TARGET', None)
+    )
 
 @app.route('/%s/get-image/' % app_config.PROJECT_SLUG, methods=['GET'])
 def get_image():
