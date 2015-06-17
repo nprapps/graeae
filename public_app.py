@@ -7,6 +7,7 @@ import logging
 import static
 
 from flask import Flask, make_response, render_template, jsonify
+from scrapers.utils import get_art_root_url
 from render_utils import make_context, smarty_filter, urlencode_filter
 from werkzeug.debug import DebuggedApplication
 
@@ -61,11 +62,11 @@ def get_image():
     evaluator = request.cookies['graeae_user']
 
     result = db.query("""
-        select lead_art_url, lead_art_root_url
+        select s.lead_art_url as image_url
         from seamus s
         left join
             (select image_url from evaluated_images where evaluator = '{0}') ev
-            on s.lead_art_root_url = ev.image_url
+            on s.lead_art_url = ev.image_url
         where ev.image_url is Null and s.lead_art_url is not Null
         limit 1
     """.format(evaluator))
@@ -73,15 +74,9 @@ def get_image():
     image_list = list(result)
 
     if len(image_list):
-        image = image_list.pop(0)
-        print image
-        data = {
-            'image_url': image['lead_art_root_url'],
-        }
+        data = image_list.pop(0)
     else:
-        data = {
-            'image_url': None,
-        }
+        data = {}
 
     return jsonify(**data)
 
@@ -96,6 +91,7 @@ def save_image():
     data = {
         'evaluator': request.form['evaluator'],
         'image_url': request.form['image_url'],
+        'image_root_url': get_art_root_url(request.form['image_url']),
     }
 
     if request.form['quality'] == 'love':
