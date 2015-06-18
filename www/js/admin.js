@@ -13,6 +13,8 @@ var $spinner;
 var $love;
 var $hate;
 
+var buttonsEnabled;
+
 var onLoadImage = function(data) {
     if (data.image_url) {
         var $newImg = $('<img class="img-responsive">');
@@ -23,6 +25,7 @@ var onLoadImage = function(data) {
           .css('max-height', maxHeight);
         $imageCanvas.html($newImg).hide();
         imagesLoaded($newImg, function() {
+            enableButtons();
             $imageCanvas.fadeIn();
         });
         loadImage(1);
@@ -35,6 +38,16 @@ var onLoadImage = function(data) {
 var cacheImage = function(data) {
     var image = new Image();
     image.src = data.thumb_url;
+}
+
+var disableButtons = function() {
+    buttonsEnabled = false;
+    $qualityButtons.attr('disabled', 'disabled');
+}
+
+var enableButtons = function() {
+    buttonsEnabled = true;
+    $qualityButtons.attr('disabled', false);
 }
 
 var loadImage = function(offset) {
@@ -111,7 +124,7 @@ var saveImage = function(quality, image_url) {
             evaluator: $.cookie('graeae_user')
         },
         success: function(data) {
-          loadImage();
+            loadImage();
         },
     });
 }
