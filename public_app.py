@@ -11,6 +11,7 @@ from scrapers.utils import get_art_root_url
 from sqlalchemy.exc import ProgrammingError
 from render_utils import make_context, smarty_filter, urlencode_filter
 from werkzeug.debug import DebuggedApplication
+from urllib import unquote
 
 SITE_USERS = [
     {'name': 'Ariel Zambelich'},
@@ -71,7 +72,7 @@ def get_image(offset=0):
 
     db = dataset.connect(app_config.POSTGRES_URL)
 
-    evaluator = request.cookies['graeae_user']
+    evaluator = unquote(request.cookies['graeae_user'])
 
     try:
         result = db.query("""
