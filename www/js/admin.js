@@ -15,7 +15,10 @@ var onLoadImage = function(data) {
     if (data.image_url) {
         var $newImg = $('<img class="img-responsive">');
         var maxHeight = $window.height() - $footer.outerHeight() - $header.height() - parseInt($imageWrapper.css('margin-top'));
-        $newImg.attr('src', data.image_url).css('max-height', maxHeight);
+        $newImg
+          .attr('src', data.thumb_url)
+          .attr('data-image-url', data.image_url)
+          .css('max-height', maxHeight);
         $imageCanvas.html($newImg).hide();
         imagesLoaded($newImg, function() {
             $imageCanvas.fadeIn();
@@ -67,7 +70,7 @@ var drawUserNotice = function(e) {
 
 var evaluateImage = function(e, quality) {
     var quality = quality||$(this).data('quality');
-    var image_url = $imageCanvas.find('img').attr('src');
+    var image_url = $imageCanvas.find('img').data('image-url');
 
     $imageCanvas.fadeOut();
     $.ajax({

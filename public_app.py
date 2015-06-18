@@ -89,8 +89,10 @@ def get_image():
 
     if len(image_list):
         image = image_list.pop()
+        root, ext = image['lead_art_url'].rsplit('.', 1)
         data = {
-            'image_url': image['lead_art_url']
+            'thumb_url': '{0}-s800.{1}'.format(root, ext),
+            'image_url': image['lead_art_url'],
         }
     else:
         data = {}
