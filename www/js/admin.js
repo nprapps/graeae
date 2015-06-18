@@ -10,6 +10,8 @@ var $window;
 var $footer;
 var $navbar;
 var $spinner;
+var $love;
+var $hate;
 
 var onLoadImage = function(data) {
     if (data.image_url) {
@@ -73,6 +75,20 @@ var evaluateImage = function(e, quality) {
     var image_url = $imageCanvas.find('img').data('image-url');
 
     $imageCanvas.fadeOut();
+    if (quality == 'love') {
+        $love.css('visibility', 'visible')
+    } else {
+        $hate.css('visibility', 'visible')
+    }
+    setTimeout(function() {
+        saveImage(quality, image_url)
+    }, 300);
+}
+
+var saveImage = function(quality, image_url) {
+    $hate.css('visibility', 'hidden');
+    $love.css('visibility', 'hidden');
+
     $.ajax({
         url: 'save-image/',
         method: 'POST',
@@ -97,6 +113,8 @@ var onDocumentLoad = function(e) {
     $footer = $('.footer');
     $header = $('.header');
     $spinner = $('.spinner');
+    $love = $('#love');
+    $hate = $('#hate');
 
     $userButtons.on('click', selectUser);
     $alternateUserForm.on('submit', selectAlternateUser);
