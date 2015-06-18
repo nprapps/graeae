@@ -25,17 +25,29 @@ var onLoadImage = function(data) {
         imagesLoaded($newImg, function() {
             $imageCanvas.fadeIn();
         });
+        loadImage(1);
     } else {
         $imageCanvas.html('<h1 class="text-center">No moar images. Awesome!</h1>').fadeIn();
         $spinner.hide();
     }
 }
 
-var loadImage = function(e) {
-    $.ajax({
-        url: 'get-image/',
-        success: onLoadImage,
-    });
+var cacheImage = function(data) {
+    var image = new Image();
+    image.src = data.thumb_url;
+}
+
+var loadImage = function(offset) {
+    var offset = offset || 0;
+    var params = {
+        url: 'get-image/' + offset
+    }
+    if (!offset) {
+        params.success = onLoadImage;
+    } else {
+        params.success = cacheImage;
+    }
+    $.ajax(params);
 }
 
 var loadSelectUser = function(e) {
@@ -98,7 +110,9 @@ var saveImage = function(quality, image_url) {
             image_url: image_url,
             evaluator: $.cookie('graeae_user')
         },
-        success: loadImage
+        success: function(data) {
+          loadImage();
+        },
     });
 }
 
