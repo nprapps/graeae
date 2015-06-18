@@ -10,6 +10,7 @@ var $window;
 var $footer;
 var $navbar;
 var $spinner;
+var $stamps;
 var $love;
 var $hate;
 
@@ -97,23 +98,29 @@ var drawUserNotice = function(e) {
 }
 
 var evaluateImage = function(e, quality) {
+    if (!buttonsEnabled) {
+        return;
+    }
+
     var quality = quality||$(this).data('quality');
     var image_url = $imageCanvas.find('img').data('image-url');
 
+    disableButtons();
     $imageCanvas.fadeOut();
+
     if (quality == 'love') {
         $love.css('visibility', 'visible')
     } else {
         $hate.css('visibility', 'visible')
     }
+
     setTimeout(function() {
         saveImage(quality, image_url)
     }, 300);
 }
 
 var saveImage = function(quality, image_url) {
-    $hate.css('visibility', 'hidden');
-    $love.css('visibility', 'hidden');
+    $stamps.css('visibility', 'hidden');
 
     $.ajax({
         url: 'save-image/',
@@ -141,6 +148,7 @@ var onDocumentLoad = function(e) {
     $footer = $('.footer');
     $header = $('.header');
     $spinner = $('.spinner');
+    $stamps = $('.stamp');
     $love = $('#love');
     $hate = $('#hate');
 
