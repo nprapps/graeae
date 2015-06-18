@@ -57,6 +57,7 @@ var selectAlternateUser = function(e) {
     $.cookie('graeae_user', $(this).find('input').val());
     drawUserNotice();
     $userModal.modal('hide');
+    loadImage();
     e.preventDefault();
 }
 
