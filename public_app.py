@@ -64,7 +64,8 @@ def debug():
     )
 
 @app.route('/%s/get-image/' % app_config.PROJECT_SLUG, methods=['GET'])
-def get_image():
+@app.route('/%s/get-image/<offset>' % app_config.PROJECT_SLUG, methods=['GET'])
+def get_image(offset=0):
     from flask import request
 
     db = dataset.connect(app_config.POSTGRES_URL)
@@ -80,10 +81,11 @@ def get_image():
                 on s.lead_art_url = ev.image_url
             where ev.image_url is Null and s.lead_art_url is not Null
             limit 1
-        """.format(evaluator))
+            offset {1}
+        """.format(evaluator, offset))
     except ProgrammingError:
         table = db['seamus']
-        result = table.find(has_lead_art=True, _limit=1)
+        result = table.find(has_lead_art=True, _limit=1, _offset=int(offset))
 
     image_list = list(result)
 
