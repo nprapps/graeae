@@ -13,13 +13,14 @@ var $spinner;
 var $stamps;
 var $love;
 var $hate;
+var $evaluateLabel;
 
 var buttonsEnabled;
 
 var onLoadImage = function(data) {
     if (data.image_url) {
         var $newImg = $('<img class="img-responsive">');
-        var maxHeight = $window.height() - $footer.outerHeight() - $header.height() - parseInt($imageWrapper.css('margin-top'));
+        var maxHeight = $window.height() - $footer.outerHeight() - $header.height() - $evaluateLabel.height() - parseInt($imageWrapper.css('margin-top'));
         $newImg
           .attr('src', data.thumb_url)
           .attr('data-image-url', data.image_url)
@@ -151,6 +152,7 @@ var onDocumentLoad = function(e) {
     $stamps = $('.stamp');
     $love = $('#love');
     $hate = $('#hate');
+    $evaluateLabel = $('#evaluate-label');
 
     $userButtons.on('click', selectUser);
     $alternateUserForm.on('submit', selectAlternateUser);
