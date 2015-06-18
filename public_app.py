@@ -13,10 +13,11 @@ from render_utils import make_context, smarty_filter, urlencode_filter
 from werkzeug.debug import DebuggedApplication
 
 SITE_USERS = [
-    {'name': 'Ariel'},
-    {'name': 'Kainaz'},
-    {'name': 'Emily'},
-    {'name': 'Lydia'},
+    {'name': 'Ariel Zambelich'},
+    {'name': 'David Gilkey'},
+    {'name': 'Emily Bogle'},
+    {'name': 'Kainaz Amaria'},
+    {'name': 'Lydia Thompson'},
 ]
 
 app = Flask(__name__)
