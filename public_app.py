@@ -158,10 +158,11 @@ def _top_loved_query(db):
                sum(case when is_good then 1 else 0 end) as fleek
         from evaluated_images ev
         join seamus s on s.lead_art_url = ev.image_url
+        where {0}
         group by ev.image_url, s.title, s.canonical_url
         order by fleek desc
         limit 10
-    """)
+    """.format(_editors()))
     result_list = list(result)
     for row in result_list:
         row['image_url'] = _get_small_image(row['image_url'])
@@ -173,10 +174,11 @@ def _top_hated_query(db):
                sum(case when is_good is false then 1 else 0 end) as shade
         from evaluated_images ev
         join seamus s on s.lead_art_url = ev.image_url
+        where {0}
         group by ev.image_url, s.title, s.canonical_url
         order by shade desc
         limit 10
-    """)
+    """.format(_editors()))
     result_list = list(result)
     for row in result_list:
         row['image_url'] = _get_small_image(row['image_url'])
@@ -185,6 +187,11 @@ def _top_hated_query(db):
 def _get_small_image(url):
     root, ext = url.rsplit('.', 1)
     return '{0}-s200.{1}'.format(root, ext)
+
+def _editors():
+    quoted_list = ["'{0}'".format(user['name']) for user in SITE_USERS]
+    query_fragment = "evaluator in ({0})".format(", ".join(quoted_list))
+    return query_fragment
 
 # Enable Werkzeug debug pages
 if app_config.DEBUG:
