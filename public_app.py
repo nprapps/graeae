@@ -176,8 +176,8 @@ def _top_loved_query(db):
         from evaluated_images ev
         join seamus s on s.lead_art_url = ev.image_url
         where {0}
-        group by ev.image_url, s.title, s.canonical_url, s.publication_date
-        order by fleek desc, s.publication_date desc
+        group by ev.image_url, s.title, s.canonical_url
+        order by fleek desc
         limit 10
     """.format(_editors()))
     result_list = list(result)
@@ -192,8 +192,8 @@ def _top_hated_query(db):
         from evaluated_images ev
         join seamus s on s.lead_art_url = ev.image_url
         where {0}
-        group by ev.image_url, s.title, s.canonical_url, s.publication_date
-        order by shade desc, s.publication_date desc
+        group by ev.image_url, s.title, s.canonical_url
+        order by shade desc
         limit 10
     """.format(_editors()))
     result_list = list(result)
