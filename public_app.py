@@ -34,16 +34,6 @@ app.register_blueprint(static.static, url_prefix='/%s' % app_config.PROJECT_SLUG
 app.add_template_filter(smarty_filter, name='smarty')
 app.add_template_filter(urlencode_filter, name='urlencode')
 
-# Example application views
-@app.route('/%s/test/' % app_config.PROJECT_SLUG, methods=['GET'])
-def _test_app():
-    """
-    Test route for verifying the application is running.
-    """
-    app.logger.info('Test URL requested.')
-
-    return make_response(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-
 # Example of rendering index.html with public_app 
 @app.route('/%s/' % app_config.PROJECT_SLUG, methods=['GET'])
 def index():
@@ -55,15 +45,6 @@ def index():
     context['users'] = SITE_USERS
 
     return make_response(render_template('admin/index.html', **context))
-
-@app.route('/%s/debug/' % app_config.PROJECT_SLUG, methods=['GET'])
-def debug():
-    import os
-    return jsonify(
-        deployment_target=app_config.DEPLOYMENT_TARGET,
-        postgres_url=app_config.POSTGRES_URL,
-        deploy_target_env=os.environ.get('DEPLOYMENT_TARGET', None)
-    )
 
 @app.route('/%s/get-image/' % app_config.PROJECT_SLUG, methods=['GET'])
 @app.route('/%s/get-image/<offset>' % app_config.PROJECT_SLUG, methods=['GET'])
