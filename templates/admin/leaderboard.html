@@ -1,0 +1,43 @@
+{% extends 'admin/_base.html' %}
+
+{% block content %}
+<h1>Leaderboard</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>On Fleek</td>
+            <td>% On Fleek</td>
+            <td>Shade</td>
+            <td>% Shade</td>
+            <td>Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in leaderboard %}
+        <tr>
+            <td>{{ row.evaluator }}</td>
+            <td>{{ row.fleek }}</td>
+            <td>
+                {% if row.fleek_pct %}
+                {{ row.fleek_pct|format_commas(0) }}%
+                {% else %}
+                0
+                {% endif %}
+            </td>
+            <td>{{ row.shade }}</td>
+            <td>
+                {% if row.shade_pct %}
+                {{ row.shade_pct|format_commas(0) }}%
+                {% else %}
+                0
+                {% endif %}
+            </td>
+            <td>{{ row.total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

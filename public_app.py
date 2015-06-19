@@ -10,6 +10,7 @@ from flask import Flask, make_response, render_template, jsonify
 from scrapers.utils import get_art_root_url
 from sqlalchemy.exc import ProgrammingError
 from render_utils import make_context, smarty_filter, urlencode_filter
+from render_utils import format_commas_filter
 from werkzeug.debug import DebuggedApplication
 from urllib import unquote
 
@@ -33,6 +34,7 @@ app.register_blueprint(static.static, url_prefix='/%s' % app_config.PROJECT_SLUG
 
 app.add_template_filter(smarty_filter, name='smarty')
 app.add_template_filter(urlencode_filter, name='urlencode')
+app.add_template_filter(format_commas_filter, name='format_commas')
 
 # Example of rendering index.html with public_app 
 @app.route('/%s/' % app_config.PROJECT_SLUG, methods=['GET'])
@@ -106,6 +108,30 @@ def save_image():
     table.upsert(data, ['evaluator', 'image_url'])
 
     return 'success'
+
+@app.route('/%s/leaderboard/' % app_config.PROJECT_SLUG, methods=['GET'])
+def leaderboard():
+    """
+    leaderboard for photo evaluations
+    """
+    context = make_context(asset_depth=1)
+
+# returns on fleek per evaluator
+    db = dataset.connect(app_config.POSTGRES_URL)
+    result = db.query("""
+        select evaluator, 
+               sum(case when is_good then 1 else 0 end) as fleek,
+               sum(case when is_good is false then 1 else 0 end) as shade,
+               count(is_good) as total,
+               sum(case when is_good then 1.0 else 0 end) / count(is_good) * 100 as fleek_pct,
+               sum(case when is_good is false then 1.0 else 0 end) / count(is_good) * 100 as shade_pct
+        from evaluated_images
+        group by evaluator
+    """)
+
+    context['leaderboard'] = list(result)
+
+    return make_response(render_template('admin/leaderboard.html', **context))
 
 # Enable Werkzeug debug pages
 if app_config.DEBUG:
