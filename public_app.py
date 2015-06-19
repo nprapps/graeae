@@ -163,8 +163,9 @@ def _total_query(db):
     Query # of lead art elements
     """
     result = db.query("""
-        select count(distinct(lead_art_url)) as count
+        select count(lead_art_url) as count
         from seamus
+        where lead_art_url is not null
     """)
     value = list(result).pop()
     return value['count']
