@@ -139,7 +139,24 @@ def _leaderboard_query(db):
         group by evaluator
         order by total desc
     """)
-    return list(result)
+    result_list = list(result)
+
+    grand_total_result = db.query("""
+        select
+               sum(case when is_good then 1 else 0 end) as fleek,
+               sum(case when is_good is false then 1 else 0 end) as shade,
+               count(is_good) as total,
+               sum(case when is_good then 1.0 else 0 end) / count(is_good) * 100 as fleek_pct,
+               sum(case when is_good is false then 1.0 else 0 end) / count(is_good) * 100 as shade_pct
+        from evaluated_images
+    """)
+
+    grand_total_row = list(grand_total_result).pop()
+    grand_total_row['evaluator'] = 'Total'
+
+    result_list.append(grand_total_row)
+
+    return result_list
 
 def _total_query(db):
     """

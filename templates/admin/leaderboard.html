@@ -12,35 +12,35 @@
 <table class="table">
     <thead>
         <tr>
-            <td>Name</td>
-            <td>On Fleek</td>
-            <td>% On Fleek</td>
-            <td>Shade</td>
-            <td>% Shade</td>
-            <td>Total</td>
+            <th>Name</th>
+            <th class="value">On Fleek</th>
+            <th class="value">% On Fleek</th>
+            <th class="value">Shade</th>
+            <th class="value">% Shade</th>
+            <th class="value">Total</th>
         </tr>
     </thead>
     <tbody>
         {% for row in leaderboard %}
-        <tr>
+        <tr {% if loop.last %}class="last"{% endif %}>
             <td>{{ row.evaluator }}</td>
-            <td>{{ row.fleek }}</td>
-            <td>
+            <td class="value">{{ row.fleek }}</td>
+            <td class="value">
                 {% if row.fleek_pct %}
                 {{ row.fleek_pct|format_commas(0) }}%
                 {% else %}
                 0
                 {% endif %}
             </td>
-            <td>{{ row.shade }}</td>
-            <td>
+            <td class="value">{{ row.shade }}</td>
+            <td class="value">
                 {% if row.shade_pct %}
                 {{ row.shade_pct|format_commas(0) }}%
                 {% else %}
                 0
                 {% endif %}
             </td>
-            <td>{{ row.total }}</td>
+            <td class="value">{{ row.total }}</td>
         </tr>
         {% endfor %}
     </tbody>

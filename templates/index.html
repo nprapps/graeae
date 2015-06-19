@@ -200,7 +200,7 @@
                 </thead>
                 <tbody>
                     {% for row in homepage_summary %}
-                    <tr {% if loop.last %}class="last"{% endif %}>
+                    <tr>
                         <td>{{ row.on_homepage }}</td>
                         <td class="value">{{row.on_homepage_count}}</td>
                         <td class="value">{{row.on_homepage_count_pct|format_commas(2) }}%</td>
@@ -225,7 +225,7 @@
                 </thead>
                 <tbody>
                     {% for row in facebook_summary %}
-                    <tr {% if loop.last %}class="last"{% endif %}>
+                    <tr>
                         <td>{{ row.on_facebook }}</td>
                         <td class="value">{{row.on_facebook_count}}</td>
                         <td class="value">{{row.on_facebook_count_pct|format_commas(2) }}%</td>
@@ -251,7 +251,7 @@
         </thead>
         <tbody>
             {% for row in contribution_summary %}
-            <tr {% if loop.last %}class="last"{% endif %}>
+            <tr>
                 <td>{{ row.contribution }}</td>
                 <td class="value">{{row.contribution_count}}</td>
                 <td class="value">{{row.contribution_count_pct|format_commas(2) }}%</td>
