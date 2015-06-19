@@ -1,7 +1,13 @@
 {% extends 'admin/_base.html' %}
 
 {% block content %}
-<h1>Leaderboard</h1>
+<h1>Graeae Leaderboard</h1>
+
+<h3>Total lead art images found: {{ total_images }}</h3>
+
+<hr/>
+
+<h2>Team results</h2>
 
 <table class="table">
     <thead>
@@ -39,5 +45,45 @@
         {% endfor %}
     </tbody>
 </table>
+
+<hr/>
+
+<section class="photo-list">
+    <h2>Ten photos we love</h2>
+
+    <div class="row">
+    {% for row in top_loved %}
+        <div class="col-md-6">
+            <img src="{{ row.image_url }}">
+            <h4>
+                <a href="{{ row.canonical_url }}" target="_blank">{{ row.title }}</a>
+            </h4>
+        </div>
+    {% if not loop.last and loop.index0 % 2 > 0 %}
+    </div>
+    <div class="row">
+    {% endif %}
+    {% endfor %}
+    </div>
+</section>
+
+<section class="photo-list">
+    <h2>Ten photos we didn't love</h2>
+
+    <div class="row">
+    {% for row in top_hated %}
+        <div class="col-md-6">
+            <img src="{{ row.image_url }}">
+            <h4>
+                <a href="{{ row.canonical_url }}" target="_blank">{{ row.title }}</a>
+            </h4>
+        </div>
+    {% if not loop.last and loop.index0 % 2 > 0 %}
+    </div>
+    <div class="row">
+    {% endif %}
+    {% endfor %}
+    </div>
+</section>
 
 {% endblock %}

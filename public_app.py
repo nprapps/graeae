@@ -114,12 +114,22 @@ def leaderboard():
     """
     leaderboard for photo evaluations
     """
+    db = dataset.connect(app_config.POSTGRES_URL)
     context = make_context(asset_depth=1)
 
-# returns on fleek per evaluator
-    db = dataset.connect(app_config.POSTGRES_URL)
+    context['total_images'] = _total_query(db)
+    context['leaderboard'] = _leaderboard_query(db)
+    context['top_loved'] = _top_loved_query(db)
+    context['top_hated'] = _top_hated_query(db)
+
+    return make_response(render_template('admin/leaderboard.html', **context))
+
+def _leaderboard_query(db):
+    """
+    Query for leaderboard
+    """
     result = db.query("""
-        select evaluator, 
+        select evaluator,
                sum(case when is_good then 1 else 0 end) as fleek,
                sum(case when is_good is false then 1 else 0 end) as shade,
                count(is_good) as total,
@@ -127,11 +137,54 @@ def leaderboard():
                sum(case when is_good is false then 1.0 else 0 end) / count(is_good) * 100 as shade_pct
         from evaluated_images
         group by evaluator
+        order by total desc
     """)
+    return list(result)
 
-    context['leaderboard'] = list(result)
+def _total_query(db):
+    """
+    Query # of lead art elements
+    """
+    result = db.query("""
+        select count(distinct(lead_art_url)) as count
+        from seamus
+    """)
+    value = list(result).pop()
+    return value['count']
 
-    return make_response(render_template('admin/leaderboard.html', **context))
+def _top_loved_query(db):
+    result = db.query("""
+        select ev.image_url, s.title, s.canonical_url,
+               sum(case when is_good then 1 else 0 end) as fleek
+        from evaluated_images ev
+        join seamus s on s.lead_art_url = ev.image_url
+        group by ev.image_url, s.title, s.canonical_url
+        order by fleek desc
+        limit 10
+    """)
+    result_list = list(result)
+    for row in result_list:
+        row['image_url'] = _get_small_image(row['image_url'])
+    return result_list
+
+def _top_hated_query(db):
+    result = db.query("""
+        select ev.image_url, s.title, s.canonical_url,
+               sum(case when is_good is false then 1 else 0 end) as shade
+        from evaluated_images ev
+        join seamus s on s.lead_art_url = ev.image_url
+        group by ev.image_url, s.title, s.canonical_url
+        order by shade desc
+        limit 10
+    """)
+    result_list = list(result)
+    for row in result_list:
+        row['image_url'] = _get_small_image(row['image_url'])
+    return result_list
+
+def _get_small_image(url):
+    root, ext = url.rsplit('.', 1)
+    return '{0}-s200.{1}'.format(root, ext)
 
 # Enable Werkzeug debug pages
 if app_config.DEBUG:
