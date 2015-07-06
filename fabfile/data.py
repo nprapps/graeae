@@ -12,7 +12,9 @@ import requests
 from dateutil import parser
 from fabric.api import local, task
 from facebook import GraphAPI
+from pyquery import PyQuery
 from scrapers.utils import get_art_root_url, get_seamus_id_from_url
+from scrapers.seamus.models import Story
 
 SECRETS = app_config.get_secrets()
 FACEBOOK_USER = 'NPR'
@@ -139,6 +141,22 @@ def fix_seamus_dupes():
         else:
             print 'found dupe for %s, deleting %s' % (row['story_id'], row['id'])
             seamus.delete(id=row['id'])
+
+@task
+def fix_seamus_slugs_and_audio():
+    db = dataset.connect(app_config.POSTGRES_URL)
+    seamus = db['seamus']
+    stories = list(seamus.all())
+    for row in stories: #[:10]:
+        response = requests.get('http://api.npr.org/query', params={
+            'id': row['story_id'],
+            'apiKey': SECRETS['NPR_API_KEY']})
+
+        element = PyQuery(response.content, parser='xml').find('story')
+        story = Story(element, row['run_time'])
+
+        print 'updating %s with slug %s and has_audio: %s' % (story.story_id, story.slug, story.has_audio)
+        seamus.update(story.serialize(), ['story_id'])
 
 @task
 def db_shell():
