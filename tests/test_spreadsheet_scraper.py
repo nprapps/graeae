@@ -29,8 +29,8 @@ class TestScrapeSeamus(unittest.TestCase):
         self.assertEqual(self.stories[1].contribution, 'Request / tone / edit reporter or producer images, Source pre-existing images (photo or illustration) from the wires / Flickr / other newspapers / archives')
 
     def test_contributors(self):
-        self.assertEqual(self.stories[0].contributors, ['Kainaz Amaria'])
-        self.assertEqual(self.stories[10].contributors, ['Ariel Zambelich', 'Emily Bogle', 'Ryan Kellman'])
+        self.assertEqual(self.stories[0].contributors, 'Kainaz Amaria')
+        self.assertEqual(self.stories[10].contributors, 'Ariel Zambelich, Emily Bogle, Ryan Kellman')
 
     def test_timestamp(self):
         self.assertEqual(self.stories[0].timestamp, datetime(2015, 4, 29, 14, 38, 32))

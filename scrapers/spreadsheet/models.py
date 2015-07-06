@@ -34,8 +34,7 @@ class Story:
 
     @property
     def contributors(self):
-        contributors = [str(contributor.strip()) for contributor in self.story['Who worked on it?'].split(',')]
-        return contributors
+        return str(self.story['Who worked on it?'])
 
     @property
     def duration(self):
