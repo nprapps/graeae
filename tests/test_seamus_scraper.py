@@ -42,3 +42,7 @@ class TestScrapeSeamus(unittest.TestCase):
 
     def test_lead_art_root_url(self):
         self.assertEqual(self.stories[6].lead_art_root_url, 'http://media.npr.org/assets/img/2015/04/21/morsi-court.jpg')
+
+    def test_has_audio(self):
+        self.assertEqual(self.stories[0].has_audio, False)
+        self.assertEqual(self.stories[3].has_audio, True)

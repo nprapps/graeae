@@ -33,6 +33,7 @@ class Story(ApiEntry):
             ('lead_art_provider', self.lead_art_provider),
             ('lead_art_url', self.lead_art_url),
             ('lead_art_root_url', self.lead_art_root_url),
+            ('has_audio', self.has_audio),
         ])
 
     def _parse_date(self, date_string):
@@ -89,3 +90,7 @@ class Story(ApiEntry):
             return url[:url.find('?')]
         else:
             return url
+
+    @property
+    def has_audio(self):
+        return bool(self.element.children('audio'))
