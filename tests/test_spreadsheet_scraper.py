@@ -7,7 +7,7 @@ import app_config
 from datetime import datetime
 from scrapers.spreadsheet import SpreadsheetScraper
 
-class TestScrapeSeamus(unittest.TestCase):
+class TestScrapeSpreadsheet(unittest.TestCase):
     def setUp(self):
         self.scraper = SpreadsheetScraper()
         self.stories = self.scraper.scrape_spreadsheet(filename='tests/snapshots/did-visuals-touch-it.xlsx')
