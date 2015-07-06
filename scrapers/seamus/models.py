@@ -104,4 +104,8 @@ class Story(ApiEntry):
         """
         Get the slug/vertical of a story
         """
-        return self.element.children('slug').text()
+        slug = str(self.element.children('slug').text())
+        if slug:
+            return slug
+        else:
+            return None
