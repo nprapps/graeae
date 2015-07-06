@@ -34,6 +34,7 @@ class Story(ApiEntry):
             ('lead_art_url', self.lead_art_url),
             ('lead_art_root_url', self.lead_art_root_url),
             ('has_audio', self.has_audio),
+            ('slug', self.slug),
         ])
 
     def _parse_date(self, date_string):
@@ -93,4 +94,14 @@ class Story(ApiEntry):
 
     @property
     def has_audio(self):
+        """
+        Get if the story has audio
+        """
         return bool(self.element.children('audio'))
+
+    @property
+    def slug(self):
+        """
+        Get the slug/vertical of a story
+        """
+        return self.element.children('slug').text()

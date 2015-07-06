@@ -46,3 +46,6 @@ class TestScrapeSeamus(unittest.TestCase):
     def test_has_audio(self):
         self.assertEqual(self.stories[0].has_audio, False)
         self.assertEqual(self.stories[3].has_audio, True)
+
+    def test_slug(self):
+        self.assertEqual(self.stories[0].slug, 'The Two-Way')
