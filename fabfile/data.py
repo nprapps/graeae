@@ -147,15 +147,20 @@ def fix_seamus_slugs_and_audio():
     db = dataset.connect(app_config.POSTGRES_URL)
     seamus = db['seamus']
     stories = list(seamus.all())
-    for row in stories: #[:10]:
+    for row in stories:
+        print 'processing %s (%s)' % (row['story_id'], row['title'])
+        if row['has_audio'] is not None:
+            print 'skipping %s (%s)' % (row['story_id'], row['title'])
+            continue
+
         response = requests.get('http://api.npr.org/query', params={
             'id': row['story_id'],
             'apiKey': SECRETS['NPR_API_KEY']})
 
         element = PyQuery(response.content, parser='xml').find('story')
         story = Story(element, row['run_time'])
-
         print 'updating %s with slug %s and has_audio: %s' % (story.story_id, story.slug, story.has_audio)
+
         seamus.update(story.serialize(), ['story_id'])
 
 @task
