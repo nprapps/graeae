@@ -159,7 +159,7 @@ def deploy(analyse=True, remote='origin'):
         if app_config.DEPLOY_SERVICES:
             servers.deploy_confs()
 
-    if analyse:
+    if analyse == True:
         execute('analysis.analyse')
         execute('render.render_all')
 
