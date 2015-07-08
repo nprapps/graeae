@@ -30,6 +30,25 @@ def analyse():
     get_photo_efforts_fb()
     analyse_photo_efforts_fb()
 
+@task
+def get_seamus_verticals():
+    """
+    gets all seamus content by vertical and writes to csv
+    """
+    db = dataset.connect(app_config.POSTGRES_URL)
+    result = db.query("""
+        select distinct(s.slug), count(s.slug)
+        from seamus s
+        group by s.slug
+        order by s.slug
+        """)
+
+    result_list = list(result)
+    # for row in result_list:
+    #     ?
+
+    dataset.freeze(result_list, format='csv', filename='www/live-data/seamus_summary.csv')
+
 
 @task
 def get_raw_insights():
@@ -38,7 +57,7 @@ def get_raw_insights():
     """
     db = dataset.connect(app_config.POSTGRES_URL)
     result = db.query("""
-        select f1.*, s.has_lead_art, s.lead_art_provider, s.lead_art_url, s.lead_art_root_url, s.title, s.story_id
+        select f1.*, s.has_lead_art, s.lead_art_provider, s.lead_art_url, s.lead_art_root_url, s.title, s.story_id, s.slug, s.has_audio
         from facebook f1
         inner join
             (select link_url, max(run_time) as max_run_time from facebook group by link_url) f2 
@@ -65,7 +84,7 @@ def get_insights():
     result = db.query("""
         select f1.created_time, f1.people_reached, f1.shares, f1.likes,
                f1.comments, f1.link_clicks, s.has_lead_art, s.lead_art_provider,
-               f1.art_root_url, s.lead_art_root_url
+               f1.art_root_url, s.lead_art_root_url, s.slug, s.has_audio
         from facebook f1
         inner join
             (select link_url, max(run_time) as max_run_time from facebook group by link_url) f2
@@ -112,7 +131,7 @@ def analyse_insights():
     """
     generate reports from insights data
     """
-    column_types = (date_type, number_type, number_type, number_type, number_type, number_type, boolean_type, text_type, text_type, text_type, text_type, text_type)
+    column_types = (date_type, number_type, number_type, number_type, number_type, number_type, boolean_type, text_type, text_type, text_type, text_type, boolean_type, text_type, text_type)
 
     with open('www/live-data/insights.csv') as f:
         rows = list(csv.reader(f))

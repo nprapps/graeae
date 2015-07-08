@@ -17,6 +17,31 @@
 
 <hr/>
 
+    <h2>NPR.org Content</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="slug">NPR.org Verticals</th>
+                <th class="value">Count</th>
+                <th class="value">Percent of total</th>
+                <th class="value">Daily Average</th>
+                <th class="value">Has Audio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in seamus_summary %}
+            <tr {% if loop.last %}class="last"{% endif %}>
+                <td class="slug">{% if row.slug %}{{ row.slug }}{% else %}No slug{% endif %}</td>
+                <td class="value">{{ row.count|format_commas(0) }}</td>
+                <td class="value"></td>
+                <td class="value"></td>
+                <td class="value"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
 <section id="image-performance">
     <h2>Facebook and image providers</h2>
     <div class="row">
