@@ -37,10 +37,10 @@ def get_seamus_verticals():
     """
     db = dataset.connect(app_config.POSTGRES_URL)
     result = db.query("""
-        select distinct(s.slug), count(s.slug)
+        select distinct(s.slug), count(s.slug) as slug_count
         from seamus s
         group by s.slug
-        order by s.slug
+        order by slug_count desc
         """)
 
     result_list = list(result)

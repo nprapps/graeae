@@ -32,7 +32,7 @@
             {% for row in seamus_summary %}
             <tr {% if loop.last %}class="last"{% endif %}>
                 <td class="slug">{% if row.slug %}{{ row.slug }}{% else %}No slug{% endif %}</td>
-                <td class="value">{{ row.count|format_commas(0) }}</td>
+                <td class="value">{{ row.slug_count|format_commas(0) }}</td>
                 <td class="value"></td>
                 <td class="value"></td>
                 <td class="value"></td>
