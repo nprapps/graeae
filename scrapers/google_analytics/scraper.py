@@ -4,6 +4,12 @@ from datetime import datetime
 from oauth import get_credentials
 from scrapers.google_analytics.models import GoogleAnalyticsRow
 
+import logging
+
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
 class GoogleAnalyticsScraper:
     def __init__(self):
         self.run_time = datetime.utcnow()
@@ -32,11 +38,11 @@ class GoogleAnalyticsScraper:
             resp = app_config.authomatic.access(credentials, api_url, params=params)
             data = resp.data
 
-            if not data.get('rows'):
-                break
+            logger.info('Processing rows {0} - {1}'.format(params['start-index'], params['start-index'] + app_config.GA_RESULT_SIZE)
 
-            #if params['start-index'] > 10000:
-                #import ipdb; ipdb.set_trace()
+            if not data.get('rows'):
+                logger.info('No rows found, done.')
+                break
 
             for row in resp.data['rows']:
                 analytics_row = GoogleAnalyticsRow(row, app_config.GA_METRICS, app_config.GA_DIMENSIONS, data)
