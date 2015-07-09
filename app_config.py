@@ -142,6 +142,15 @@ DISQUS_API_KEY = 'tIbSzEhGBE9NIptbnQWn4wy1gZ546CsQ2IHHtxJiYAceyyPoAkDkVnQfCifmCa
 DISQUS_UUID = 'cd2a2c4f-e2e5-11e4-abcc-80e6500ab74c'
 
 """
+Google analytics
+"""
+GA_ORGANIZATION_ID = '53470309'
+GA_SAMPLING_LEVEL = 'HIGHER_PRECISION'
+GA_RESULT_SIZE = 10000
+GA_METRICS = ['sessions', 'pageviews']
+GA_DIMENSIONS = ['pagePath', 'source', 'deviceCategory']
+
+"""
 OAUTH
 """
 
@@ -153,7 +162,7 @@ authomatic_config = {
         'class_': oauth2.Google,
         'consumer_key': os.environ.get('GOOGLE_OAUTH_CLIENT_ID'),
         'consumer_secret': os.environ.get('GOOGLE_OAUTH_CONSUMER_SECRET'),
-        'scope': ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/userinfo.email'],
+        'scope': ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/analytics.readonly'],
         'offline': True,
     },
 }

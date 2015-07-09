@@ -15,6 +15,7 @@ from scrapers.facebook import FacebookScraper
 from scrapers.homepage import HomepageScraper
 from scrapers.seamus import SeamusScraper
 from scrapers.spreadsheet import SpreadsheetScraper
+from scrapers.google_analytics import GoogleAnalyticsScraper
 
 @task
 def test():
@@ -79,6 +80,17 @@ def scrape_spreadsheet():
     scraper = SpreadsheetScraper()
     stories = scraper.scrape_spreadsheet(app_config.STORIES_PATH)
     scraper.write(db, stories)
+
+@task
+def scrape_google_analytics():
+    db = dataset.connect(app_config.POSTGRES_URL)
+    min_result = list(db.query("""
+        select min(publication_date) as date
+        from seamus
+    """)).pop(0)
+
+    scraper = GoogleAnalyticsScraper()
+    rows = scraper.scrape_google_analytics(min_result['date'])
 
 @task
 def backup():
