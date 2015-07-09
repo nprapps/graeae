@@ -91,6 +91,7 @@ def scrape_google_analytics():
 
     scraper = GoogleAnalyticsScraper()
     rows = scraper.scrape_google_analytics(min_result['date'])
+    scraper.write(db, rows)
 
 @task
 def backup():
