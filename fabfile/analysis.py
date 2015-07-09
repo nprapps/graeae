@@ -38,18 +38,41 @@ def get_seamus_verticals():
     """
     db = dataset.connect(app_config.POSTGRES_URL)
     result = db.query("""
-        select distinct(s.slug), count(s.slug) as slug_count
+        select distinct(s.slug), count(s.slug) as slug_count, 
+            count(case when s.has_audio then 1 else null END) as count_has_audio,
+            count(case when s.has_audio then null else 1 END) as count_has_no_audio
         from seamus s
         group by s.slug
         order by slug_count desc
         """)
 
     result_list = list(result)
-    # for row in result_list:
-    #     ?
+    print "before writing everything"
+
+    max_result = list(db.query("""
+        select max(publication_date)
+        from seamus
+    """)).pop(0)
+    print "did this too"
+
+    min_result = list(db.query("""
+        select min(publication_date)
+        from seamus s
+    """)).pop(0)
+    print "got this far"
+
+    difference = max_result['max'] - min_result['min']
+    avg = result['slug_count'] / float(difference.days)
+    print "finished!"
+
+    # to add here:
+    # loop over result_list
+    # calculate the average
+    # add avg as column to each row
+    for row in result_list:
+        row['count_avg'] = avg
 
     dataset.freeze(result_list, format='csv', filename='www/live-data/seamus_summary.csv')
-
 
 @task
 def get_raw_insights():
