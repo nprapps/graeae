@@ -29,6 +29,7 @@ def analyse():
     analyse_photo_efforts()
     get_photo_efforts_fb()
     analyse_photo_efforts_fb()
+    get_seamus_verticals()
 
 @task
 def get_seamus_verticals():
