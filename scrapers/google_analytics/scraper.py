@@ -38,7 +38,7 @@ class GoogleAnalyticsScraper:
             resp = app_config.authomatic.access(credentials, api_url, params=params)
             data = resp.data
 
-            logger.info('Processing rows {0} - {1}'.format(params['start-index'], params['start-index'] + app_config.GA_RESULT_SIZE)
+            logger.info('Processing rows {0} - {1}'.format(params['start-index'], params['start-index'] + app_config.GA_RESULT_SIZE))
 
             if not data.get('rows'):
                 logger.info('No rows found, done.')
