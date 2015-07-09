@@ -8,11 +8,14 @@ class GoogleAnalyticsRow:
         self.fields = dimensions + metrics
 
         data = OrderedDict(zip(self.fields, self.row))
-        for k,v in data.items():
+        new_data = OrderedDict()
+        for k, v in data.items():
             if v.isnumeric():
-                data[k] = float(v)
+                new_data[k.lower()] = float(v)
+            else:
+                new_data[k.lower()] = v
 
-        self.data = data
+        self.data = new_data
 
     def serialize(self):
         self.data['story_id'] = self.story_id
@@ -20,6 +23,6 @@ class GoogleAnalyticsRow:
 
     @property
     def story_id(self):
-        full_path = u'http://www.npr.org{0}'.format(self.data['pagePath'])
+        full_path = u'http://www.npr.org{0}'.format(self.data['pagepath'])
         return get_seamus_id_from_url(full_path)
 
