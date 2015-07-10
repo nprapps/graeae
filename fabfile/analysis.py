@@ -75,6 +75,47 @@ def get_seamus_verticals():
     dataset.freeze(result_list, format='csv', filename='www/live-data/seamus_summary.csv')
 
 @task
+def get_raw_effort_and_analytics():
+    """
+    Get efforts and analytics
+    """
+    db = dataset.connect(app_config.POSTGRES_URL)
+
+    results = db.query("""
+        select 
+            s.story_id,
+            s.canonical_url,
+            ga.pageviews,
+            ga.sessions,
+            (case when sp.seamus_id is not null then true else false end) as visuals_contributed
+        from seamus s
+        left join
+            (select story_id, sum(pageviews) as pageviews, sum(sessions) as sessions from google_analytics group by story_id) ga
+             on s.story_id = ga.story_id
+        full outer join spreadsheet sp
+            on s.story_id = sp.seamus_id
+        where
+            ga.pageviews > 0 and ga.sessions > 0
+    """)
+
+    dataset.freeze(results, format='csv', filename='www/live-data/raw_effort_and_analytics.csv')
+
+@task
+def analyse_effort_and_analytics():
+    column_types = (text_type, text_type, number_type, number_type, boolean_type)
+
+    with open('www/live-data/raw_effort_and_analytics.csv') as f:
+        rows = list(csv.reader(f))
+
+    column_names = rows.pop(0)
+    table = Table(rows, column_types, column_names)
+    #import ipdb; ipdb.set_trace();
+    summary = table.aggregate('visuals_contributed', (('pageviews', 'sum'), ('pageviews', 'mean'), ('pageviews', 'median'), ('sessions', 'sum'), ('sessions', 'mean'), ('sessions', 'median')))
+    for row in summary.rows:
+        print row
+    _write_summary_csv(summary, 'www/live-data/effort_and_analytics_summary.csv')
+
+@task
 def get_raw_insights():
     """
     gets insights and art and writes csv
