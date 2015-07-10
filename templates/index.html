@@ -252,7 +252,7 @@
         <tbody>
             {% for row in seamus_summary %}
             <tr>
-                <td class="slug">{% if row.slug %}{{ row.slug }}{% else %}No slug{% endif %}</td>
+                <td class="slug">{% if row.slug %}{{ row.slug }}{% else %}No vertical assigned{% endif %}</td>
                 <td class="value">{{ row.slug_count|format_commas(0) }}</td>
                 <td class="value">{{ row.percent_of_total|format_commas(2) }}%</td>
                 <td class="value">{{ row.stories_per_day|format_commas(0) }}</td>
