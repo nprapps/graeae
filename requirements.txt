@@ -28,7 +28,7 @@ ipdb==0.8
 ipython==3.1.0
 jdcal==1.0
 jmespath==0.2.1
-journalism==0.4.0
+-e git+git@github.com:livlab/journalism.git@2766cd03d4252c5ff16dcab4c1fcaac2ba8f3708#egg=journalism-master
 lxml==3.4.2
 nose==1.2.1
 numpy==1.9.2
@@ -40,7 +40,7 @@ psycopg2==2.6
 pyasn1==0.1.7
 pycrypto==2.6
 pyquery==1.2.9
-python-dateutil==2.2
+python-dateutil==2.4.2
 python-slugify==1.0.2
 pytz==2015.2
 requests==2.5.0
