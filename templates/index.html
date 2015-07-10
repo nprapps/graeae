@@ -31,7 +31,7 @@
                 </thead>
                 <tbody>
                     {% for row in insights_summary %}
-                    <tr {% if loop.last %}class="last"{% endif %}>
+                    <tr>
                         <td class="provider">{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
                         <td class="value">{{ row.provider_type_count|format_commas(0) }}</td>
                         <td class="value">{{ row.provider_type_count_pct|format_commas(2) }}%</td>
@@ -80,7 +80,7 @@
         </thead>
         <tbody>
             {% for row in insights_summary %}
-            <tr {% if loop.last %}class="last"{% endif %}>
+            <tr>
                 <td class="provider">{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
                 <td class="value">{{ row['{0}_median'.format(metric)]|format_commas(0) }}</td>
                 <td class="value">{{ row['{0}_max'.format(metric)]|format_commas(0) }}</td>
@@ -122,55 +122,12 @@
             {% endfor %}
         </tbody>
     </table>
-        {#<div class="col-md-6">
-            <h4>{{ metric_name }} histogram</h4>
-            <table class="table table-striped table-hover fb-histogram">
-                <thead>
-                    <tr>
-                        {% for header in histograms[metric][0] %}
-                        {% if loop.index == 1 %}
-                        <th>{{ header }}</th>
-                        {% elif not loop.last %}
-                        <th class="value">{{ header|format_thousands }} - {{ histograms[metric][0][loop.index]|format_thousands }}</th>
-                        {% else %}
-                        <th class="value">{{ header|format_thousands }}+</th>
-                        {% endif %}
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in histograms[metric][1:] %}
-                    <tr>
-                        {% for column in row %}
-                        {% if loop.index == 1 %}
-                        <td>{{ column }}</td>
-                        {% else %}
-                        <td class="value">{{ column|format_commas(1) }}%</td>
-                        {% endif %}
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>#}
     {% endfor %}
 
     <p>
         <a class="btn btn-default" href="live-data/insights_summary.csv"><i class="fa fa-table"></i> Download Summary CSV</a> 
         <a class="btn btn-default" href="live-data/insights_raw.csv"><i class="fa fa-table"></i> Download Per Story CSV</a>
     </p>
-
-    <h4>@TODO</h4>
-    <ul>Data:
-        <li>FB Link Clicks x Provider Type</li>
-        <li>FB Link Clicks x Image Type</li>
-    </ul>
-    <p><strong>Story Engagement</strong></p>
-    <ul>Data:
-        <li>GA Pageview x Has Lead Art/Not</li>
-        <li>GA Bounce x Has Lead Art/Not</li>
-    </ul>
-    <p class="muted">Note: All NPR Facebook posts include an image. A story may or may not contain a lead image at npr.org.</p>
 </section>
 
 <hr/>
@@ -284,7 +241,7 @@
         </thead>
         <tbody>
             {% for row in seamus_summary %}
-            <tr {% if loop.last %}class="last"{% endif %}>
+            <tr>
                 <td class="slug">{% if row.slug %}{{ row.slug }}{% else %}No slug{% endif %}</td>
                 <td class="value">{{ row.slug_count|format_commas(0) }}</td>
                 <td class="value">{{ row.percent_of_total|format_commas(2) }}%</td>
