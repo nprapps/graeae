@@ -2,6 +2,38 @@
 
 {% block content %}
 
+<section id="nav">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          <li role="presentation"><a href="#visuals-effort">Visuals Efforts<span class="sr-only">(current)</span></a></a></li>
+          <li role="presentation"><a href="#image-performance">Images on Facebook</a></li>
+          <li role="presentation"><a href="#npr-content">NPR.org Content</a></li>
+      </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="/graeae/" class="navbar-link fa fa-heart" aria-hidden="true"> Graeaeder</a></li>
+        <li><a href="/graeae/leaderboard" class="navbar-link fa fa-trophy" aria-hidden="true"> Leaderboard</a></li>
+        <li>&nbsp;<li>
+    </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</section>
+
+<br> <br> 
 <section id="header">
 <div class="row">
     <div class="col-sm-2">
@@ -12,19 +44,17 @@
     </div>
 </div>
 
-<div>
-    <ul class="nav nav-pills nav-justified">
-      <li role="presentation"><a href="#image-performance">Images on Facebook</a></li>
-      <li role="presentation"><a href="#visuals-effort">Visuals Efforts</a></li>
-      <li role="presentation"><a href="#npr-content">NPR.org Content</a></li>
-    </ul>
-<div>
-
+<section id="visuals-effort">
 <hr/>
-<p>Graeae report for <em>Time range tktk</em>.</p>
+<!--
+<p>Graeae report for <em>{{start_date}} to {{end_date}}</em>.</p>
+-->
 
-<section id="effort-analytics"> 
-    <h2>Effect of visual contributions on Traffic</h2>
+<br> 
+    <h2>Does the Visuals Team's effort affect performance?</h2>
+    <p>&nbsp;</p>
+
+    <h4>Effect of Visual Contributions on Traffic</h4>
     <div class="row">
         <div class="col-md-12">
             <table class="table">
@@ -53,12 +83,100 @@
             </table>
         </div>             
     </div>  
-</section>   
 
-<hr/>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Stories Visuals worked (Homepage)</h4>
+            <table class="table table-striped table-hover"> 
+                <thead> 
+                    <tr>
+                        <th>On Homepage</th>
+                        <th class="value">Count</th>
+                        <th class="value">Count %</th>
+                        <th class="value">Total Duration
+                        <th class="value">Duration %</th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in homepage_summary %}
+                    <tr>
+                        <td>{{ row.on_homepage }}</td>
+                        <td class="value">{{row.on_homepage_count}}</td>
+                        <td class="value">{{row.on_homepage_count_pct|format_commas(2) }}%</td>
+                        <td class="value">{{row.duration_sum}}</td>
+                        <td class="value">{{row.duration_sum_pct|format_commas(2) }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+ 
+        </div>
+        <div class="col-md-6">
+
+            <h4>Stories Visuals worked on (Facebook)</h4>
+            <table class="table table-striped table-hover"> 
+                <thead> 
+                    <tr>
+                        <th>On Facebook</th>
+                        <th class="value">Count</th>
+                        <th class="value">Count %</th>
+                        <th class="value">Total Duration
+                        <th class="value">Duration %</th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in facebook_summary %}
+                    <tr>
+                        <td>{{ row.on_facebook }}</td>
+                        <td class="value">{{row.on_facebook_count}}</td>
+                        <td class="value">{{row.on_facebook_count_pct|format_commas(2) }}%</td>
+                        <td class="value">{{row.duration_sum}}</td>
+                        <td class="value">{{row.duration_sum_pct|format_commas(2) }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <h4>Visuals' Effort by Type of Contribution</h4>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Contribution Type</th>
+                <th class="value">Count</th>
+                <th class="value">Count %</th>
+                <th class="value">Total Duration</th>
+                <th class="value">Duration %</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in contribution_summary %}
+            <tr>
+                <td>{{ row.contribution }}</td>
+                <td class="value">{{row.contribution_count}}</td>
+                <td class="value">{{row.contribution_count_pct|format_commas(2) }}%</td>
+                <td class="value">{{row.duration_sum}}</td>
+                <td class="value">{{row.duration_sum_pct|format_commas(2) }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>
+        <a class="btn btn-default" href="live-data/homepage_summary.csv"><i class="fa fa-table"></i> Download Homepage Summary CSV</a>
+        <a class="btn btn-default" href="live-data/contribution_summary.csv"><i class="fa fa-table"></i> Download Contribution Summary CSV</a>
+        <a class="btn btn-default" href="live-data/photo_efforts.csv"><i class="fa fa-table"></i> Download Photo Effort CSV</a>
+    </p>
 </section>
 
 <section id="image-performance">
+<hr/>
+<a href="#header" class="fa fa-arrow-up" aria-hidden="true"> Return to top</a>
+
     <h2>Facebook and Image Providers</h2>
     <div class="row">
         <div class="col-md-5">
@@ -170,108 +288,11 @@
     </p>
 </section>
 
-<hr/>
-<a href="#header" class="fa fa-arrow-up" aria-hidden="true"> Return to top</a>
-
-
-<section id="visuals-effort">
-    <h2>Does the Visuals Team's effort affect performance?</h2>
-
-    <div class="row">
-        <div class="col-md-6">
-            <h4>Stories Visuals worked on vs. homepage</h4>
-            <table class="table table-striped table-hover"> 
-                <thead> 
-                    <tr>
-                        <th>On Homepage</th>
-                        <th class="value">Count</th>
-                        <th class="value">Count %</th>
-                        <th class="value">Total Duration
-                        <th class="value">Duration %</th>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in homepage_summary %}
-                    <tr>
-                        <td>{{ row.on_homepage }}</td>
-                        <td class="value">{{row.on_homepage_count}}</td>
-                        <td class="value">{{row.on_homepage_count_pct|format_commas(2) }}%</td>
-                        <td class="value">{{row.duration_sum}}</td>
-                        <td class="value">{{row.duration_sum_pct|format_commas(2) }}%</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
- 
-            <h4>Stories Visuals worked on vs. Facebook</h4>
-            <table class="table table-striped table-hover"> 
-                <thead> 
-                    <tr>
-                        <th>On Facebook</th>
-                        <th class="value">Count</th>
-                        <th class="value">Count %</th>
-                        <th class="value">Total Duration
-                        <th class="value">Duration %</th>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in facebook_summary %}
-                    <tr>
-                        <td>{{ row.on_facebook }}</td>
-                        <td class="value">{{row.on_facebook_count}}</td>
-                        <td class="value">{{row.on_facebook_count_pct|format_commas(2) }}%</td>
-                        <td class="value">{{row.duration_sum}}</td>
-                        <td class="value">{{row.duration_sum_pct|format_commas(2) }}%</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-6">
-            <h4>Summary (TK TK)</h4>
-            <p>Someday, this will have text automatically generated by Graeae, or maybe an explanation of what you're looking at. For now, relax and drink some coffee.</p>
-        </div>
-    </div>
-
-    <h4>Visuals' Effort by Type of Contribution</h4>
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>Contribution Type</th>
-                <th class="value">Count</th>
-                <th class="value">Count %</th>
-                <th class="value">Total Duration</th>
-                <th class="value">Duration %</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in contribution_summary %}
-            <tr>
-                <td>{{ row.contribution }}</td>
-                <td class="value">{{row.contribution_count}}</td>
-                <td class="value">{{row.contribution_count_pct|format_commas(2) }}%</td>
-                <td class="value">{{row.duration_sum}}</td>
-                <td class="value">{{row.duration_sum_pct|format_commas(2) }}%</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <p>
-        <a class="btn btn-default" href="live-data/homepage_summary.csv"><i class="fa fa-table"></i> Download Homepage Summary CSV</a>
-        <a class="btn btn-default" href="live-data/contribution_summary.csv"><i class="fa fa-table"></i> Download Contribution Summary CSV</a>
-        <a class="btn btn-default" href="live-data/photo_efforts.csv"><i class="fa fa-table"></i> Download Photo Effort CSV</a>
-    </p>
-</section>
-
-<hr/>
-<a href="#header" class="fa fa-arrow-up" aria-hidden="true"> Return to top</a>
-
 <section id="npr-content">
+<hr/>
+<a href="#header" class="fa fa-arrow-up" aria-hidden="true"> Return to top</a>
     <h2>NPR.org Content</h2>
-        <p>Daily NPR story output: <strong> {{daily_output}} </strong></p>
+        <p>Daily NPR story output: <strong> {{daily_output|format_commas(1)}} </strong></p>
 
     <table class="table">
         <thead>
