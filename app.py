@@ -13,6 +13,7 @@ import json
 import oauth
 import static
 
+from fabfile.analysis import get_daily_output
 from flask import Flask, make_response, render_template
 from render_utils import make_context, smarty_filter, urlencode_filter
 from render_utils import format_commas_filter, format_thousands_filter
@@ -67,6 +68,8 @@ def index():
         reader = csv.DictReader(f)
         context['contribution_summary'] = list(reader)
 
+    context['daily_output'] = get_daily_output()
+    
     with open('www/live-data/seamus_summary.csv') as f:
         reader = csv.DictReader(f)
         context['seamus_summary'] = list(reader)

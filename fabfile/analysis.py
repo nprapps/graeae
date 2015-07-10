@@ -376,7 +376,7 @@ def get_daily_output():
 
     difference = max_result['max'] - min_result['min']
     avg = result['count'] / float(difference.days)
-    print avg
+    return avg
 
 
 def _get_provider_category(row):
