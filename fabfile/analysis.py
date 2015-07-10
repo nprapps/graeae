@@ -40,7 +40,7 @@ def get_seamus_verticals():
     """
     db = dataset.connect(app_config.POSTGRES_URL)
     result = db.query("""
-        select distinct(s.slug), count(s.slug) as slug_count, 
+        select distinct(s.slug), count(s.story_id) as slug_count, 
             count(case when s.has_audio then 1 else null END) as count_has_audio,
             count(case when s.has_audio then null else 1 END) as count_has_no_audio
         from seamus s
@@ -61,7 +61,6 @@ def get_seamus_verticals():
     """)).pop(0)
 
     difference = max_result['max'] - min_result['min']
-    print "max is %r, min is %r, difference is %r" % (max_result, min_result, difference)
 
     total_sum = list(db.query("""
         select count(story_id)
