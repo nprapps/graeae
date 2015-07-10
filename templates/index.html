@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<section id="header">
 <div class="row">
     <div class="col-sm-2">
         <img src="https://38.media.tumblr.com/5325461788b3833bf77a3cdee86736a8/tumblr_mfrlfmNMzU1rkzusmo2_r1_250.gif" class="img-responsive"/>
@@ -11,10 +12,16 @@
     </div>
 </div>
 
+<div>
+    <ul class="nav nav-pills nav-justified">
+      <li role="presentation"><a href="#image-performance">Images on Facebook</a></li>
+      <li role="presentation"><a href="#visuals-effort">Visuals Efforts</a></li>
+      <li role="presentation"><a href="#npr-content">NPR.org Content</a></li>
+    </ul>
+<div>
+
 <hr/>
-
 <p>Graeae report for <em>Time range tktk</em>.</p>
-
 
 <section id="effort-analytics"> 
     <h2>Effect of visual contributions on Traffic</h2>
@@ -49,9 +56,10 @@
 </section>   
 
 <hr/>
+</section>
 
 <section id="image-performance">
-    <h2>Facebook and image providers</h2>
+    <h2>Facebook and Image Providers</h2>
     <div class="row">
         <div class="col-md-5">
             <table class="table">
@@ -64,7 +72,7 @@
                 </thead>
                 <tbody>
                     {% for row in insights_summary %}
-                    <tr {% if loop.last %}class="last"{% endif %}>
+                    <tr>
                         <td class="provider">{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
                         <td class="value">{{ row.provider_type_count|format_commas(0) }}</td>
                         <td class="value">{{ row.provider_type_count_pct|format_commas(2) }}%</td>
@@ -75,8 +83,7 @@
         </div>
         <div class="col-md-7">
             <h4>Image providers and Facebook impact</h4>
-            <p>These summaries contain only those Facebook posts where the art matches the lead art on the story.</p>
-            <p>In addition to these posts, there have been:</p>
+            <p>These summaries contain only those Facebook posts where the image matches the lead image on the story at npr.org. In addition to these posts, there have been:</p>
             <ul>
                 <li><strong>{{ insights_art_match.total }}</strong> total Facebook posts</li>
                 <li><strong>{{ insights_art_match.non_matching }}</strong> posts ({{ insights_art_match.non_matching_pct|format_commas(1) }}% of total) where the lead art did not match the Facebook post</li>
@@ -113,7 +120,7 @@
         </thead>
         <tbody>
             {% for row in insights_summary %}
-            <tr {% if loop.last %}class="last"{% endif %}>
+            <tr>
                 <td class="provider">{% if row.provider_type %}{{ row.provider_type }}{% else %}No art{% endif %}</td>
                 <td class="value">{{ row['{0}_median'.format(metric)]|format_commas(0) }}</td>
                 <td class="value">{{ row['{0}_max'.format(metric)]|format_commas(0) }}</td>
@@ -155,69 +162,22 @@
             {% endfor %}
         </tbody>
     </table>
-        {#<div class="col-md-6">
-            <h4>{{ metric_name }} histogram</h4>
-            <table class="table table-striped table-hover fb-histogram">
-                <thead>
-                    <tr>
-                        {% for header in histograms[metric][0] %}
-                        {% if loop.index == 1 %}
-                        <th>{{ header }}</th>
-                        {% elif not loop.last %}
-                        <th class="value">{{ header|format_thousands }} - {{ histograms[metric][0][loop.index]|format_thousands }}</th>
-                        {% else %}
-                        <th class="value">{{ header|format_thousands }}+</th>
-                        {% endif %}
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in histograms[metric][1:] %}
-                    <tr>
-                        {% for column in row %}
-                        {% if loop.index == 1 %}
-                        <td>{{ column }}</td>
-                        {% else %}
-                        <td class="value">{{ column|format_commas(1) }}%</td>
-                        {% endif %}
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>#}
     {% endfor %}
 
     <p>
         <a class="btn btn-default" href="live-data/insights_summary.csv"><i class="fa fa-table"></i> Download Summary CSV</a> 
         <a class="btn btn-default" href="live-data/insights_raw.csv"><i class="fa fa-table"></i> Download Per Story CSV</a>
     </p>
-
-    <h4>@TODO</h4>
-    <ul>Data:
-        <li>FB Link Clicks x Provider Type</li>
-        <li>FB Link Clicks x Image Type</li>
-    </ul>
-    <p><strong>Story Engagement</strong></p>
-    <ul>Data:
-        <li>GA Pageview x Has Lead Art/Not</li>
-        <li>GA Bounce x Has Lead Art/Not</li>
-    </ul>
-    <p class="muted">Note: All NPR Facebook posts include an image. A story may or may not contain a lead image at npr.org.</p>
 </section>
 
 <hr/>
+<a href="#header" class="fa fa-arrow-up" aria-hidden="true"> Return to top</a>
+
 
 <section id="visuals-effort">
     <h2>Does the Visuals Team's effort affect performance?</h2>
 
-    <p><strong>Promoting and Driving Traffic</strong></p>
-
     <div class="row">
-        <div class="col-md-6">
-            <h4>Summary (TK TK)</h4>
-            <p>Someday, this will have text automatically generated by Graeae, or maybe an explanation of what you're looking at. For now, relax and drink some coffee.</p>
-        </div>
         <div class="col-md-6">
             <h4>Stories Visuals worked on vs. homepage</h4>
             <table class="table table-striped table-hover"> 
@@ -269,9 +229,13 @@
                 </tbody>
             </table>
         </div>
+        <div class="col-md-6">
+            <h4>Summary (TK TK)</h4>
+            <p>Someday, this will have text automatically generated by Graeae, or maybe an explanation of what you're looking at. For now, relax and drink some coffee.</p>
+        </div>
     </div>
 
-    <h4>Effort by type of contribution</h4>
+    <h4>Visuals' Effort by Type of Contribution</h4>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -300,9 +264,12 @@
         <a class="btn btn-default" href="live-data/contribution_summary.csv"><i class="fa fa-table"></i> Download Contribution Summary CSV</a>
         <a class="btn btn-default" href="live-data/photo_efforts.csv"><i class="fa fa-table"></i> Download Photo Effort CSV</a>
     </p>
+</section>
 
+<hr/>
+<a href="#header" class="fa fa-arrow-up" aria-hidden="true"> Return to top</a>
 
-
+<section id="npr-content">
     <h2>NPR.org Content</h2>
     <table class="table">
         <thead>
@@ -317,7 +284,7 @@
         </thead>
         <tbody>
             {% for row in seamus_summary %}
-            <tr {% if loop.last %}class="last"{% endif %}>
+            <tr>
                 <td class="slug">{% if row.slug %}{{ row.slug }}{% else %}No slug{% endif %}</td>
                 <td class="value">{{ row.slug_count|format_commas(0) }}</td>
                 <td class="value">{{ row.percent_of_total|format_commas(2) }}%</td>
@@ -328,84 +295,9 @@
             {% endfor %}
         </tbody>
     </table>
-
-
-
-    <ul>Data:
-        <li>FB Likes x “Touched by Visuals/not”</li>
-        <li>FB Shares x “Touched by Visuals/not”</li>
-        <li>FB People Reached x “Touched by Visuals/not”</li>
-        <li>FB Link Clicked x “Touched by Visuals/not”</li>
-        <li>Posted on homepage/not x “Touched by Visuals/not”</li>        
-    </ul>
-    <p><strong>Story Engagement</strong></p>
-    <ul>Data:
-        <li>FB Comments x “Touched by Visuals/not”</li>
-        <li>GA Pageviews x “Touched by Visuals/not” x Posted on Facebook/not</li>
-        <li>GA Bounce x “Touched by Visuals/not” x Posted on Facebook/not</li>
-        <li>GA Pageviews x Visuals Effort Type</li>
-        <li>GA Pageviews x Visuals Effort Duration</li>
-    </ul>
-    <p class="muted">Note: Note: The comparisons focuses on photography because that’s the data we have right now, but same should be replicated for other non-photo imagery, graphs, apps, etc.</p>
-
 </section>
 
 <hr/>
-<section id="lead-photo-performance">
-    <h2>Does the quality of a lead photo affect performance?</h2>
-    <p><strong>Promoting and Driving Traffic</strong></p>
-    <ul>Data:
-        <li>FB Likes, Shares, People Reached x "Good Photo Category"</li>
-        <li>GA Pageviews x “Good Photo Category” x Provider Type</li>
-    </ul>
-    <p><strong>Story Engagement</strong></p>
-    <ul>Data:
-        <li>FB Comments x “Good Photo Category”</li>
-        <li>GA Pageviews x "Good Photo Category"</li>
-        <li>GA Bounce x "Good Photo Category"</li>
-        <li>GA Pageviews x “Good Photo Category” x Provider Type</li>
-        <li>GA Bounce x “Good Photo Category” x Provider Type</li>
-    </ul>
-    <p class="muted">Note: This excludes non-photos posts (illustrations, charts, etc)</p>
-
-</section>
-
-<hr/>
-<section id="facebook-timing">
-    <h2>Does the timing of a Facebook post affect story performance?</h2>
-    <p><strong>Promoting and Driving Traffic</strong></p>
-    <ul>Data:
-        <li>FB Time Posted x FB Likes, Shares, People Reached, People Reached</li>
-        <li>FB Day of Week posted x FB Likes, Shares, People Reached, People Reached</li>
-    </ul>
-    <p><strong>Story Engagement</strong></p>
-    <ul>Data:
-        <li>FB Time Posted x FB Comments</li>
-        <li>FB Day of Week posted x FB Comments</li>
-        <li>FB Time Posted x GA Pageviews</li>
-        <li>FB Day of Week posted x GA Pageviews</li>
-    </ul>
-    <p class="muted">Note: Facebook algorithm determines when a post appears in users’ newsfeeds, so the date and time of a post does not presume the time it is shown or seen by users</p>
-</section>
-
-<hr/>
-<section id="homepage-exposure">
-    <h2>Does npr.org homepage exposure affect performance?</h2>
-    <p><strong>Promoting and Driving Traffic</strong></p>
-    <ul>Data:
-        <li>GA Pageviews x Was on homepage/not</li>
-        <li>GA Bounce x Was on homepage/not</li>
-        <li>SE Time Posted x GA Pageviews</li>
-        <li>SE Day of Week Posted x GA Pageviews</li>
-        <li>?Duration of Homepage Placement x GA Pageviews</li>
-        <li>?Homepage Starting Position x GA Pageviews</li>
-        <li>?Homepage layout type x GA Pageviews</li>
-    </ul>
-    <p><strong>Story Engagement</strong></p>
-    <ul>Data:
-        <li>none</li>
-    </ul>
-    <p class="muted">Note:</p>
-</section>
+<a href="#header" class="fa fa-arrow-up" aria-hidden="true"> Return to top</a>
 
 {% endblock %}
