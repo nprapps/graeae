@@ -15,6 +15,39 @@
 
 <p>Graeae report for <em>Time range tktk</em>.</p>
 
+
+<section id="effort-analytics"> 
+    <h2>Effect of visual contributions on Traffic</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="visuals">Did visuals contribute?</th>
+                        <th class="value">Stories</th>
+                        <th class="value">Pageviews per story</th>
+                        <th class="value">Median pageviews</th>
+                        <th class="value">Sessions per story</th>
+                        <th class="value">Median sessions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in effort_and_analytics_summary %}
+                    <tr>
+                        <td class="visuals">{{ row.visuals_contributed}}</td>
+                        <td class="value">{{ row.visuals_contributed_count|format_commas(0) }}</td>
+                        <td class="value">{{ row.pageviews_mean|format_commas(0) }}</td>
+                        <td class="value">{{ row.pageviews_median|format_commas(0) }}</td>
+                        <td class="value">{{ row.sessions_mean|format_commas(0) }}</td>
+                        <td class="value">{{ row.sessions_median|format_commas(0) }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>             
+    </div>  
+</section>   
+
 <hr/>
 
 <section id="image-performance">
