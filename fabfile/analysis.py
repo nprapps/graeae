@@ -47,30 +47,30 @@ def get_seamus_verticals():
         """)
 
     result_list = list(result)
-    print "before writing everything"
 
     max_result = list(db.query("""
         select max(publication_date)
         from seamus
     """)).pop(0)
-    print "did this too"
 
     min_result = list(db.query("""
         select min(publication_date)
         from seamus s
     """)).pop(0)
-    print "got this far"
 
     difference = max_result['max'] - min_result['min']
-    avg = result['slug_count'] / float(difference.days)
-    print "finished!"
+    print "max is %r, min is %r, difference is %r" % (max_result, min_result, difference)
 
-    # to add here:
-    # loop over result_list
-    # calculate the average
-    # add avg as column to each row
+    total_sum = list(db.query("""
+        select count(story_id)
+        from seamus s
+    """)).pop(0)
+
     for row in result_list:
-        row['count_avg'] = avg
+        avg = row['slug_count'] / float(difference.days)
+        row['stories_per_day'] = avg
+        percent_of_total = row['slug_count'] / float(total_sum['count']) * 100
+        row['percent_of_total'] = percent_of_total
 
     dataset.freeze(result_list, format='csv', filename='www/live-data/seamus_summary.csv')
 

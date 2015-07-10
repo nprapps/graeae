@@ -23,6 +23,7 @@
             <tr>
                 <th class="slug">NPR.org Verticals</th>
                 <th class="value">Count</th>
+                <th class="value">Percent of Total</th>
                 <th class="value">Daily Average</th>
                 <th class="value">Has Audio</th>
                 <th class="value">No Audio</th>
@@ -33,7 +34,8 @@
             <tr {% if loop.last %}class="last"{% endif %}>
                 <td class="slug">{% if row.slug %}{{ row.slug }}{% else %}No slug{% endif %}</td>
                 <td class="value">{{ row.slug_count|format_commas(0) }}</td>
-                <td class="value"></td>
+                <td class="value">{{ row.percent_of_total|format_commas(2) }}%</td>
+                <td class="value">{{ row.stories_per_day|format_commas(0) }}</td>
                 <td class="value">{{ row.count_has_audio}}</td>
                 <td class="value">{{ row.count_has_no_audio}}</td>
             </tr>
