@@ -378,6 +378,27 @@ def get_daily_output():
     avg = result['count'] / float(difference.days)
     return avg
 
+@task
+def get_reporting_period():
+    """
+    gets start and end dates for ananlysis
+    """
+    db = dataset.connect(app_config.POSTGRES_URL)
+
+    max_result = list(db.query("""
+        select max(date(publication_date))
+        from seamus
+    """)).pop(0)
+
+    min_result = list(db.query("""
+        select min(date(publication_date))
+        from seamus
+    """)).pop(0)
+
+    start_date = str(min_result['min'])
+    end_date = str(max_result['max'])
+    reporting_period = "%s - %s" % (start_date, end_date)
+    return reporting_period
 
 def _get_provider_category(row):
     """
