@@ -84,13 +84,21 @@ def scrape_spreadsheet():
 @task
 def scrape_google_analytics():
     db = dataset.connect(app_config.POSTGRES_URL)
-    min_result = list(db.query("""
-        select min(publication_date) as date
-        from seamus
-    """)).pop(0)
+    #min_result = list(db.query("""
+        #select min(publication_date) as date
+        #from seamus
+    #""")).pop(0)
+
+    from datetime import datetime
+    min_result = {
+        'date': datetime(2015, 6, 15)
+    }
+    max_result = {
+        'date': datetime(2015, 7, 22)
+    }
 
     scraper = GoogleAnalyticsScraper()
-    rows = scraper.scrape_google_analytics(min_result['date'])
+    rows = scraper.scrape_google_analytics(min_result['date'], max_result['date'])
     scraper.write(db, rows)
 
 @task

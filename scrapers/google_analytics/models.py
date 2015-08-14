@@ -3,7 +3,8 @@ from scrapers.utils import get_seamus_id_from_url
 
 class GoogleAnalyticsRow:
 
-    def __init__(self, row, metrics, dimensions, meta):
+    def __init__(self, row, date, metrics, dimensions):
+        self.date = date
         self.row = row
         self.fields = dimensions + metrics
 
@@ -19,6 +20,7 @@ class GoogleAnalyticsRow:
 
     def serialize(self):
         self.data['story_id'] = self.story_id
+        self.data['date'] = self.date
         return self.data
 
     @property
