@@ -34,6 +34,31 @@ def analyse():
     analyse_effort_and_analytics()
 
 @task
+def get_goats_and_soda_report():
+    """
+    Get FB insights for Goats and Soda
+    """
+    db = dataset.connect(app_config.POSTGRES_URL)
+    table = db['facebook']
+
+    with open('data/gns-ids.txt') as f:
+        gns_ids = [line.rstrip('\n') for line in f]
+
+    output = []
+    for i, id in enumerate(reversed(gns_ids)):
+        result = table.find_one(seamus_id=id, order_by='-run_time')
+        if result:
+            print 'found %s' % id
+            output.append(result)
+        else:
+            output.append({
+                'seamus_id': id,
+            })
+
+    dataset.freeze(output, format='csv', filename='www/live-data/gns_insights.csv')
+
+
+@task
 def get_seamus_verticals():
     """
     gets all seamus content by vertical and writes to csv
